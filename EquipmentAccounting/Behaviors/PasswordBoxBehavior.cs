@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ProjectManagment.Behaviors
+namespace EquipmentAccounting.Behaviors
 {
     public static class PasswordBoxBehavior
     {

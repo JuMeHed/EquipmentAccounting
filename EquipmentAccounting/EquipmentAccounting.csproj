@@ -87,7 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Behaviours\PasswordBoxBehavior.cs" />
+    <Compile Include="Behaviors\PasswordBoxBehavior.cs" />
     <Compile Include="Classes\Manager.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Classes\User.cs" />
