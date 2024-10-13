@@ -30,6 +30,7 @@ namespace EquipmentAccounting.ViewModels
             Page loginPage = new LoginPage();
 
             CurrentPage = loginPage;
+            Manager.CurrentPage = CurrentPage;
 
             CloseCommand = new RelayCommand(Close);
             DragMoveCommand = new RelayCommand(DragMove);

@@ -75,7 +75,8 @@ namespace EquipmentAccounting.ViewModels
                 } else
                 {
                     Classes.User.CurrentUser = user;
-                    MessageBox.Show("чики");
+                    Views.MenuPage menuPage = new Views.MenuPage();
+                    Manager.MainViewModel.CurrentPage = menuPage;
                 }
             }
         }

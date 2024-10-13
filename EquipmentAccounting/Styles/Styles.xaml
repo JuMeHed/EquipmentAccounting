@@ -294,8 +294,8 @@
     <Style x:Key="TgBtn" TargetType="{x:Type ToggleButton}">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="Background" Value="#FA9927"/>
-        <Setter Property="Foreground" Value="#FBF3F2"/>
+        <Setter Property="Background" Value="#07244C"/>
+        <Setter Property="Foreground" Value="#E5EAF3"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -306,7 +306,6 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border
                         x:Name="border"
-                        CornerRadius="5 5 5 5"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Background="{TemplateBinding Background}"
                         SnapsToDevicePixels="True">
@@ -322,14 +321,16 @@
                             <Setter Property="Background" Value="White" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#032539"/>
-                            <Setter Property="Foreground" Value="#FA9927"/>
-                            <Setter Property="BorderBrush" Value="#032539" TargetName="border"/>
+                            <Setter Property="Background" TargetName="border" Value="#103a75"/>
+                            <Setter Property="Foreground" Value="#E5EAF3"/>
+                            <Setter Property="BorderBrush" Value="#07244C" TargetName="border"/>
+                            <Setter Property="BorderBrush" Value="#E5EAF3" TargetName="border"/>
+                            <Setter Property="BorderThickness" Value="2, 0, 0, 0" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="#FA9927"/>
-                            <Setter Property="Foreground" Value="#FBF3F2"/>
-                            <Setter Property="BorderBrush" Value="#FA9927" TargetName="border"/>
+                            <Setter Property="Background" TargetName="border" Value="#07244C"/>
+                            <Setter Property="Foreground" Value="#E5EAF3"/>
+                            <Setter Property="BorderBrush" Value="#07244C" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
