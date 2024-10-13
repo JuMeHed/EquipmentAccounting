@@ -1,0 +1,844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EquipmentInventoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Characteristiс">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReleaseYear" Type="int" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ComponentCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentTypeCharacteristicId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComponentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Abbreviation" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ComponentTypeCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="int" Nullable="false" />
+          <Property Name="CharacteristicId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InventoryDate" Type="date" Nullable="false" />
+          <Property Name="InventoryNumber" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="EquipmentTypeId" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EquipmentComponent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="EquipmentId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AccessLevelId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Component__Chara__45F365D3">
+          <End Role="ComponentType" Type="Self.ComponentType" Multiplicity="1" />
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Chara__46E78A0C">
+          <End Role="Characteristiс" Type="Self.Characteristiс" Multiplicity="1" />
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristiс">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="CharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Compo__4D94879B">
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="1" />
+          <End Role="ComponentCharacteristic" Type="Self.ComponentCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentCharacteristic">
+              <PropertyRef Name="ComponentTypeCharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Note__49C3F6B7">
+          <End Role="ComponentType" Type="Self.ComponentType" Multiplicity="1" />
+          <End Role="Component" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Value__4CA06362">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="ComponentCharacteristic" Type="Self.ComponentCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentCharacteristic">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Compo__5535A963">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="EquipmentComponent" Type="Self.EquipmentComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentComponent">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Equip__5165187F">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="EquipmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__IsAct__5441852A">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentComponent" Type="Self.EquipmentComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentComponent">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__IsAct__5812160E">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentLocation" Type="Self.EquipmentLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentLocation">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Locat__59063A47">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="EquipmentLocation" Type="Self.EquipmentLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentLocation">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Note__5070F446">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__AccessLeve__5BE2A6F2">
+          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="AccessLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EquipmentInventoryModelContainer">
+          <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Characteristiс" EntityType="Self.Characteristiс" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComponentCharacteristic" EntityType="Self.ComponentCharacteristic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComponentType" EntityType="Self.ComponentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComponentTypeCharacteristic" EntityType="Self.ComponentTypeCharacteristic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentComponent" EntityType="Self.EquipmentComponent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentLocation" EntityType="Self.EquipmentLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Component__Chara__45F365D3" Association="Self.FK__Component__Chara__45F365D3">
+            <End Role="ComponentType" EntitySet="ComponentType" />
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Chara__46E78A0C" Association="Self.FK__Component__Chara__46E78A0C">
+            <End Role="Characteristiс" EntitySet="Characteristiс" />
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Compo__4D94879B" Association="Self.FK__Component__Compo__4D94879B">
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+            <End Role="ComponentCharacteristic" EntitySet="ComponentCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Note__49C3F6B7" Association="Self.FK__Component__Note__49C3F6B7">
+            <End Role="ComponentType" EntitySet="ComponentType" />
+            <End Role="Component" EntitySet="Component" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Value__4CA06362" Association="Self.FK__Component__Value__4CA06362">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="ComponentCharacteristic" EntitySet="ComponentCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Compo__5535A963" Association="Self.FK__Equipment__Compo__5535A963">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="EquipmentComponent" EntitySet="EquipmentComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Equip__5165187F" Association="Self.FK__Equipment__Equip__5165187F">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__IsAct__5441852A" Association="Self.FK__Equipment__IsAct__5441852A">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentComponent" EntitySet="EquipmentComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__IsAct__5812160E" Association="Self.FK__Equipment__IsAct__5812160E">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentLocation" EntitySet="EquipmentLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Locat__59063A47" Association="Self.FK__Equipment__Locat__59063A47">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="EquipmentLocation" EntitySet="EquipmentLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Note__5070F446" Association="Self.FK__Equipment__Note__5070F446">
+            <End Role="State" EntitySet="State" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__AccessLeve__5BE2A6F2" Association="Self.FK__User__AccessLeve__5BE2A6F2">
+            <End Role="AccessLevel" EntitySet="AccessLevel" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EquipmentInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__AccessLeve__5BE2A6F2" FromRole="AccessLevel" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Characteristiс">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ComponentTypeCharacteristic" Relationship="Self.FK__Component__Chara__46E78A0C" FromRole="Characteristiс" ToRole="ComponentTypeCharacteristic" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ComponentType" Relationship="Self.FK__Component__Note__49C3F6B7" FromRole="Component" ToRole="ComponentType" />
+          <NavigationProperty Name="ComponentCharacteristic" Relationship="Self.FK__Component__Value__4CA06362" FromRole="Component" ToRole="ComponentCharacteristic" />
+          <NavigationProperty Name="EquipmentComponent" Relationship="Self.FK__Equipment__Compo__5535A963" FromRole="Component" ToRole="EquipmentComponent" />
+        </EntityType>
+        <EntityType Name="ComponentCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentTypeCharacteristicId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="Self.FK__Component__Value__4CA06362" FromRole="ComponentCharacteristic" ToRole="Component" />
+          <NavigationProperty Name="ComponentTypeCharacteristic" Relationship="Self.FK__Component__Compo__4D94879B" FromRole="ComponentCharacteristic" ToRole="ComponentTypeCharacteristic" />
+        </EntityType>
+        <EntityType Name="ComponentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Component" Relationship="Self.FK__Component__Note__49C3F6B7" FromRole="ComponentType" ToRole="Component" />
+          <NavigationProperty Name="ComponentTypeCharacteristic" Relationship="Self.FK__Component__Chara__45F365D3" FromRole="ComponentType" ToRole="ComponentTypeCharacteristic" />
+        </EntityType>
+        <EntityType Name="ComponentTypeCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CharacteristicId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Characteristiс" Relationship="Self.FK__Component__Chara__46E78A0C" FromRole="ComponentTypeCharacteristic" ToRole="Characteristiс" />
+          <NavigationProperty Name="ComponentCharacteristic" Relationship="Self.FK__Component__Compo__4D94879B" FromRole="ComponentTypeCharacteristic" ToRole="ComponentCharacteristic" />
+          <NavigationProperty Name="ComponentType" Relationship="Self.FK__Component__Chara__45F365D3" FromRole="ComponentTypeCharacteristic" ToRole="ComponentType" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InventoryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InventoryNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentType" Relationship="Self.FK__Equipment__Equip__5165187F" FromRole="Equipment" ToRole="EquipmentType" />
+          <NavigationProperty Name="EquipmentComponent" Relationship="Self.FK__Equipment__IsAct__5441852A" FromRole="Equipment" ToRole="EquipmentComponent" />
+          <NavigationProperty Name="EquipmentLocation" Relationship="Self.FK__Equipment__IsAct__5812160E" FromRole="Equipment" ToRole="EquipmentLocation" />
+          <NavigationProperty Name="State" Relationship="Self.FK__Equipment__Note__5070F446" FromRole="Equipment" ToRole="State" />
+        </EntityType>
+        <EntityType Name="EquipmentComponent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="IsActual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="Self.FK__Equipment__Compo__5535A963" FromRole="EquipmentComponent" ToRole="Component" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__IsAct__5441852A" FromRole="EquipmentComponent" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="EquipmentLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__IsAct__5812160E" FromRole="EquipmentLocation" ToRole="Equipment" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Equipment__Locat__59063A47" FromRole="EquipmentLocation" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__Equip__5165187F" FromRole="EquipmentType" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentLocation" Relationship="Self.FK__Equipment__Locat__59063A47" FromRole="Location" ToRole="EquipmentLocation" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__Note__5070F446" FromRole="State" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccessLevelId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccessLevel" Relationship="Self.FK__User__AccessLeve__5BE2A6F2" FromRole="User" ToRole="AccessLevel" />
+        </EntityType>
+        <Association Name="FK__User__AccessLeve__5BE2A6F2">
+          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="AccessLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Chara__46E78A0C">
+          <End Role="Characteristiс" Type="Self.Characteristiс" Multiplicity="1" />
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristiс">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="CharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Note__49C3F6B7">
+          <End Role="ComponentType" Type="Self.ComponentType" Multiplicity="1" />
+          <End Role="Component" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Value__4CA06362">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="ComponentCharacteristic" Type="Self.ComponentCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentCharacteristic">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Compo__5535A963">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="EquipmentComponent" Type="Self.EquipmentComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentComponent">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Compo__4D94879B">
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="1" />
+          <End Role="ComponentCharacteristic" Type="Self.ComponentCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentCharacteristic">
+              <PropertyRef Name="ComponentTypeCharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__Chara__45F365D3">
+          <End Role="ComponentType" Type="Self.ComponentType" Multiplicity="1" />
+          <End Role="ComponentTypeCharacteristic" Type="Self.ComponentTypeCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComponentTypeCharacteristic">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Equip__5165187F">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="EquipmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__IsAct__5441852A">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentComponent" Type="Self.EquipmentComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentComponent">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__IsAct__5812160E">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentLocation" Type="Self.EquipmentLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentLocation">
+              <PropertyRef Name="EquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Note__5070F446">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipment__Locat__59063A47">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="EquipmentLocation" Type="Self.EquipmentLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EquipmentLocation">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EquipmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" />
+          <EntitySet Name="Characteristiс" EntityType="Self.Characteristiс" />
+          <EntitySet Name="Component" EntityType="Self.Component" />
+          <EntitySet Name="ComponentCharacteristic" EntityType="Self.ComponentCharacteristic" />
+          <EntitySet Name="ComponentType" EntityType="Self.ComponentType" />
+          <EntitySet Name="ComponentTypeCharacteristic" EntityType="Self.ComponentTypeCharacteristic" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentComponent" EntityType="Self.EquipmentComponent" />
+          <EntitySet Name="EquipmentLocation" EntityType="Self.EquipmentLocation" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="State" EntityType="Self.State" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__User__AccessLeve__5BE2A6F2" Association="Self.FK__User__AccessLeve__5BE2A6F2">
+            <End Role="AccessLevel" EntitySet="AccessLevel" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Chara__46E78A0C" Association="Self.FK__Component__Chara__46E78A0C">
+            <End Role="Characteristiс" EntitySet="Characteristiс" />
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Note__49C3F6B7" Association="Self.FK__Component__Note__49C3F6B7">
+            <End Role="ComponentType" EntitySet="ComponentType" />
+            <End Role="Component" EntitySet="Component" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Value__4CA06362" Association="Self.FK__Component__Value__4CA06362">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="ComponentCharacteristic" EntitySet="ComponentCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Compo__5535A963" Association="Self.FK__Equipment__Compo__5535A963">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="EquipmentComponent" EntitySet="EquipmentComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Compo__4D94879B" Association="Self.FK__Component__Compo__4D94879B">
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+            <End Role="ComponentCharacteristic" EntitySet="ComponentCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__Chara__45F365D3" Association="Self.FK__Component__Chara__45F365D3">
+            <End Role="ComponentType" EntitySet="ComponentType" />
+            <End Role="ComponentTypeCharacteristic" EntitySet="ComponentTypeCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Equip__5165187F" Association="Self.FK__Equipment__Equip__5165187F">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__IsAct__5441852A" Association="Self.FK__Equipment__IsAct__5441852A">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentComponent" EntitySet="EquipmentComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__IsAct__5812160E" Association="Self.FK__Equipment__IsAct__5812160E">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentLocation" EntitySet="EquipmentLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Note__5070F446" Association="Self.FK__Equipment__Note__5070F446">
+            <End Role="State" EntitySet="State" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipment__Locat__59063A47" Association="Self.FK__Equipment__Locat__59063A47">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="EquipmentLocation" EntitySet="EquipmentLocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EquipmentInventoryModelContainer" CdmEntityContainer="EquipmentEntities">
+          <EntitySetMapping Name="AccessLevel">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.AccessLevel">
+              <MappingFragment StoreEntitySet="AccessLevel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characteristiс">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.Characteristiс">
+              <MappingFragment StoreEntitySet="Characteristiс">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Component">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.Component">
+              <MappingFragment StoreEntitySet="Component">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentCharacteristic">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.ComponentCharacteristic">
+              <MappingFragment StoreEntitySet="ComponentCharacteristic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ComponentTypeCharacteristicId" ColumnName="ComponentTypeCharacteristicId" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentType">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.ComponentType">
+              <MappingFragment StoreEntitySet="ComponentType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentTypeCharacteristic">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.ComponentTypeCharacteristic">
+              <MappingFragment StoreEntitySet="ComponentTypeCharacteristic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
+                <ScalarProperty Name="CharacteristicId" ColumnName="CharacteristicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="InventoryDate" ColumnName="InventoryDate" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="EquipmentTypeId" ColumnName="EquipmentTypeId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentComponent">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.EquipmentComponent">
+              <MappingFragment StoreEntitySet="EquipmentComponent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentLocation">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.EquipmentLocation">
+              <MappingFragment StoreEntitySet="EquipmentLocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="EquipmentId" ColumnName="EquipmentId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentType">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.EquipmentType">
+              <MappingFragment StoreEntitySet="EquipmentType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="EquipmentInventoryModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AccessLevelId" ColumnName="AccessLevelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
