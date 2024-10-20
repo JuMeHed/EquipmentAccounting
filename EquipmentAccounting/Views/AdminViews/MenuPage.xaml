@@ -5,6 +5,7 @@
       xmlns:vm="clr-namespace:EquipmentAccounting.ViewModels"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:local="clr-namespace:EquipmentAccounting.Views"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
@@ -24,50 +25,74 @@
             <StackPanel Orientation="Vertical">
 
                 <ToggleButton x:Name="ComponentsToggleBtn"
-                      Style="{StaticResource TgBtn}"
-                      Width="180"
-                      Height="40"
-                      HorizontalAlignment="Left"
-                      Margin="0,0,0,10">
+                              Style="{StaticResource TgBtn}"
+                              Width="180"
+                              Height="40"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,10"
+                              IsChecked="{Binding IsComponentBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/tools.png" Width="32" Height="32" Margin="5,0,10,0"/>
                         <TextBlock Text="Комплектующие" FontSize="17" VerticalAlignment="Center"/>
                     </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding ComponentsClickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ToggleButton>
 
                 <ToggleButton x:Name="EquipmentToggleBtn"
-                      Style="{StaticResource TgBtn}"
-                      Width="180"
-                      Height="40"
-                      HorizontalAlignment="Left"
-                      Margin="0,0,0,10">
+                              Style="{StaticResource TgBtn}"
+                              Width="180"
+                              Height="40"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,10"
+                              IsChecked="{Binding IsEquipmentBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/equipment.png" Width="32" Height="32" Margin="5,0,10,0"/>
                         <TextBlock Text="Оборудование" FontSize="17"  VerticalAlignment="Center"/>
                     </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding EquipmentCLickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ToggleButton>
 
                 <ToggleButton x:Name="UsersToggleBtn"
-                      Style="{StaticResource TgBtn}"
-                      Width="180"
-                      Height="40"
-                      HorizontalAlignment="Left"
-                      Margin="0,0,0,10">
+                              Style="{StaticResource TgBtn}"
+                              Width="180"
+                              Height="40"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,10"
+                              IsChecked="{Binding IsUsersBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/list-of-users.png" Width="32" Height="32" Margin="5,0,10,0"/>
                         <TextBlock Text="Пользователи" FontSize="17" VerticalAlignment="Center"/>
                     </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding UsersClickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ToggleButton>
 
                 <ToggleButton x:Name="ProfileToggleBtn"
-                      Style="{StaticResource TgBtn}"
-                      Width="180"
-                      Height="40"
-                      HorizontalAlignment="Left">
+                              Style="{StaticResource TgBtn}"
+                              Width="180"
+                              Height="40"
+                              HorizontalAlignment="Left"
+                              IsChecked="{Binding IsProfileBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/user.png" Width="32" Height="32" Margin="5,0,10,0"/>
                         <TextBlock Text="Профиль" FontSize="17" VerticalAlignment="Center"/>
                     </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding ProfileClickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ToggleButton>
 
             </StackPanel>

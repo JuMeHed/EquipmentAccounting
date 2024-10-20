@@ -1,15 +1,126 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EquipmentAccounting.Classes;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace EquipmentAccounting.ViewModels
 {
     internal class MenuPageViewModel : INotifyPropertyChanged
     {
+        private bool _isProfileBtnChecked;
+        private bool _isEquipmentBtnChecked;
+        private bool _isComponentBtnChecked;
+        private bool _isUsersBtnChecked;
+
+        public bool IsEquipmentBtnChecked
+        {
+            get => _isEquipmentBtnChecked;
+            set
+            {
+                if (_isEquipmentBtnChecked != value)
+                {
+                    _isEquipmentBtnChecked = value;
+                    OnPropertyChanged();
+                    if (_isEquipmentBtnChecked)
+                    {
+                        IsProfileBtnChecked = false;
+                        IsUsersBtnChecked = false;
+                        IsComponentBtnChecked = false;
+                    }
+                }
+            }
+        }
+
+        public bool IsProfileBtnChecked
+        {
+            get => _isProfileBtnChecked;
+            set
+            {
+                if (_isProfileBtnChecked != value)
+                {
+                    _isProfileBtnChecked = value;
+                    OnPropertyChanged();
+                    if (_isProfileBtnChecked)
+                    {
+                        IsEquipmentBtnChecked = false;
+                        IsUsersBtnChecked = false;
+                        IsComponentBtnChecked = false;
+                    }
+                }
+            }
+        }
+
+        public bool IsComponentBtnChecked
+        {
+            get => _isComponentBtnChecked;
+            set
+            {
+                if (_isComponentBtnChecked != value)
+                {
+                    _isComponentBtnChecked = value;
+                    OnPropertyChanged();
+                    if (_isComponentBtnChecked)
+                    {
+                        IsEquipmentBtnChecked = false;
+                        IsUsersBtnChecked = false;
+                        IsProfileBtnChecked = false;
+                    }
+                }
+            }
+        }
+
+        public bool IsUsersBtnChecked
+        {
+            get => _isUsersBtnChecked;
+            set
+            {
+                if (_isUsersBtnChecked != value)
+                {
+                    _isUsersBtnChecked = value;
+                    OnPropertyChanged();
+                    if (_isUsersBtnChecked)
+                    {
+                        IsEquipmentBtnChecked = false;
+                        IsProfileBtnChecked = false;
+                        IsComponentBtnChecked = false;
+                    }
+                }
+            }
+        }
+
+        public ICommand EquipmentCLickCommand { get; set; }
+        public ICommand ProfileClickCommand { get; set; }
+        public ICommand UsersClickCommand { get; set; }
+        public ICommand ComponentsClickCommand { get; set; }
+
+        public MenuPageViewModel()
+        {
+            EquipmentCLickCommand = new RelayCommand(EquipmentBtnClick);
+            ProfileClickCommand = new RelayCommand(ProfileBtnClick);
+            UsersClickCommand = new RelayCommand(UsersBtnClick);
+            ComponentsClickCommand = new RelayCommand(ComponentsBtnClick);
+        }
+
+        private void EquipmentBtnClick()
+        {
+
+        }
+
+        private void ProfileBtnClick()
+        {
+
+        }
+
+        private void UsersBtnClick()
+        {
+
+        }
+
+        private void ComponentsBtnClick()
+        {
+
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
