@@ -3,7 +3,7 @@ using EquipmentAccounting.Models;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EquipmentAccounting.ViewModels
@@ -56,7 +56,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public ICommand LoginCommand {get;set;}
+        public ICommand LoginCommand { get; set; }
         public LoginPageViewModel()
         {
             LoginCommand = new RelayCommand(LogIn);
@@ -72,11 +72,22 @@ namespace EquipmentAccounting.ViewModels
                 {
                     IsPasswordValid = false;
                     return;
-                } else
+                }
+                else
                 {
                     Classes.User.CurrentUser = user;
-                    Views.MenuPage menuPage = new Views.MenuPage();
-                    Manager.MainViewModel.CurrentPage = menuPage;
+
+                    Page page = new Page();
+                    if (Classes.User.CurrentUser.AccessLevelId == 1)
+                    {
+                        page = new Views.UserViews.UserMenu();
+                    }
+                    else
+                    {
+                        page = new Views.MenuPage();
+                    }
+
+                    Manager.MainViewModel.CurrentPage = page;
                 }
             }
         }
