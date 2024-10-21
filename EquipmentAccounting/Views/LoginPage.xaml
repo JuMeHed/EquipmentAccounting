@@ -21,7 +21,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:NumericInputConverter x:Key="NumericInputConverter"/>
     </Page.Resources>
-    
+
     <Border CornerRadius="20"
             Background="#7671FA"
             Margin="350, 100, 350, 100">

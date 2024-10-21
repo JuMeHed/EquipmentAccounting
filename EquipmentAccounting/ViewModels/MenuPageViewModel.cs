@@ -1,6 +1,7 @@
 ﻿using EquipmentAccounting.Classes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EquipmentAccounting.ViewModels
@@ -11,7 +12,7 @@ namespace EquipmentAccounting.ViewModels
         private bool _isEquipmentBtnChecked;
         private bool _isComponentBtnChecked;
         private bool _isUsersBtnChecked;
-
+        private Page _currentPage;
         public bool IsEquipmentBtnChecked
         {
             get => _isEquipmentBtnChecked;
@@ -87,6 +88,15 @@ namespace EquipmentAccounting.ViewModels
                 }
             }
         }
+        public Page CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand EquipmentCLickCommand { get; set; }
         public ICommand ProfileClickCommand { get; set; }
@@ -95,10 +105,16 @@ namespace EquipmentAccounting.ViewModels
 
         public MenuPageViewModel()
         {
+            Manager.MainViewModel.IsBorderVisible = true;
+
             EquipmentCLickCommand = new RelayCommand(EquipmentBtnClick);
             ProfileClickCommand = new RelayCommand(ProfileBtnClick);
             UsersClickCommand = new RelayCommand(UsersBtnClick);
             ComponentsClickCommand = new RelayCommand(ComponentsBtnClick);
+
+            Page components = new Views.AdminViews.ComponentsPage();
+            IsComponentBtnChecked = true;
+            CurrentPage = components;
         }
 
         private void EquipmentBtnClick()

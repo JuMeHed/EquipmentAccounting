@@ -97,6 +97,9 @@
 
             </StackPanel>
         </Border>
-        <Frame x:Name="InnerFrame" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="InnerFrame" 
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden" 
+               Content="{Binding CurrentPage}"/>
     </Grid>
 </Page>

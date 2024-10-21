@@ -30,6 +30,12 @@
                 <RowDefinition/>
                 <RowDefinition Height="16*"/>
             </Grid.RowDefinitions>
+            <Border HorizontalAlignment="Left"
+                    Background="#07244C"
+                    Width="181"
+                    CornerRadius="18, 0,0,0"
+                    Visibility="{Binding IsBorderVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            </Border>
             <Button x:Name="CloseBtn"
                     Content="X"
                     Foreground="#07244C"

@@ -75,14 +75,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToColorConverter.cs" />
+    <Compile Include="Converters\BoolToTextConverter.cs" />
+    <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
+    <Compile Include="Views\AdminViews\ComponentsPage.xaml.cs">
+      <DependentUpon>ComponentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminViews\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AdminViews\ComponentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +233,17 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\ssd.png" />
+    <Resource Include="Resources\computer-case.png" />
+    <Resource Include="Resources\computer.png" />
+    <Resource Include="Resources\cooler.png" />
+    <Resource Include="Resources\gpu-mining.png" />
+    <Resource Include="Resources\hdd.png" />
+    <Resource Include="Resources\network-interface-card.png" />
+    <Resource Include="Resources\power.png" />
+    <Resource Include="Resources\processor.png" />
+    <Resource Include="Resources\ram.png" />
+    <Resource Include="Resources\sound-card.png" />
     <Resource Include="Resources\equipment.png" />
     <Resource Include="Resources\list-of-users.png" />
     <Resource Include="Resources\tools.png" />

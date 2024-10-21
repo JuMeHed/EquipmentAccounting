@@ -11,6 +11,7 @@ namespace EquipmentAccounting.ViewModels
     {
         public Page MainPage;
         private Page _currentPage;
+        private bool _isBorderVisible;
         public Page CurrentPage
         {
             get { return _currentPage; }
@@ -20,13 +21,22 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged(nameof(CurrentPage));
             }
         }
-
+        public bool IsBorderVisible 
+        {
+            get => _isBorderVisible;
+            set
+            {
+                _isBorderVisible = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand CloseCommand { get; set; }
         public ICommand DragMoveCommand { get; set; }
 
         public MainWindowViewModel()
         {
             Manager.MainViewModel = this;
+            IsBorderVisible = false;
             Page loginPage = new LoginPage();
 
             CurrentPage = loginPage;
