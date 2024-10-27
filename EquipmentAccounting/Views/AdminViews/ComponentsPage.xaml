@@ -28,17 +28,17 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal">
-            <TextBox Text="{Binding FilterRequest, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="10" 
-                     Foreground="#7e7f9c" 
-                     BorderBrush="#7e7f9c" 
-                     materialDesign:HintAssist.Hint="Название" 
-                     x:Name="NameTB" 
-                     FontSize="20"
-                     materialDesign:HintAssist.Foreground="#7e7f9c" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     Height="42" 
-                     Width="600"/>
+            <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" 
+                      Margin="10" 
+                      Foreground="#7e7f9c" 
+                      BorderBrush="#7e7f9c" 
+                      materialDesign:HintAssist.Hint="Название" 
+                      x:Name="NameTB" 
+                      FontSize="20"
+                      materialDesign:HintAssist.Foreground="#7e7f9c" 
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                      Height="50" 
+                      Width="600"/>
             <ComboBox ItemsSource="{Binding ComponentTypes}" 
                       SelectedItem="{Binding SelectedComponentType}" 
                       materialDesign:HintAssist.Hint="Тип компонента" 
@@ -48,26 +48,38 @@
                       Margin="70,0,30,0" 
                       Width="200" 
                       DisplayMemberPath="Title" 
-                      Height="40" 
+                      Height="50" 
                       SelectedIndex="0"
-                      FontSize="20"/>
+                      FontSize="17"/>
             <CheckBox x:Name="IsActiveCB" 
                       Content="Применен"
                       Foreground="#7e7f9c"
                       FontSize="20"
                       HorizontalAlignment="Right"
-                      />
-            <Button Content="+"
-                    Background="#7671FA"
-                    Foreground="#E5EAF3"
-                    Margin="20,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                      IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <materialDesign:PopupBox Foreground="#7671FA"
+                                     Padding="2 0 2 0"
+                                     >
+                <StackPanel>
+                    <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
+                    <Button Content="Материнская плата"/>
+                    <Button Content="Оперативная память"/>
+                    <Button Content="Корпус"/>
+                    <Button Content="Кулер"/>
+                    <Button Content="HDD"/>
+                    <Button Content="SSD"/>
+                    <Button Content="Видеокарта"/>
+                    <Button Content="Блок питания"/>
+                    <Button Content="Сетевая карта"/>
+                    <Button Content="Звуковая карта"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
         </StackPanel>
         <ListBox Grid.Row="1"
          x:Name="ComponentsLB"
          ScrollViewer.VerticalScrollBarVisibility="Hidden"
-         ItemsSource="{Binding Components}">
+         ItemsSource="{Binding FilteredComponents}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"

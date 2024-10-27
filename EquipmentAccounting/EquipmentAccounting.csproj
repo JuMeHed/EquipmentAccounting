@@ -69,6 +69,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Wpf.Ui, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPF-UI.3.0.5\lib\net472\Wpf.Ui.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -78,10 +81,14 @@
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToTextConverter.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
+    <Compile Include="ViewModels\CPUAddEditViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
     <Compile Include="Views\AdminViews\ComponentsPage.xaml.cs">
       <DependentUpon>ComponentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\CPUAddEditView.xaml.cs">
+      <DependentUpon>CPUAddEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdminViews\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
@@ -90,6 +97,10 @@
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AdminViews\ComponentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\CPUAddEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +244,10 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\processor %281%29.png" />
+    <Resource Include="Resources\pulse.png" />
+    <Resource Include="Resources\socket.png" />
+    <Resource Include="Resources\thunderbolt.png" />
     <Resource Include="Resources\ssd.png" />
     <Resource Include="Resources\computer-case.png" />
     <Resource Include="Resources\computer.png" />

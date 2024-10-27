@@ -27,10 +27,10 @@ namespace EquipmentAccounting.Models
         public int ReleaseYear { get; set; }
         public int ComponentTypeId { get; set; }
         public string Note { get; set; }
-        public string ImagePath { get; set; }
-        public bool IsActive { get; set; }
+        public virtual string ImagePath { get; set; }
+        public virtual bool IsActive { get; set; }
 
-        public string GetImagePath()
+        public virtual string GetImagePath()
         {
             switch (ComponentTypeId)
             {

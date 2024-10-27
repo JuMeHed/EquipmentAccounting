@@ -1,12 +1,13 @@
-﻿using EquipmentAccounting.Models;
+﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace EquipmentAccounting.ViewModels
 {
@@ -14,9 +15,11 @@ namespace EquipmentAccounting.ViewModels
     {
         private ObservableCollection<EquipmentAccounting.Models.Component> _components;
         private ObservableCollection<ComponentType> _componentTypes;
+        private ObservableCollection<EquipmentAccounting.Models.Component> _filteredComponents;
         private string _nameFilter;
         private ComponentType _selectedComponentType;
         private bool _isActive;
+        private bool _isContextMenuOpen;
 
         public ObservableCollection<EquipmentAccounting.Models.Component> Components
         {
@@ -25,8 +28,20 @@ namespace EquipmentAccounting.ViewModels
             {
                 _components = value;
                 OnPropertyChanged();
+                FilterComponents();
             }
         }
+
+        public ObservableCollection<EquipmentAccounting.Models.Component> FilteredComponents
+        {
+            get => _filteredComponents;
+            private set
+            {
+                _filteredComponents = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<ComponentType> ComponentTypes
         {
             get => _componentTypes;
@@ -34,8 +49,10 @@ namespace EquipmentAccounting.ViewModels
             {
                 _componentTypes = value;
                 OnPropertyChanged();
+                FilterComponents();
             }
         }
+
         public string NameFilter
         {
             get => _nameFilter;
@@ -43,8 +60,10 @@ namespace EquipmentAccounting.ViewModels
             {
                 _nameFilter = value;
                 OnPropertyChanged();
+                FilterComponents();
             }
         }
+
         public ComponentType SelectedComponentType
         {
             get => _selectedComponentType;
@@ -52,8 +71,10 @@ namespace EquipmentAccounting.ViewModels
             {
                 _selectedComponentType = value;
                 OnPropertyChanged();
+                FilterComponents();
             }
         }
+
         public bool IsActive
         {
             get => _isActive;
@@ -61,26 +82,35 @@ namespace EquipmentAccounting.ViewModels
             {
                 _isActive = value;
                 OnPropertyChanged();
+                FilterComponents();
             }
         }
 
+        public bool IsContextMenuOpen 
+        {
+            get => _isContextMenuOpen;
+            set
+            {
+                _isContextMenuOpen = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand OpenCPUAddEdit => new RelayCommand(onCPUAddEditOpen);
         public ComponentsViewModel()
         {
             LoadComponents();
             LoadComponentTypes();
-
+            FilterComponents(); 
         }
 
         private void LoadComponentTypes()
         {
             var types = new ObservableCollection<ComponentType>(EquipmentEntities.GetContext().ComponentType.ToList());
-            types.Insert(0, new ComponentType
-            {
-                Title = "Все типы"
-            });
-
+            types.Insert(0, new ComponentType { Title = "Все типы" });
             ComponentTypes = types;
         }
+
         private void LoadComponents()
         {
             var components = new ObservableCollection<EquipmentAccounting.Models.Component>(EquipmentEntities.GetContext().Component.ToList());
@@ -88,16 +118,53 @@ namespace EquipmentAccounting.ViewModels
             foreach (var component in components)
             {
                 component.ImagePath = component.GetImagePath();
-                var componentInEquipment = EquipmentEntities.GetContext().EquipmentComponent.FirstOrDefault(x => x.ComponentId == component.Id);
+                var componentInEquipment = EquipmentEntities.GetContext().EquipmentComponent
+                                           .FirstOrDefault(x => x.ComponentId == component.Id);
 
-                if (componentInEquipment != null && componentInEquipment.IsActual)
-                    component.IsActive = true;
-                else 
-                    component.IsActive = false;
+                component.IsActive = componentInEquipment != null && componentInEquipment.IsActual;
             }
 
             Components = components;
         }
+
+        private void FilterComponents()
+        {
+            try
+            {
+                if (Components == null || Components.Count == 0)
+                {
+                    FilteredComponents = new ObservableCollection<Models.Component>();
+                    return;
+                }
+
+                var filteredComponents = Components.AsEnumerable();
+
+                filteredComponents = filteredComponents.Where(x => x.IsActive == IsActive);
+
+                if (!string.IsNullOrEmpty(NameFilter))
+                {
+                    filteredComponents = filteredComponents
+                                         .Where(x => x.Model.ToLower().Contains(NameFilter.ToLower()));
+                }
+                if (SelectedComponentType != null && SelectedComponentType != ComponentTypes[0])
+                {
+                    filteredComponents = filteredComponents.Where(x => x.ComponentType == SelectedComponentType);
+                }
+
+                FilteredComponents = new ObservableCollection<Models.Component>(filteredComponents);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void onCPUAddEditOpen()
+        {
+            Views.AdminViews.CPUAddEditView cpuAddEdit = new Views.AdminViews.CPUAddEditView();
+            Classes.Manager.MenuPage.CurrentPage = cpuAddEdit;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

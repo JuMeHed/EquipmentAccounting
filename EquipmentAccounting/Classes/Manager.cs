@@ -7,6 +7,6 @@ namespace EquipmentAccounting.Classes
     {
         public static MainWindowViewModel MainViewModel { get; set; }
         public static Page CurrentPage { get; set; }
-        public static Page CurrentMenuPage { get; set; }
+        public static MenuPageViewModel MenuPage { get; set; }
     }
 }

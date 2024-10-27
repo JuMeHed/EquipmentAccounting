@@ -106,6 +106,7 @@ namespace EquipmentAccounting.ViewModels
         public MenuPageViewModel()
         {
             Manager.MainViewModel.IsBorderVisible = true;
+            Manager.MenuPage = this;
 
             EquipmentCLickCommand = new RelayCommand(EquipmentBtnClick);
             ProfileClickCommand = new RelayCommand(ProfileBtnClick);
@@ -134,7 +135,8 @@ namespace EquipmentAccounting.ViewModels
 
         private void ComponentsBtnClick()
         {
-
+            Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
+            CurrentPage = componentsPage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
