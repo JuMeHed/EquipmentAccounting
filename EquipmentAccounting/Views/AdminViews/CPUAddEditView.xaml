@@ -51,8 +51,9 @@
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,2,3,0"
-                         
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="10,2,3,0"
+                         Text="{Binding CurrentComponent.Brand}"
                          />
 
                 <TextBox Grid.Row="1"
@@ -61,7 +62,10 @@
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,50,0,0" Grid.RowSpan="2"/>
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Margin="10,50,0,0"
+                         Grid.RowSpan="2"
+                         Text="{Binding CurrentComponent.Model}"/>
 
                 <TextBox Grid.Row="3"
                          materialDesign:HintAssist.Hint="Год выпуска"
@@ -69,7 +73,9 @@
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,3,15"/>
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="10,0,3,15"
+                         Text="{Binding CurrentComponent.ReleaseYear}"/>
 
                 <TextBox
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -85,7 +91,9 @@
                     AcceptsReturn="True"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
-                    materialDesign:HintAssist.Hint="Примечание" Grid.Row="1"
+                    materialDesign:HintAssist.Hint="Примечание" 
+                    Grid.Row="1"
+                    Text="{Binding CurrentComponent.Note}"
                    />
             </Grid>
         </Border>
@@ -144,7 +152,10 @@
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.Column="1" Margin="0,0,10,10"/>
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Grid.Column="1"
+                         Margin="0,0,10,10"
+                         Text="{Binding Frequency}"/>
                 <ComboBox
                     Grid.Row="2"
                     Foreground="#7E7F9C"
@@ -152,31 +163,12 @@
                     Grid.Column="1"
                     FontSize="17"
                     materialDesign:HintAssist.HelperText="Количество ядер"
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,0,833,0" Height="38">
-                    <ComboBoxItem>
-                        2
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        4
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        6
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        8
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        10
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        12
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        16
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        64
-                    </ComboBoxItem>
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                    Margin="0,0,833,0"
+                    Height="38"
+                    SelectedValue="{Binding NumberOfCores}"
+                    ItemsSource="{Binding AvailableCores}">
+                  
                 </ComboBox>
                 <ComboBox
                         Grid.Row="3"
@@ -185,37 +177,12 @@
                         Grid.Column="1"
                         FontSize="17"
                         materialDesign:HintAssist.HelperText="Сокет"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,0,833,0" Height="38">
-                    <ComboBoxItem>
-                        AM5
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        AM4
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        LGA 1700
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        LGA 1200
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        LGA 1151-v2
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        LGA 1151
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        AM3+
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        sWRX8
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        TR4
-                    </ComboBoxItem> 
-                    <ComboBoxItem>
-                        FM2+
-                    </ComboBoxItem>
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Margin="0,0,833,0"
+                        Height="38"
+                        SelectedItem="{Binding Socket}"
+                    ItemsSource="{Binding Sockets}">
+                 
                 </ComboBox>
                 <TextBox Grid.Row="3"
                          materialDesign:HintAssist.Hint="Кэш"
@@ -223,14 +190,22 @@
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.Column="1" Margin="0,73,10,10" Grid.RowSpan="2"/>
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Grid.Column="1"
+                         Margin="0,73,10,10" 
+                         Grid.RowSpan="2"
+                         Text="{Binding Cash}"/>
                 <TextBox Grid.Row="4"
                          materialDesign:HintAssist.Hint="Энергопотребление"
                          BorderBrush="#E5EAF3"
                          materialDesign:HintAssist.Foreground="#E5EAF3"
                          Foreground="#E5EAF3"
                          FontSize="20"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.Column="1" Margin="0,74,10,10" Grid.RowSpan="2" />
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Grid.Column="1"
+                         Margin="0,74,10,10"
+                         Grid.RowSpan="2"
+                         Text="{Binding EnergyConsumption}"/>
             </Grid>
 
         </Border>
@@ -243,7 +218,8 @@
         <Button Content="Сохранить"
                 Background="#7671FA"
                 Grid.Row="3"
-                Foreground="#E5EAF3" Height="40" Width="300" Margin="809,20,10,20"/>
+                Foreground="#E5EAF3" Height="40" Width="300" Margin="809,20,10,20"
+                Command="{Binding SaveCommand}" Cursor="Hand"/>
         <Button Content="Назад"
                 Background="#7E7F9C"
                 Grid.Row="3"

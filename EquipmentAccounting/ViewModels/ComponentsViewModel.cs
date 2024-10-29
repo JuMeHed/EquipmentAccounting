@@ -16,6 +16,7 @@ namespace EquipmentAccounting.ViewModels
         private ObservableCollection<EquipmentAccounting.Models.Component> _components;
         private ObservableCollection<ComponentType> _componentTypes;
         private ObservableCollection<EquipmentAccounting.Models.Component> _filteredComponents;
+        private Models.Component _selectedComponent;
         private string _nameFilter;
         private ComponentType _selectedComponentType;
         private bool _isActive;
@@ -96,6 +97,15 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        public Models.Component SelectedComponent
+        {
+            get => _selectedComponent;
+            set
+            {
+                _selectedComponent = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand OpenCPUAddEdit => new RelayCommand(onCPUAddEditOpen);
         public ComponentsViewModel()
         {
@@ -162,6 +172,10 @@ namespace EquipmentAccounting.ViewModels
         private void onCPUAddEditOpen()
         {
             Views.AdminViews.CPUAddEditView cpuAddEdit = new Views.AdminViews.CPUAddEditView();
+            CPUAddEditViewModel cPUAddEditViewModel = new CPUAddEditViewModel();
+            cPUAddEditViewModel.CurrentComponent = SelectedComponent;
+            MessageBox.Show($"{SelectedComponent.Id}");
+            cpuAddEdit.DataContext = cPUAddEditViewModel;
             Classes.Manager.MenuPage.CurrentPage = cpuAddEdit;
         }
 

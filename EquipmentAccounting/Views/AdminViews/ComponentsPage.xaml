@@ -79,7 +79,13 @@
         <ListBox Grid.Row="1"
          x:Name="ComponentsLB"
          ScrollViewer.VerticalScrollBarVisibility="Hidden"
-         ItemsSource="{Binding FilteredComponents}">
+         ItemsSource="{Binding FilteredComponents}"
+         SelectedItem="{Binding SelectedComponent}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenCPUAddEdit}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"
