@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a1a355ac07a47d7a1321ca7f70448ab" Name="Diagram1">
+      <Diagram DiagramId="5a138cf81f07444d94edad3da7a80400" Name="Diagram1">
         <EntityTypeShape EntityType="EquipmentInventoryModel.AccessLevel" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.Characteristiс" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.Component" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
@@ -18,18 +18,18 @@
         <EntityTypeShape EntityType="EquipmentInventoryModel.Location" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.State" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.User" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__User__AccessLeve__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Note__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Value__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Compo__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__IsAct__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__User__AccessLeve__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Note__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Value__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Compo__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__IsAct__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Note__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Locat__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__IsAct__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Note__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Locat__5CD6CB2B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

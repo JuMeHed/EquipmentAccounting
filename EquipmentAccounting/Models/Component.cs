@@ -11,7 +11,7 @@ namespace EquipmentAccounting.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Component
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +20,7 @@ namespace EquipmentAccounting.Models
             this.ComponentCharacteristic = new HashSet<ComponentCharacteristic>();
             this.EquipmentComponent = new HashSet<EquipmentComponent>();
         }
-    
+
         public int Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -57,7 +57,7 @@ namespace EquipmentAccounting.Models
                 case 11:
                     return "pack://application:,,,/Resources/sound-card.png";
                 default:
-                    return null; 
+                    return null;
             }
         }
 

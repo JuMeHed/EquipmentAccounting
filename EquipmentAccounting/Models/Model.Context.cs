@@ -16,19 +16,17 @@ namespace EquipmentAccounting.Models
     public partial class EquipmentEntities : DbContext
     {
         private static EquipmentEntities _context;
-        
-        public static EquipmentEntities GetContext()
-        {
-            if (_context == null) 
-                _context = new EquipmentEntities();
-            return _context;
-        }
-
         public EquipmentEntities()
             : base("name=EquipmentEntities")
         {
         }
     
+        public static EquipmentEntities GetContext()
+        {
+            if (_context == null)
+                _context = new EquipmentEntities();
+            return _context;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

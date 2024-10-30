@@ -80,48 +80,6 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToTextConverter.cs" />
-    <Compile Include="ViewModels\ComponentsViewModel.cs" />
-    <Compile Include="ViewModels\CPUAddEditViewModel.cs" />
-    <Compile Include="ViewModels\MenuPageViewModel.cs" />
-    <Compile Include="ViewModels\UserMenuViewModel.cs" />
-    <Compile Include="Views\AdminViews\ComponentsPage.xaml.cs">
-      <DependentUpon>ComponentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AdminViews\CPUAddEditView.xaml.cs">
-      <DependentUpon>CPUAddEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AdminViews\MenuPage.xaml.cs">
-      <DependentUpon>MenuPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserViews\UserMenu.xaml.cs">
-      <DependentUpon>UserMenu.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Views\AdminViews\ComponentsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AdminViews\CPUAddEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Behaviors\PasswordBoxBehavior.cs" />
-    <Compile Include="Classes\Manager.cs" />
-    <Compile Include="Classes\RelayCommand.cs" />
-    <Compile Include="Classes\User.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\NumericInputConverter.cs" />
     <Compile Include="Models\AccessLevel.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -176,6 +134,56 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ComponentsViewModel.cs" />
+    <Compile Include="ViewModels\CPUAddEditViewModel.cs" />
+    <Compile Include="ViewModels\MenuPageViewModel.cs" />
+    <Compile Include="ViewModels\MotherboardAddEditViewModel.cs" />
+    <Compile Include="ViewModels\UserMenuViewModel.cs" />
+    <Compile Include="Views\AdminViews\ComponentsPage.xaml.cs">
+      <DependentUpon>ComponentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\CPUAddEditView.xaml.cs">
+      <DependentUpon>CPUAddEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\MotherboardAddEditView.xaml.cs">
+      <DependentUpon>MotherboardAddEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\UserMenu.xaml.cs">
+      <DependentUpon>UserMenu.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AdminViews\ComponentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\CPUAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\MotherboardAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\PasswordBoxBehavior.cs" />
+    <Compile Include="Classes\Manager.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\NumericInputConverter.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\LoginPage.xaml.cs">
@@ -232,18 +240,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\processor %281%29.png" />
     <Resource Include="Resources\pulse.png" />
     <Resource Include="Resources\socket.png" />

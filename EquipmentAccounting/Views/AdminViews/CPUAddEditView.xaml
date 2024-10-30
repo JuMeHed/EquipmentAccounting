@@ -79,6 +79,7 @@
 
                 <TextBox
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    materialDesign:HintAssist.Foreground="#07244C"
                     BorderBrush="#E5EAF3"
                     Foreground="#E5EAF3"
                     Background="Transparent"
@@ -206,6 +207,27 @@
                          Margin="0,74,10,10"
                          Grid.RowSpan="2"
                          Text="{Binding EnergyConsumption}"/>
+                <ComboBox
+                    Grid.Row="2"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    FontSize="17"
+                    materialDesign:HintAssist.HelperText="Число потоков"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                    Margin="224,0,609,0"
+                    Height="38"
+                    SelectedValue="{Binding NumberOfThreads}"
+                    ItemsSource="{Binding AvailableThreads}"/>
+
+                <CheckBox IsChecked="{Binding IsHasGraphics}"
+                          Content="Графическое ядро"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          Margin="438,0,0,73"
+                          Grid.RowSpan="2"
+                          Foreground="#E5EAF3"
+                          FontSize="20"/>
             </Grid>
 
         </Border>
@@ -219,7 +241,7 @@
                 Background="#7671FA"
                 Grid.Row="3"
                 Foreground="#E5EAF3" Height="40" Width="300" Margin="809,20,10,20"
-                Command="{Binding SaveCommand}" Cursor="Hand"/>
+                Command="{Binding OpenSaveDialogCommand}" Cursor="Hand"/>
         <Button Content="Назад"
                 Background="#7E7F9C"
                 Grid.Row="3"
@@ -227,7 +249,7 @@
                 Foreground="#E5EAF3" 
                 Height="40" Width="300" Margin="504,20,315,20"
                  IsEnabled="True" Cursor="Hand"/>
-        <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}" 
+        <materialDesign:DialogHost IsOpen="{Binding IsExitDialogOpen}" 
                             Grid.RowSpan="4"
                             Grid.ColumnSpan="3"
                             HorizontalAlignment="Center"
@@ -251,6 +273,36 @@
                                     Foreground="#7671FA"
                                     Background="#E5EAF3"
                                     Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost IsOpen="{Binding IsSaveDialogOpen}" 
+                      Grid.RowSpan="4"
+                      Grid.ColumnSpan="3"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Background="#7671FA">
+            <materialDesign:DialogHost.DialogContent>
+                <Border Background="#7671FA" Padding="20" CornerRadius="8" BorderBrush="Transparent">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Вы уверены, что хотите сохранить изменения?"
+                 Foreground="#E5EAF3" 
+                 FontSize="20" 
+                 Margin="0,0,0,16"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Отмена" 
+                              Command="{Binding CloseDialogCommand}"
+                              Foreground="#7671FA"
+                              Background="#E5EAF3"
+                              Margin="5" Cursor=""/>
+                            <Button Content="Да" 
+                              Command="{Binding SaveCommand}"
+                              Foreground="#7671FA"
+                              Background="#E5EAF3"
+                              Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

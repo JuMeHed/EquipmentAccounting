@@ -174,7 +174,7 @@ namespace EquipmentAccounting.ViewModels
             Views.AdminViews.CPUAddEditView cpuAddEdit = new Views.AdminViews.CPUAddEditView();
             CPUAddEditViewModel cPUAddEditViewModel = new CPUAddEditViewModel();
             cPUAddEditViewModel.CurrentComponent = SelectedComponent;
-            MessageBox.Show($"{SelectedComponent.Id}");
+            //cPUAddEditViewModel.IsEditing = true;
             cpuAddEdit.DataContext = cPUAddEditViewModel;
             Classes.Manager.MenuPage.CurrentPage = cpuAddEdit;
         }

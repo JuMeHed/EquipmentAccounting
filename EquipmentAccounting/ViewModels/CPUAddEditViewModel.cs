@@ -15,6 +15,7 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class CPUAddEditViewModel : INotifyPropertyChanged
     {
+        private static readonly List<int> NUMBER_OF_THREADS = new List<int>() { 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 48, 64, 128 };
         private static readonly List<int> NUMBER_OF_CORES = new List<int>() { 2, 4, 6, 8, 10, 12, 16, 64 };
         private static readonly List<string> SOCKET_TYPES = new List<string>
         {
@@ -32,19 +33,25 @@ namespace EquipmentAccounting.ViewModels
 
         private Models.Component _currentComponent;
         private Models.ComponentCharacteristic _characteristic;
-        private bool _isDialogOpen;
+
+        private bool _isSaveDialogOpen;
+        private bool _isExitDialogOpen;
         private bool _isEditing;
-        private string _frequency;
+        private bool _isHasGraphics;
+        
         private int _numberOfCores;
+        private int _numberOfThreads;
+
+        private string _frequency;
         private string _socket;
         private string _cash;
         private string _energyConsumption;
-        public bool IsDialogOpen
+        public bool IsExitDialogOpen
         {
-            get => _isDialogOpen;
+            get => _isExitDialogOpen;
             set
             {
-                _isDialogOpen = value;
+                _isExitDialogOpen = value;
                 OnPropertyChanged();
             }
         }
@@ -63,14 +70,12 @@ namespace EquipmentAccounting.ViewModels
                 else
                 {
                     _currentComponent = value;
-                    LoadCharacteristics();
                     IsEditing = true;
+                    LoadCharacteristics();
                     OnPropertyChanged();
                 }
             }
         }
-
-
         public Models.ComponentCharacteristic Characteristic
         {
             get => _characteristic;
@@ -109,6 +114,15 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
+        public int NumberOfThreads
+        {
+            get => _numberOfThreads;
+            set
+            {
+                _numberOfThreads = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Socket
         {
@@ -139,13 +153,34 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        public bool IsSaveDialogOpen
+        {
+            get => _isSaveDialogOpen;
+            set
+            {
+                _isSaveDialogOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsHasGraphics
+        {
+            get => _isHasGraphics;
+            set
+            {
+                _isHasGraphics = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<int> AvailableCores => NUMBER_OF_CORES;
         public List<string> Sockets => SOCKET_TYPES;
+        public List<int> AvailableThreads => NUMBER_OF_THREADS;
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         public ICommand ExitCommand => new RelayCommand(Exit);
         public ICommand CloseDialogCommand => new RelayCommand(CloseDialog);
-        public ICommand SaveCommand => new RelayCommand(OnSaveChanges); 
+        public ICommand SaveCommand => new RelayCommand(OnSaveChanges);
+        public ICommand OpenSaveDialogCommand => new RelayCommand(OpenSaveDialog);
         public CPUAddEditViewModel()
         {
             
@@ -153,24 +188,30 @@ namespace EquipmentAccounting.ViewModels
 
         private void CloseDialog()
         {
-            IsDialogOpen = false;
+            IsExitDialogOpen = false;
+            IsSaveDialogOpen = false;
         }
         private void Exit()
         {
-            _isDialogOpen = false;
+            _isExitDialogOpen = false;
+            _isSaveDialogOpen = false;
             Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
             Classes.Manager.MenuPage.CurrentPage = componentsPage;
         }
         private void GoBack()
         {
-            IsDialogOpen = true;
+            IsExitDialogOpen = true;
+        }
+
+        private void OpenSaveDialog()
+        {
+            IsSaveDialogOpen = true;
         }
 
         private void OnSaveChanges()
         {
             if (IsEditing)
             {
-                ClearCharacteristics();
                 SetCharacteristics();
 
                 try
@@ -180,9 +221,9 @@ namespace EquipmentAccounting.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "сохранение");
                 }
-            } else
+            } 
+            else
             {
                 SetCharacteristics();
 
@@ -194,7 +235,6 @@ namespace EquipmentAccounting.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + "сохранение");
                 }
             }
         }
@@ -261,6 +301,38 @@ namespace EquipmentAccounting.ViewModels
                     };
                     AddCharacteristic(energyCharacteristic);
                 }
+
+                if (NumberOfThreads > 0)
+                {
+                    var threadsCharacteristic = new Models.ComponentCharacteristic
+                    {
+                        ComponentTypeCharacteristicId = 20,
+                        ComponentId = CurrentComponent.Id,
+                        Value = NumberOfThreads.ToString()
+                    };
+                    AddCharacteristic(threadsCharacteristic);
+                }
+
+                if (IsHasGraphics)
+                {
+                    var graphicsCharacteristic = new Models.ComponentCharacteristic
+                    {
+                        ComponentTypeCharacteristicId = 21,
+                        ComponentId = CurrentComponent.Id,
+                        Value = "Есть"
+                    };
+                    AddCharacteristic(graphicsCharacteristic);
+                }
+                else
+                {
+                    var graphicsCharacteristic = new Models.ComponentCharacteristic
+                    {
+                        ComponentTypeCharacteristicId = 21,
+                        ComponentId = CurrentComponent.Id,
+                        Value = "Нет"
+                    };
+                    AddCharacteristic(graphicsCharacteristic);
+                }
             }
         }
         private void AddCharacteristic(Models.ComponentCharacteristic characteristic)
@@ -272,41 +344,40 @@ namespace EquipmentAccounting.ViewModels
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         private void LoadCharacteristics()
         {
-            //MessageBox.Show("ZZ");
-            //MessageBox.Show($"{CurrentComponent != null}");
             if (CurrentComponent != null)
             {
                 var characteristics = EquipmentEntities.GetContext().ComponentCharacteristic
                     .Where(cc => cc.ComponentId == CurrentComponent.Id).ToList();
-                MessageBox.Show($"{CurrentComponent.Id}");
 
                 foreach (var characteristic in characteristics)
                 {
-                    MessageBox.Show($"characteristic.ComponentTypeCharacteristic");
                     switch (characteristic.ComponentTypeCharacteristicId)
                     {
                         case 1: 
                             Frequency = characteristic.Value;
-                            //MessageBox.Show($"Frequency: {Frequency} value {characteristic.Value}");
                             break;
                         case 2: 
                             NumberOfCores = int.Parse(characteristic.Value);
-                            MessageBox.Show($"Frequency: {NumberOfCores} value {characteristic.Value}");
                             break;
                         case 3: 
                             Socket = characteristic.Value;
-                            MessageBox.Show($"Frequency: {Socket} value {characteristic.Value}");
                             break;
                         case 4:
                             Cash = characteristic.Value;
                             break;
                         case 5: 
                             EnergyConsumption = characteristic.Value;
+                            break;
+                        case 20: 
+                            NumberOfThreads = int.Parse(characteristic.Value);
+                            break;
+                        case 21:
+                            IsHasGraphics = characteristic.Value.Equals("Есть");
                             break;
                     }
                 }
@@ -318,7 +389,8 @@ namespace EquipmentAccounting.ViewModels
             try
             {
                 var existingCharacteristics = EquipmentEntities.GetContext().ComponentCharacteristic
-                    .Where(cc => cc.ComponentId != CurrentComponent.Id).ToList();
+                    .Where(cc => cc.ComponentId == CurrentComponent.Id).ToList();
+                MessageBox.Show($"{existingCharacteristics.Count}");
                 EquipmentEntities.GetContext().ComponentCharacteristic.RemoveRange(existingCharacteristics);
                 EquipmentEntities.GetContext().SaveChanges();
             }
