@@ -15,22 +15,6 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class CPUAddEditViewModel : INotifyPropertyChanged
     {
-        private static readonly List<int> NUMBER_OF_THREADS = new List<int>() { 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 48, 64, 128 };
-        private static readonly List<int> NUMBER_OF_CORES = new List<int>() { 2, 4, 6, 8, 10, 12, 16, 64 };
-        private static readonly List<string> SOCKET_TYPES = new List<string>
-        {
-            "AM5",
-            "AM4",
-            "LGA1700",
-            "LGA1200",
-            "LGA1151-v2",
-            "LGA1151",
-            "AM3+",
-            "sWRX8",
-            "TR4",
-            "FM2+"
-        };
-
         private Models.Component _currentComponent;
         private Models.ComponentCharacteristic _characteristic;
 
@@ -85,6 +69,7 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public bool IsEditing
         {
             get => _isEditing;
@@ -172,9 +157,9 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public List<int> AvailableCores => NUMBER_OF_CORES;
-        public List<string> Sockets => SOCKET_TYPES;
-        public List<int> AvailableThreads => NUMBER_OF_THREADS;
+        public List<int> AvailableCores => ConstLists.NUMBER_OF_CORES;
+        public List<string> Sockets => ConstLists.SOCKET_TYPES;
+        public List<int> AvailableThreads => ConstLists.NUMBER_OF_THREADS;
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         public ICommand ExitCommand => new RelayCommand(Exit);

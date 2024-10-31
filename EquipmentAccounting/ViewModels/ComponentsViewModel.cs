@@ -106,7 +106,10 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ICommand OpenCPUAddEdit => new RelayCommand(onCPUAddEditOpen);
+
+        public ICommand OpenAddEditPageCommand => new RelayCommand<Models.Component>(onAddEditPageOpen);
+        public ICommand OpenMotherboardAddEditPageCommand => new RelayCommand(OnMotherBoardAddEditOpen);
+        public ICommand OpenCPUAddEdit => new RelayCommand(OnCPUAddEditOpen);
         public ComponentsViewModel()
         {
             LoadComponents();
@@ -169,12 +172,40 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        private void onCPUAddEditOpen()
+        private void onAddEditPageOpen(Models.Component component)
+        {
+            if (component == null) return;
+
+            switch (component.ComponentTypeId)
+            {
+                case 1:
+                    OnCPUAddEditOpen();
+                    break;
+                case 2:
+                    OnMotherBoardAddEditOpen();
+                    break;
+                case 3:
+                    break;
+                default:
+                    MessageBox.Show("Неизвестный тип компонента");
+                    break;
+            }
+        }
+
+        private void OnMotherBoardAddEditOpen()
+        {
+            Views.AdminViews.MotherboardAddEditView motherboardAddEditView = new Views.AdminViews.MotherboardAddEditView();
+            MotherboardAddEditViewModel viewModel = new MotherboardAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
+            motherboardAddEditView.DataContext = viewModel;
+            Classes.Manager.MenuPage.CurrentPage = motherboardAddEditView;
+        }
+
+        private void OnCPUAddEditOpen()
         {
             Views.AdminViews.CPUAddEditView cpuAddEdit = new Views.AdminViews.CPUAddEditView();
             CPUAddEditViewModel cPUAddEditViewModel = new CPUAddEditViewModel();
             cPUAddEditViewModel.CurrentComponent = SelectedComponent;
-            //cPUAddEditViewModel.IsEditing = true;
             cpuAddEdit.DataContext = cPUAddEditViewModel;
             Classes.Manager.MenuPage.CurrentPage = cpuAddEdit;
         }

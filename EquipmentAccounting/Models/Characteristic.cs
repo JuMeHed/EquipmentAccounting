@@ -12,10 +12,10 @@ namespace EquipmentAccounting.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Characteristiс
+    public partial class Characteristic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Characteristiс()
+        public Characteristic()
         {
             this.ComponentTypeCharacteristic = new HashSet<ComponentTypeCharacteristic>();
         }

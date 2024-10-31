@@ -20,20 +20,20 @@ namespace EquipmentAccounting.Models
             : base("name=EquipmentEntities")
         {
         }
-    
         public static EquipmentEntities GetContext()
         {
             if (_context == null)
                 _context = new EquipmentEntities();
             return _context;
         }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<AccessLevel> AccessLevel { get; set; }
-        public virtual DbSet<Characteristiс> Characteristiс { get; set; }
+        public virtual DbSet<Characteristic> Characteristic { get; set; }
         public virtual DbSet<Component> Component { get; set; }
         public virtual DbSet<ComponentCharacteristic> ComponentCharacteristic { get; set; }
         public virtual DbSet<ComponentType> ComponentType { get; set; }

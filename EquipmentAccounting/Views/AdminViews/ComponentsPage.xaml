@@ -63,7 +63,7 @@
                                      >
                 <StackPanel>
                     <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
-                    <Button Content="Материнская плата"/>
+                    <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
                     <Button Content="Оперативная память"/>
                     <Button Content="Корпус"/>
                     <Button Content="Кулер"/>
@@ -83,7 +83,7 @@
          SelectedItem="{Binding SelectedComponent}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding OpenCPUAddEdit}"/>
+                    <i:InvokeCommandAction Command="{Binding OpenAddEditPageCommand}" CommandParameter="{Binding SelectedComponent}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>

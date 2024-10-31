@@ -122,71 +122,51 @@
                     FontFamily="Montserrat"
                     FontSize="25"
                     Margin="10,0,0,0" Grid.ColumnSpan="2"/>
-                <Image Height="64"
-                    Width="64"
-                    Stretch="UniformToFill"
-                    Grid.Row="1"
-                    Grid.Column="0" Source="/Resources/pulse.png"/>
                 <Image  Height="64"
                      Width="64"
                      Stretch="UniformToFill"
-                     Grid.Row="2"
-                     Grid.Column="0" Source="/Resources/processor (1).png"/>
+                     Grid.Row="1"
+                     Grid.Column="1" Source="/Resources/processor (1).png" Margin="210,0,751,10"/>
                 <Image  Height="64"
                      Width="64"
                      Stretch="UniformToFill"
-                     Grid.Row="3"
-                     Grid.Column="0" Source="/Resources/socket.png"/>
+                     Grid.Row="1"
+                     Grid.Column="0" Source="/Resources/socket.png" Margin="5,6,5,4"/>
                 <Image  Height="64"
                      Width="64"
                      Stretch="UniformToFill"
                      Grid.Row="4"
                      Grid.Column="0" Source="/Resources/pulse.png"/>
-                <Image  Height="64"
-                     Width="64"
-                     Stretch="UniformToFill"
-                     Grid.Row="5"
-                     Grid.Column="0" Source="/Resources/thunderbolt.png"/>
-                <TextBox Grid.Row="1"
-                      materialDesign:HintAssist.Hint="Частота"
-                      BorderBrush="#E5EAF3"
-                      materialDesign:HintAssist.Foreground="#E5EAF3"
-                      Foreground="#E5EAF3"
-                      FontSize="20"
-                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                      Grid.Column="1"
-                      Margin="0,0,10,10"
-                      Text="{Binding Frequency}"/>
                 <ComboBox
-                 Grid.Row="2"
+                 Grid.Row="1"
                  Foreground="#7E7F9C"
                  BorderBrush="#E5EAF3"
                  Grid.Column="1"
+                    IsEditable="True"
                  FontSize="17"
-                 materialDesign:HintAssist.HelperText="Количество ядер"
+                 materialDesign:HintAssist.HelperText="Чипсет"
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                 Margin="0,0,833,0"
+                 Margin="279,0,554,0"
                  Height="38"
-                 SelectedValue="{Binding NumberOfCores}"
-                 ItemsSource="{Binding AvailableCores}">
-
-                </ComboBox>
+                 SelectedValue="{Binding SelectedChipset}"
+                 ItemsSource="{Binding AvailableChipsets}"/>
                 <ComboBox
-                     Grid.Row="3"
+                     Grid.Row="1"
                      Foreground="#7E7F9C"
                      BorderBrush="#E5EAF3"
                      Grid.Column="1"
                      FontSize="17"
+                     IsEditable="True"
                      materialDesign:HintAssist.HelperText="Сокет"
                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                     Margin="0,0,833,0"
+                     Margin="0,19,833,0"
                      Height="38"
-                     SelectedItem="{Binding Socket}"
-                 ItemsSource="{Binding Sockets}">
+                     SelectedValue="{Binding SelectedSocket}"
+                 ItemsSource="{Binding AvailableSockets}" VerticalAlignment="Top">
 
                 </ComboBox>
                 <TextBox Grid.Row="3"
-                      materialDesign:HintAssist.Hint="Кэш"
+                      materialDesign:HintAssist.Hint="Интерфейс подключения"
                       BorderBrush="#E5EAF3"
                       materialDesign:HintAssist.Foreground="#E5EAF3"
                       Foreground="#E5EAF3"
@@ -195,18 +175,81 @@
                       Grid.Column="1"
                       Margin="0,73,10,10" 
                       Grid.RowSpan="2"
-                      Text="{Binding Cash}"/>
-                <TextBox Grid.Row="4"
-                      materialDesign:HintAssist.Hint="Энергопотребление"
-                      BorderBrush="#E5EAF3"
-                      materialDesign:HintAssist.Foreground="#E5EAF3"
-                      Foreground="#E5EAF3"
-                      FontSize="20"
-                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                      Grid.Column="1"
-                      Margin="0,74,10,10"
-                      Grid.RowSpan="2"
-                      Text="{Binding EnergyConsumption}"/>
+                      Text="{Binding ConnectionInterfaces}"/>
+                <Image  Height="64"
+                    Width="64"
+                    Stretch="UniformToFill"
+                    Grid.Row="1"
+                    Grid.Column="1" Source="/Resources/tools.png" Margin="491,5,470,5"/>
+                <ComboBox
+                    Grid.Row="1"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    IsEditable="True"
+                    FontSize="17"
+                    materialDesign:HintAssist.HelperText="Форм фактор"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                    Margin="572,0,261,0"
+                    Height="38"
+                    SelectedValue="{Binding SelectedMotherBoardFormFactor}"
+                    ItemsSource="{Binding AvailableMotherboardFormFactors}"/>
+                <Image  Height="64"
+                    Width="64"
+                    Grid.Row="2"
+                    Grid.Column="0" Source="/Resources/ram.png" Margin="5,5,5,5" Stretch="None"/>
+                <ComboBox
+                    Grid.Row="2"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    IsEditable="True"
+                    FontSize="17"
+                    materialDesign:HintAssist.HelperText="Количество портов оперативной памяти"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    Margin="0,0,833,0"
+                    Height="38"
+                    SelectedValue="{Binding SelectedCountOfRAM}"
+                    ItemsSource="{Binding AvailableRAMCounts}" RenderTransformOrigin="0.516,2.526"/>
+                <ComboBox
+                    Grid.Row="2"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    FontSize="17"
+                    IsEditable="True"
+                    materialDesign:HintAssist.HelperText="Тип памяти"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    Margin="279,0,554,0"
+                    Height="38"
+                    SelectedValue="{Binding SelectedRAMType}"
+                    ItemsSource="{Binding AvailableRAMTypes}" RenderTransformOrigin="0.516,2.526"/>
+                <ComboBox
+                    Grid.Row="3"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    FontSize="17"
+                    IsEditable="True"
+                    materialDesign:HintAssist.HelperText="Количество портов М.2"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    Margin="0,0,833,0"
+                    Height="38"
+                    SelectedValue="{Binding SelectedCountOfM2}"
+                    ItemsSource="{Binding AvailableM2Counts}" RenderTransformOrigin="0.516,2.526"/>
+                <ComboBox
+                    Grid.Row="3"
+                    Foreground="#7E7F9C"
+                    BorderBrush="#E5EAF3"
+                    Grid.Column="1"
+                    FontSize="17"
+                    IsEditable="True"
+                    materialDesign:HintAssist.HelperText="Количество портов SATA"
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    Margin="279,21,554,0"
+                    Height="38"
+                    SelectedValue="{Binding SelectedCountOfSATA}"
+                    ItemsSource="{Binding AvailableSATACounts}" RenderTransformOrigin="0.516,2.526" VerticalAlignment="Top"/>
             </Grid>
 
         </Border>

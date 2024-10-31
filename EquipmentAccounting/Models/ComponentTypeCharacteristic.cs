@@ -24,7 +24,7 @@ namespace EquipmentAccounting.Models
         public int ComponentTypeId { get; set; }
         public int CharacteristicId { get; set; }
     
-        public virtual Characteristiс Characteristiс { get; set; }
+        public virtual Characteristic Characteristic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComponentCharacteristic> ComponentCharacteristic { get; set; }
         public virtual ComponentType ComponentType { get; set; }
