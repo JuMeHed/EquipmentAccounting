@@ -64,15 +64,15 @@
                 <StackPanel>
                     <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
                     <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
-                    <Button Content="Оперативная память"/>
-                    <Button Content="Корпус"/>
-                    <Button Content="Кулер"/>
-                    <Button Content="HDD"/>
-                    <Button Content="SSD"/>
-                    <Button Content="Видеокарта"/>
-                    <Button Content="Блок питания"/>
-                    <Button Content="Сетевая карта"/>
-                    <Button Content="Звуковая карта"/>
+                    <Button Content="Оперативная память" Command="{Binding OpenRAMAddEditPageCommand}"/>
+                    <Button Content="Корпус" Command="{Binding OpenCaseAddEditPageCommand}"/>
+                    <Button Content="Кулер" Command="{Binding OpenCoolerAddEditPageCommand}"/>
+                    <Button Content="HDD" Command="{Binding OpenHDDAddEditPageCommand}"/>
+                    <Button Content="SSD" Command="{Binding OpenSSDAddEditPageCommand}"/>
+                    <Button Content="Видеокарта" Command="{Binding OpenGPUAddEditPageCommand}"/>
+                    <Button Content="Блок питания" Command="{Binding OpenPowerAddEditPageCommand}"/>
+                    <Button Content="Сетевая карта" Command="{Binding OpenNetworkCardAddEditPageCommand}"/>
+                    <Button Content="Звуковая карта" Command="{Binding OpenSoundCardAddEditPageCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
         </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using EquipmentAccounting.Classes;
 using EquipmentAccounting.Models;
+using EquipmentAccounting.Views.AdminViews;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -109,6 +110,15 @@ namespace EquipmentAccounting.ViewModels
 
         public ICommand OpenAddEditPageCommand => new RelayCommand<Models.Component>(onAddEditPageOpen);
         public ICommand OpenMotherboardAddEditPageCommand => new RelayCommand(OnMotherBoardAddEditOpen);
+        public ICommand OpenRAMAddEditPageCommand => new RelayCommand(OnRAMAddEditOpen);
+        public ICommand OpenCaseAddEditPageCommand => new RelayCommand(OnCaseAddEditOpen);
+        public ICommand OpenCoolerAddEditPageCommand => new RelayCommand(OnCoolerAddEditOpen);
+        public ICommand OpenSSDAddEditPageCommand => new RelayCommand(OnSSDAddEditOpen);
+        public ICommand OpenHDDAddEditPageCommand => new RelayCommand(OnHDDAddEditOpen);
+        public ICommand OpenGPUAddEditPageCommand => new RelayCommand(OnGPUAddEditOpen);
+        public ICommand OpenPowerAddEditPageCommand => new RelayCommand(OnPowerAddEditOpen);
+        public ICommand OpenNetworkCardAddEditPageCommand => new RelayCommand(OnNetworkCardAddEditOpen);
+        public ICommand OpenSoundCardAddEditPageCommand => new RelayCommand(OnSoundCardAddEditOpen);
         public ICommand OpenCPUAddEdit => new RelayCommand(OnCPUAddEditOpen);
         public ComponentsViewModel()
         {
@@ -185,6 +195,31 @@ namespace EquipmentAccounting.ViewModels
                     OnMotherBoardAddEditOpen();
                     break;
                 case 3:
+                    OnRAMAddEditOpen();
+                    break;
+                case 4:
+                    OnCaseAddEditOpen();
+                    break;
+                case 5:
+                    OnCoolerAddEditOpen();
+                    break;
+                case 6:
+                    OnSSDAddEditOpen();
+                    break;
+                case 7:
+                    OnHDDAddEditOpen();
+                    break;
+                case 8:
+                    OnGPUAddEditOpen();
+                    break;
+                case 9:
+                    OnPowerAddEditOpen();
+                    break;
+                case 10:
+                    OnNetworkCardAddEditOpen();
+                    break;
+                case 11:
+                    OnSoundCardAddEditOpen();
                     break;
                 default:
                     MessageBox.Show("Неизвестный тип компонента");
@@ -194,20 +229,81 @@ namespace EquipmentAccounting.ViewModels
 
         private void OnMotherBoardAddEditOpen()
         {
-            Views.AdminViews.MotherboardAddEditView motherboardAddEditView = new Views.AdminViews.MotherboardAddEditView();
+            MotherboardAddEditView view = new MotherboardAddEditView();
             MotherboardAddEditViewModel viewModel = new MotherboardAddEditViewModel();
             viewModel.CurrentComponent = SelectedComponent;
-            motherboardAddEditView.DataContext = viewModel;
-            Classes.Manager.MenuPage.CurrentPage = motherboardAddEditView;
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnCPUAddEditOpen()
         {
-            Views.AdminViews.CPUAddEditView cpuAddEdit = new Views.AdminViews.CPUAddEditView();
-            CPUAddEditViewModel cPUAddEditViewModel = new CPUAddEditViewModel();
-            cPUAddEditViewModel.CurrentComponent = SelectedComponent;
-            cpuAddEdit.DataContext = cPUAddEditViewModel;
-            Classes.Manager.MenuPage.CurrentPage = cpuAddEdit;
+            CPUAddEditView view = new CPUAddEditView();
+            CPUAddEditViewModel viewModel = new CPUAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
+        }
+
+        private void OnRAMAddEditOpen()
+        {
+            RAMAddEditView view = new RAMAddEditView();
+            RAMAddEditViewModel viewModel = new RAMAddEditViewModel();
+            //viewModel.CurrentComponent = SelectedComponent;
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
+        } 
+
+        private void OnCaseAddEditOpen()
+        {
+            CaseAddEditView view = new CaseAddEditView();
+            CaseAddEditViewModel viewModel = new CaseAddEditViewModel();
+            //viewModel.CurrentComponent = SelectedComponent;
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
+        }
+
+        private void OnCoolerAddEditOpen()
+        {
+            CoolerAddEditView view = new CoolerAddEditView();
+            CoolerAddEditViewModel viewModel = new CoolerAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
+        }
+
+        private void OnSSDAddEditOpen()
+        {
+            SSDAddEditView view = new SSDAddEditView();
+            SSDAddEditViewModel viewModel = new SSDAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage= view;
+        }
+
+        private void OnHDDAddEditOpen()
+        {
+            HDDAddEditView view = new HDDAddEditView();
+            HDDAddEditViewModel viewModel = new HDDAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
+        }
+
+        private void OnGPUAddEditOpen()
+        {
+
+        }
+        private void OnPowerAddEditOpen()
+        {
+
+        }
+
+        private void OnNetworkCardAddEditOpen()
+        {
+
+        }
+
+        private void OnSoundCardAddEditOpen()
+        {
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
