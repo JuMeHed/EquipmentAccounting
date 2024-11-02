@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -154,12 +154,19 @@
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\CoolerAddEditViewModel.cs" />
     <Compile Include="ViewModels\CPUAddEditViewModel.cs" />
+    <Compile Include="ViewModels\EquipmentViewModel.cs" />
+    <Compile Include="ViewModels\GPUAddEditViewModel.cs" />
     <Compile Include="ViewModels\HDDAddEditViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
     <Compile Include="ViewModels\MotherboardAddEditViewModel.cs" />
+    <Compile Include="ViewModels\NetworCardAddEditViewModel.cs" />
+    <Compile Include="ViewModels\PowerAddEditViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RAMAddEditViewModel.cs" />
+    <Compile Include="ViewModels\SoundCardAddEditViewModel.cs" />
     <Compile Include="ViewModels\SSDAddEditViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\AdminViews\CaseAddEditView.xaml.cs">
       <DependentUpon>CaseAddEditView.xaml</DependentUpon>
     </Compile>
@@ -172,6 +179,12 @@
     <Compile Include="Views\AdminViews\CPUAddEditView.xaml.cs">
       <DependentUpon>CPUAddEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AdminViews\EquipmentView.xaml.cs">
+      <DependentUpon>EquipmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\GPUAddEditView.xaml.cs">
+      <DependentUpon>GPUAddEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminViews\HDDAddEditView.xaml.cs">
       <DependentUpon>HDDAddEditView.xaml</DependentUpon>
     </Compile>
@@ -181,11 +194,26 @@
     <Compile Include="Views\AdminViews\MotherboardAddEditView.xaml.cs">
       <DependentUpon>MotherboardAddEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AdminViews\NetworkCardAddEditView.xaml.cs">
+      <DependentUpon>NetworkCardAddEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\PowerAddEditView.xaml.cs">
+      <DependentUpon>PowerAddEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminViews\RAMAddEditView.xaml.cs">
       <DependentUpon>RAMAddEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AdminViews\SoundCardAddEditView.xaml.cs">
+      <DependentUpon>SoundCardAddEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminViews\SSDAddEditView.xaml.cs">
       <DependentUpon>SSDAddEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViews\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
@@ -206,6 +234,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AdminViews\EquipmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\GPUAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminViews\HDDAddEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,11 +250,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AdminViews\NetworkCardAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\PowerAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminViews\RAMAddEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AdminViews\SoundCardAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminViews\SSDAddEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViews\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -331,6 +387,15 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\pencil.png" />
+    <Resource Include="Resources\delete.png" />
+    <Resource Include="Resources\group.png" />
+    <Resource Include="Resources\quality.png" />
+    <Resource Include="Resources\measure.png" />
+    <Resource Include="Resources\link.png" />
+    <Resource Include="Resources\hd.png" />
+    <Resource Include="Resources\cpu %281%29.png" />
+    <Resource Include="Resources\cpu.png" />
     <Resource Include="Resources\memory-card.png" />
     <Resource Include="Resources\disk.png" />
     <Resource Include="Resources\digital-skills.png" />

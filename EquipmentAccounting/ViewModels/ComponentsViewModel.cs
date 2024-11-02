@@ -289,21 +289,33 @@ namespace EquipmentAccounting.ViewModels
 
         private void OnGPUAddEditOpen()
         {
-
+            GPUAddEditView view = new GPUAddEditView();
+            GPUAddEditViewModel viewModel = new GPUAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void OnPowerAddEditOpen()
         {
-
+            PowerAddEditView view = new PowerAddEditView();
+            PowerAddEditViewModel viewModel = new PowerAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnNetworkCardAddEditOpen()
         {
-
+            NetworkCardAddEditView view = new NetworkCardAddEditView();
+            NetworCardAddEditViewModel viewModel = new NetworCardAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnSoundCardAddEditOpen()
         {
-
+            SoundCardAddEditView view = new SoundCardAddEditView();
+            SoundCardAddEditViewModel viewModel = new SoundCardAddEditViewModel();
+            view.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

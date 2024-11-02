@@ -21,6 +21,7 @@ namespace EquipmentAccounting.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public int AccessLevelId { get; set; }
+        public virtual string FullName => this.Surname + " " + this.Name + " " + this.Patronymic;
     
         public virtual AccessLevel AccessLevel { get; set; }
     }

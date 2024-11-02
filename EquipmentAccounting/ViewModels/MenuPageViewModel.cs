@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
+using EquipmentAccounting.Views.AdminViews;
 
 namespace EquipmentAccounting.ViewModels
 {
@@ -113,24 +114,33 @@ namespace EquipmentAccounting.ViewModels
             UsersClickCommand = new RelayCommand(UsersBtnClick);
             ComponentsClickCommand = new RelayCommand(ComponentsBtnClick);
 
-            Page components = new Views.AdminViews.ComponentsPage();
+            Page components = new ComponentsPage();
             IsComponentBtnChecked = true;
             CurrentPage = components;
         }
 
         private void EquipmentBtnClick()
         {
-
+            EquipmentView view = new EquipmentView();
+            EquipmentViewModel viewModel = new EquipmentViewModel();
+            view.DataContext = viewModel;
+            CurrentPage = view;
         }
 
         private void ProfileBtnClick()
         {
-
+            ProfileView view = new ProfileView();
+            ProfileViewModel viewModel = new ProfileViewModel();
+            view.DataContext = viewModel;
+            CurrentPage = view;
         }
 
         private void UsersBtnClick()
         {
-
+            UsersView view = new UsersView();
+            UsersViewModel viewModel = new UsersViewModel();
+            view.DataContext = viewModel;
+            CurrentPage = view;
         }
 
         private void ComponentsBtnClick()
