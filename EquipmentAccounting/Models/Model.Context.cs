@@ -20,13 +20,13 @@ namespace EquipmentAccounting.Models
             : base("name=EquipmentEntities")
         {
         }
+    
         public static EquipmentEntities GetContext()
         {
             if (_context == null)
                 _context = new EquipmentEntities();
             return _context;
         }
-    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -44,6 +44,7 @@ namespace EquipmentAccounting.Models
         public virtual DbSet<EquipmentType> EquipmentType { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<State> State { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

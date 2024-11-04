@@ -10,6 +10,7 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class LoginPageViewModel : INotifyPropertyChanged
     {
+        //TODO сохранение авторизованого пользователя после закрытия приложения
         private string _password;
         private string _login;
         private bool _isLoginExists;
@@ -59,6 +60,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand LoginCommand { get; set; }
         public LoginPageViewModel()
         {
+            Manager.MainViewModel.IsBorderVisible = false;
             LoginCommand = new RelayCommand(LogIn);
         }
 
@@ -76,9 +78,11 @@ namespace EquipmentAccounting.ViewModels
                 else
                 {
                     Classes.User.CurrentUser = user;
+                    Properties.Settings.Default.CurrentUser = user.Login;
+                    Properties.Settings.Default.Save();
 
                     Page page = new Page();
-                    if (Classes.User.CurrentUser.AccessLevelId == 1)
+                    if (Classes.User.CurrentUser.AccessLevelId == 2)
                     {
                         page = new Views.UserViews.UserMenu();
                     }

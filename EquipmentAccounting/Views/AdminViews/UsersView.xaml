@@ -39,15 +39,15 @@
                     BorderBrush="#7e7f9c" 
                     Margin="795,4,124,0" 
                     Width="200" 
-                    DisplayMemberPath="Title" 
+                    DisplayMemberPath="Description" 
                     Height="50" 
                     SelectedIndex="0"
                     FontSize="17" VerticalAlignment="Top"/>
 
 
-        <Button Content="+" Grid.Row="0" HorizontalAlignment="Left" Height="50" Width="50"
+        <Button Content="+" Grid.Row="0" HorizontalAlignment="Left" Height="50" Width="50" Command="{Binding AddDialogOpenCommand}"
                  Background="#7671FA" Foreground="White" Margin="1039,0,0,4" FontWeight="Bold" FontSize="20"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}">
+        <ListView Grid.Row="1" ItemsSource="{Binding FilteredUsers}" SelectedItem="{Binding SelectedUser}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Background" Value="#7671FA" />
@@ -86,11 +86,11 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Действия" Width="200">
+                    <GridViewColumn Header="Действия" Width="170">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0, 0, 50, 0" Orientation="Horizontal" >
-                                    <Button Command="{Binding EditCommand}" CommandParameter="{Binding}" 
+                                    <Button
                                             Background="#7671FA" 
                                             Foreground="White" 
                                             BorderBrush="Transparent" 
@@ -98,10 +98,14 @@
                                             Width="32"
                                             Height="32"
                                             Padding="5">
-                                              
-                                                <Image Source="/Resources/pencil.png" Width="16" Height="16" />
-                                            </Button>
-                                            <Button
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.EditDialogOpenCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Image Source="/Resources/pencil.png" Width="16" Height="16" />
+                                    </Button>
+                                    <Button
                                             Margin="5,0,0,0" 
                                             Background="#f71441" 
                                             Foreground="White" 
@@ -141,7 +145,7 @@
                   Margin="0,0,0,16"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Content="Отмена" 
-                               Command="{Binding DeleteDialogCloseCommand}"
+                               Command="{Binding DialogCloseCommand}"
                                Foreground="#7671FA"
                                Background="#E5EAF3"
                                Margin="5" Cursor=""/>
@@ -155,7 +159,163 @@
                 </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost IsOpen="{Binding IsEditDialogOpen}" 
+                       Grid.RowSpan="4"
+                       Grid.ColumnSpan="3"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Background="#7671FA">
+            <materialDesign:DialogHost.DialogContent>
+                <Border Background="#7671FA" Padding="20" CornerRadius="8" BorderBrush="Transparent">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding DialogTitle}"
+                                Foreground="#E5EAF3" 
+                                FontSize="20" 
+                                Margin="0,0,0,16"/>
+
+                        <TextBox Text="{Binding SelectedUser .Login, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10" 
+                                 Foreground="White" 
+                                 BorderBrush="White" 
+                                 materialDesign:HintAssist.Hint="Логин" 
+                                 FontSize="20" 
+                                 Height="50"/>
+
+                        <TextBox Text="{Binding SelectedUser .Surname, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10" 
+                                 Foreground="White" 
+                                 BorderBrush="White" 
+                                 materialDesign:HintAssist.Hint="Фамилия" 
+                                 FontSize="20" 
+                                 Height="50"/>
+
+                        <TextBox Text="{Binding SelectedUser .Name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10" 
+                                 Foreground="White" 
+                                 BorderBrush="White" 
+                                 materialDesign:HintAssist.Hint="Имя" 
+                                 FontSize="20" 
+                                 Height="50"/>
+
+                        <TextBox Text="{Binding SelectedUser .Patronymic, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10" 
+                                 Foreground="White" 
+                                 BorderBrush="White" 
+                                 materialDesign:HintAssist.Hint="Отчество" 
+                                 FontSize="20" 
+                                 Height="50"/>
+
+                        <TextBox Text="{Binding SelectedUser .Password, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,10" 
+                                 Foreground="White" 
+                                 BorderBrush="White" 
+                                 materialDesign:HintAssist.Hint="Пароль" 
+                                 FontSize="20" 
+                                 Height="50"/>
+
+                        <ComboBox ItemsSource="{Binding EditAccessLevels}" 
+                                  SelectedItem="{Binding SelectedUser .AccessLevel,  UpdateSourceTrigger=PropertyChanged}"
+                                  materialDesign:HintAssist.Hint="Уровень доступа" 
+                                  Foreground="#07244C" 
+                                  BorderBrush="White" 
+                                  Margin="0,0,0,10" 
+                                  Height="50"
+                                  DisplayMemberPath="Description" 
+                                  FontSize="17" Cursor=""/>
+
+                        <Label Content="Кабинеты под отвественностью" Foreground="White" FontSize="20"/>
+                        <ListView Grid.Row="1" ItemsSource="{Binding UsersLocations}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="200">
+                            <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Background" Value="#7671FA" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Padding" Value="5" />
+                                    <Setter Property="FontSize" Value="18" />
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Имя" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" 
+                           Foreground="White" 
+                           FontSize="18" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Примечание" Width="400">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Note}" 
+                           Foreground="White" 
+                           FontSize="18" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    
+                                    <GridViewColumn Header="Действия" Width="170">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0, 0, 50, 0" Orientation="Horizontal" >
+                                                    <Button
+                                    Margin="5,0,0,0" 
+                                    Background="#f71441" 
+                                    Foreground="White" 
+                                    BorderBrush="Transparent" 
+                                    BorderThickness="1" 
+                                    Width="32"
+                                    Height="32"
+                                    Padding="5">
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="Click">
+                                                                <i:InvokeCommandAction Command="{Binding DataContext.DeleteResponsobilityCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                        <Image Source="/Resources/delete.png" Width="16" Height="16" />
+                                                    </Button>
+
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="Назначить кабинет" 
+                                Command="{Binding AssignRoomCommand}"
+                                Foreground="#7671FA"
+                                Background="#E5EAF3"
+                                Margin="5"/>
+                            <ComboBox ItemsSource="{Binding Locations}" 
+                                  SelectedItem="{Binding SelectedLocation}" 
+                                  DisplayMemberPath="Name" 
+                                  Width="200" 
+                                  Foreground="#07244C"
+                                      BorderBrush="White"
+                                  Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="Отмена" 
+                            Command="{Binding DialogCloseCommand}"
+                            Foreground="#7671FA"
+                            Background="#E5EAF3"
+                            Margin="5"/>
+                            <Button Content="Сохранить" 
+                            Command="{Binding SaveChangesCommand}"
+                            Foreground="#7671FA"
+                            Background="#E5EAF3"
+                            Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
     </Grid>
-    
-    
 </Page>

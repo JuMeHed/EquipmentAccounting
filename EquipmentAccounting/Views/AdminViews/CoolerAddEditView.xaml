@@ -148,8 +148,8 @@
                Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                Margin="279,0,554,0"
                Height="38"
-               SelectedValue="{Binding SelectedChipset}"
-               ItemsSource="{Binding AvailableChipsets}"/>
+               SelectedValue="{Binding SelecetedCoolingType}"
+               ItemsSource="{Binding AvailableCoolingTypes}"/>
                 <ComboBox
                    Grid.Row="1"
                    Foreground="#7E7F9C"
@@ -175,7 +175,7 @@
                     Grid.Column="1"
                     Margin="0,73,10,10" 
                     Grid.RowSpan="2"
-                    Text="{Binding ConnectionInterfaces}"/>
+                    Text="{Binding DissipatedPower}"/>
                 <Image  Height="64"
                   Width="64"
                   Grid.Row="2"
@@ -191,8 +191,8 @@
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="0,0,833,0"
                   Height="38"
-                  SelectedValue="{Binding SelectedCountOfRAM}"
-                  ItemsSource="{Binding AvailableRAMCounts}" RenderTransformOrigin="0.516,2.526"/>
+                  SelectedValue="{Binding CountOfFans}"
+                  ItemsSource="{Binding AvailableCoolerCount}" RenderTransformOrigin="0.516,2.526"/>
                 <ComboBox
                   Grid.Row="3"
                   Foreground="#7E7F9C"
@@ -204,8 +204,8 @@
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="0,0,833,0"
                   Height="38"
-                  SelectedValue="{Binding SelectedCountOfM2}"
-                  ItemsSource="{Binding AvailableM2Counts}" RenderTransformOrigin="0.516,2.526"/>
+                  SelectedValue="{Binding SelectedBaseMaterial}"
+                  ItemsSource="{Binding AvailableBaseMaterials}" RenderTransformOrigin="0.516,2.526"/>
                 <ComboBox
                   Grid.Row="3"
                   Foreground="#7E7F9C"
@@ -217,8 +217,8 @@
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="279,21,554,0"
                   Height="38"
-                  SelectedValue="{Binding SelectedCountOfSATA}"
-                  ItemsSource="{Binding AvailableSATACounts}" RenderTransformOrigin="0.516,2.526" VerticalAlignment="Top"/>
+                  SelectedValue="{Binding SelectedRadiationMaterial}"
+                  ItemsSource="{Binding AvailableRadiatorMaterials}" RenderTransformOrigin="0.516,2.526" VerticalAlignment="Top"/>
                 <Image  Height="64"
                   Width="64"
                   Stretch="UniformToFill"
@@ -249,7 +249,7 @@
                     Grid.Column="1"
                     Margin="569,37,10,10" 
                     Grid.RowSpan="2"
-                    Text="{Binding ConnectionInterfaces}"/>
+                    Text="{Binding Size}"/>
             </Grid>
 
         </Border>

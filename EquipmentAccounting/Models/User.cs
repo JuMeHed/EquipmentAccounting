@@ -14,6 +14,12 @@ namespace EquipmentAccounting.Models
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Location = new HashSet<Location>();
+        }
+    
         public int Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
@@ -22,7 +28,8 @@ namespace EquipmentAccounting.Models
         public string Password { get; set; }
         public int AccessLevelId { get; set; }
         public virtual string FullName => this.Surname + " " + this.Name + " " + this.Patronymic;
-    
         public virtual AccessLevel AccessLevel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Location> Location { get; set; }
     }
 }

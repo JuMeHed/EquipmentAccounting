@@ -261,7 +261,6 @@ namespace EquipmentAccounting.ViewModels
 
                 if (SelectedCountOfRAM > 0)
                 {
-                    MessageBox.Show("Добавление характеристики количества памяти");
                     var countOfRamCharacteristic = new Models.ComponentCharacteristic
                     {
                         ComponentTypeCharacteristicId = 12,
@@ -396,7 +395,6 @@ namespace EquipmentAccounting.ViewModels
             {
                 var existingCharacteristics = EquipmentEntities.GetContext().ComponentCharacteristic
                     .Where(cc => cc.ComponentId == CurrentComponent.Id).ToList();
-                MessageBox.Show($"{existingCharacteristics.Count}");
                 EquipmentEntities.GetContext().ComponentCharacteristic.RemoveRange(existingCharacteristics);
                 EquipmentEntities.GetContext().SaveChanges();
             }

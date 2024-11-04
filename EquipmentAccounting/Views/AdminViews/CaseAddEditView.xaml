@@ -141,7 +141,7 @@
                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                    Margin="5,73,10,10" 
                    Grid.RowSpan="2"
-                   Text="{Binding ConnectionInterfaces}" Grid.Column="1"/>
+                   Text="{Binding Connectors}" Grid.Column="1"/>
                 <ComboBox
                  Grid.Row="1"
                  Foreground="#7E7F9C"
@@ -152,8 +152,8 @@
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                  Margin="12,19,838,0"
                  Height="38"
-                 SelectedValue="{Binding SelectedMotherBoardFormFactor}"
-                 ItemsSource="{Binding AvailableMotherboardFormFactors}" VerticalAlignment="Top" Grid.Column="1"/>
+                 SelectedValue="{Binding SelectedFormFactor}"
+                 ItemsSource="{Binding AvailableFormFactors}" VerticalAlignment="Top" Grid.Column="1"/>
                 <Image  Height="64"
                  Width="64"
                  Grid.Row="2"
@@ -168,8 +168,8 @@
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                  Margin="10,0,840,0"
                  Height="38"
-                 SelectedValue="{Binding SelectedCountOfRAM}"
-                 ItemsSource="{Binding AvailableRAMCounts}" RenderTransformOrigin="0.516,2.526" Grid.Column="1"/>
+                 SelectedValue="{Binding CountOfFan}"
+                 ItemsSource="{Binding AvailableCountOfFans}" RenderTransformOrigin="0.516,2.526" Grid.Column="1"/>
                 <Image
                  Width="64"
                  Stretch="UniformToFill"
@@ -190,7 +190,7 @@
                     Grid.Column="1"
                     Margin="299,37,469,10" 
                     Grid.RowSpan="2"
-                    Text="{Binding ConnectionInterfaces}"/>
+                    Text="{Binding Size}"/>
             </Grid>
 
         </Border>

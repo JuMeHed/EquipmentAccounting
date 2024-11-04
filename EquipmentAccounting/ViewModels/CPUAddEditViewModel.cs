@@ -1,13 +1,10 @@
 ﻿using EquipmentAccounting.Classes;
 using EquipmentAccounting.Models;
-using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,7 +19,7 @@ namespace EquipmentAccounting.ViewModels
         private bool _isExitDialogOpen;
         private bool _isEditing;
         private bool _isHasGraphics;
-        
+
         private int _numberOfCores;
         private int _numberOfThreads;
 
@@ -48,7 +45,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     _currentComponent = new Models.Component
                     {
-                        ComponentTypeId = 1 
+                        ComponentTypeId = 1
                     };
                 }
                 else
@@ -119,7 +116,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public string Cash 
+        public string Cash
         {
             get => _cash;
             set
@@ -168,7 +165,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenSaveDialogCommand => new RelayCommand(OpenSaveDialog);
         public CPUAddEditViewModel()
         {
-            
+
         }
 
         private void CloseDialog()
@@ -207,7 +204,7 @@ namespace EquipmentAccounting.ViewModels
                 catch (Exception ex)
                 {
                 }
-            } 
+            }
             else
             {
                 SetCharacteristics();
@@ -236,7 +233,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var frequencyCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 1, 
+                        ComponentTypeCharacteristicId = 1,
                         ComponentId = CurrentComponent.Id,
                         Value = Frequency
                     };
@@ -258,7 +255,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var socketCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 3, 
+                        ComponentTypeCharacteristicId = 3,
                         ComponentId = CurrentComponent.Id,
                         Value = Socket
                     };
@@ -269,7 +266,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var cashCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 4, 
+                        ComponentTypeCharacteristicId = 4,
                         ComponentId = CurrentComponent.Id,
                         Value = Cash
                     };
@@ -280,7 +277,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var energyCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 5, 
+                        ComponentTypeCharacteristicId = 5,
                         ComponentId = CurrentComponent.Id,
                         Value = EnergyConsumption
                     };
@@ -291,7 +288,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var threadsCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 20,
+                        ComponentTypeCharacteristicId = 6,
                         ComponentId = CurrentComponent.Id,
                         Value = NumberOfThreads.ToString()
                     };
@@ -302,7 +299,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var graphicsCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 21,
+                        ComponentTypeCharacteristicId = 7,
                         ComponentId = CurrentComponent.Id,
                         Value = "Есть"
                     };
@@ -312,7 +309,7 @@ namespace EquipmentAccounting.ViewModels
                 {
                     var graphicsCharacteristic = new Models.ComponentCharacteristic
                     {
-                        ComponentTypeCharacteristicId = 21,
+                        ComponentTypeCharacteristicId = 7,
                         ComponentId = CurrentComponent.Id,
                         Value = "Нет"
                     };
@@ -327,7 +324,7 @@ namespace EquipmentAccounting.ViewModels
                 EquipmentEntities.GetContext().ComponentCharacteristic.Add(characteristic);
                 EquipmentEntities.GetContext().SaveChanges();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
             }
@@ -341,27 +338,28 @@ namespace EquipmentAccounting.ViewModels
 
                 foreach (var characteristic in characteristics)
                 {
+                    //MessageBox.Show(characteristic.ComponentTypeCharacteristicId + " " + characteristic.ComponentTypeCharacteristic.Characteristic.Designation);
                     switch (characteristic.ComponentTypeCharacteristicId)
                     {
-                        case 1: 
+                        case 1:
                             Frequency = characteristic.Value;
                             break;
-                        case 2: 
+                        case 2:
                             NumberOfCores = int.Parse(characteristic.Value);
                             break;
-                        case 3: 
+                        case 3:
                             Socket = characteristic.Value;
                             break;
                         case 4:
                             Cash = characteristic.Value;
                             break;
-                        case 5: 
+                        case 5:
                             EnergyConsumption = characteristic.Value;
                             break;
-                        case 20: 
+                        case 6:
                             NumberOfThreads = int.Parse(characteristic.Value);
                             break;
-                        case 21:
+                        case 7:
                             IsHasGraphics = characteristic.Value.Equals("Есть");
                             break;
                     }
@@ -375,7 +373,6 @@ namespace EquipmentAccounting.ViewModels
             {
                 var existingCharacteristics = EquipmentEntities.GetContext().ComponentCharacteristic
                     .Where(cc => cc.ComponentId == CurrentComponent.Id).ToList();
-                MessageBox.Show($"{existingCharacteristics.Count}");
                 EquipmentEntities.GetContext().ComponentCharacteristic.RemoveRange(existingCharacteristics);
                 EquipmentEntities.GetContext().SaveChanges();
             }

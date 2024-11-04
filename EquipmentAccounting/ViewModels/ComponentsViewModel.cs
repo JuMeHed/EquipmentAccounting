@@ -7,13 +7,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EquipmentAccounting.ViewModels
 {
     internal class ComponentsViewModel : INotifyPropertyChanged
     {
+        //TODO третье состояние кнопки применен (все компоненты)
         private ObservableCollection<EquipmentAccounting.Models.Component> _components;
         private ObservableCollection<ComponentType> _componentTypes;
         private ObservableCollection<EquipmentAccounting.Models.Component> _filteredComponents;
@@ -88,7 +88,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public bool IsContextMenuOpen 
+        public bool IsContextMenuOpen
         {
             get => _isContextMenuOpen;
             set
@@ -124,7 +124,7 @@ namespace EquipmentAccounting.ViewModels
         {
             LoadComponents();
             LoadComponentTypes();
-            FilterComponents(); 
+            FilterComponents();
         }
 
         private void LoadComponentTypes()
@@ -249,16 +249,16 @@ namespace EquipmentAccounting.ViewModels
         {
             RAMAddEditView view = new RAMAddEditView();
             RAMAddEditViewModel viewModel = new RAMAddEditViewModel();
-            //viewModel.CurrentComponent = SelectedComponent;
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
-        } 
+        }
 
         private void OnCaseAddEditOpen()
         {
             CaseAddEditView view = new CaseAddEditView();
             CaseAddEditViewModel viewModel = new CaseAddEditViewModel();
-            //viewModel.CurrentComponent = SelectedComponent;
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
@@ -267,6 +267,7 @@ namespace EquipmentAccounting.ViewModels
         {
             CoolerAddEditView view = new CoolerAddEditView();
             CoolerAddEditViewModel viewModel = new CoolerAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
@@ -276,7 +277,7 @@ namespace EquipmentAccounting.ViewModels
             SSDAddEditView view = new SSDAddEditView();
             SSDAddEditViewModel viewModel = new SSDAddEditViewModel();
             view.DataContext = viewModel;
-            Manager.MenuPage.CurrentPage= view;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnHDDAddEditOpen()

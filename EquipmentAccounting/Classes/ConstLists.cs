@@ -9,6 +9,7 @@ namespace EquipmentAccounting.Classes
         public static readonly List<int> NUMBER_OF_M2 = new List<int>() { 0, 1, 2, 3, 4, 5, 7 };
         public static readonly List<int> NUMBER_OF_SATA = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
         public static readonly List<int> NUMBER_OF_RAM = new List<int>() { 1, 2, 4, 8 };
+        public static readonly List<int> RAM_CAPACITIES = new List<int>() { 2, 4, 8, 16, 24, 32, 48, 64, 96, 128 };
         public static readonly List<string> SOCKET_TYPES = new List<string>
         {
             "AM5",
@@ -116,6 +117,24 @@ namespace EquipmentAccounting.Classes
             "Custom",           // Custom form factors for specific builds
         };
 
+        public static readonly List<string> CASE_FORM_FACTORS = new List<string>
+        {
+            "ATX",               // Standard size for most desktop cases
+            "Micro ATX",        // Smaller than ATX, supports fewer components
+            "Mini ITX",         // Compact size for small builds
+            "E-ATX",            // Extended ATX for additional features
+            "XL-ATX",           // Extra large ATX for high-end systems
+            "BTX",              // Balanced Technology eXtended
+            "Mini DTX",         // Compact version of DTX, supports fewer components
+            "Pico ITX",         // Very small form factor, typically for specialized builds
+            "Flex ATX",         // Flexible version of ATX, often used in compact systems
+            "HTPC",             // Home Theater PC form factor, designed for media centers
+            "Cube",             // Cube-shaped cases, often used for compact builds
+            "Rackmount",        // Designed for mounting in racks, typically for servers
+            "Custom",           // Custom form factors for specific builds
+            "Server",           // Specialized for server use, may vary in size
+        };
+
         public readonly static List<string> RAM_FORM_FACTORS = new List<string>
         {
             "DIMM",
@@ -130,5 +149,35 @@ namespace EquipmentAccounting.Classes
             "DDR4",
             "DDR5"
         };
+
+        public static readonly List<string> COOLING_TYPES = new List<string>
+        {
+            "Воздушное",             // Air cooling
+            "Жидкостное",            // Liquid cooling
+            "Гибридное",             // Hybrid cooling (combination of air and liquid)
+            "Пассивное",             // Passive cooling (no fans)
+            "Термоэлектрическое",    // Thermoelectric cooling (Peltier)
+            "Водяное охлаждение",    // Water cooling
+            "Альтернативное",        // Alternative cooling methods (e.g., phase change)
+        };
+
+        public static readonly List<string> BASE_MATERIALS = new List<string>
+        {
+            "Медь",                  // Copper
+            "Алюминий",             // Aluminum
+            "Сталь",                // Steel
+            "Комбинированный",      // Combined materials
+            "Нержавеющая сталь",    // Stainless steel
+        };
+
+        public static readonly List<string> RADIATOR_MATERIALS = new List<string>
+        {
+            "Медь",                  // Copper
+            "Алюминий",             // Aluminum
+            "Сталь",                // Steel
+            "Пластик",              // Plastic
+            "Комбинированный",      // Combined materials
+        };
+
     }
 }

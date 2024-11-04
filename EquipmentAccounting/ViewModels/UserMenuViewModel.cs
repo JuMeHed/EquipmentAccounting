@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -13,6 +14,8 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class UserMenuViewModel : INotifyPropertyChanged
     {
+        private Page _currentPage;
+
         private bool _isEquipmentBtnChecked;
         private bool _isProfileBtnChecked;
 
@@ -50,14 +53,22 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public ICommand EquipmentCLickCommand { get; set; }
-        public ICommand ProfileClickCommand { get; set; }
+        public Page CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
+        public ICommand EquipmentCLickCommand => new RelayCommand(EquipmentBtnCLick);
+        public ICommand ProfileClickCommand => new RelayCommand(ProfileBtnClick);
 
         public UserMenuViewModel()
         {
-
-            EquipmentCLickCommand = new RelayCommand(EquipmentBtnCLick);
-            ProfileClickCommand = new RelayCommand(ProfileBtnClick);
+            Manager.UserMenu = this;
+            Manager.MainViewModel.IsBorderVisible = true;
         }
 
         private void EquipmentBtnCLick()
@@ -67,7 +78,10 @@ namespace EquipmentAccounting.ViewModels
 
         private void ProfileBtnClick()
         {
-
+            Views.AdminViews.ProfileView profile = new Views.AdminViews.ProfileView();
+            ProfileViewModel viewModel = new ProfileViewModel();
+            profile.DataContext = viewModel;
+            Manager.UserMenu.CurrentPage = profile;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

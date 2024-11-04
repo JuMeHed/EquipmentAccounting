@@ -1,6 +1,8 @@
 ﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Models;
 using EquipmentAccounting.Views;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +11,6 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        public Page MainPage;
         private Page _currentPage;
         private bool _isBorderVisible;
         public Page CurrentPage
@@ -21,7 +22,7 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged(nameof(CurrentPage));
             }
         }
-        public bool IsBorderVisible 
+        public bool IsBorderVisible
         {
             get => _isBorderVisible;
             set
@@ -39,8 +40,26 @@ namespace EquipmentAccounting.ViewModels
             IsBorderVisible = false;
             Page loginPage = new LoginPage();
 
-            CurrentPage = loginPage;
-            Manager.CurrentPage = CurrentPage;
+            //Manager.CurrentPage = CurrentPage;
+
+            string savedLogin = Properties.Settings.Default.CurrentUser;
+            if (!string.IsNullOrEmpty(savedLogin))
+            {
+                var user = EquipmentEntities.GetContext().User.FirstOrDefault(x => x.Login == savedLogin);
+                if (user != null)
+                {
+                    Classes.User.CurrentUser = user;
+
+                    if (user.AccessLevelId == 1)
+                        Manager.MainViewModel.CurrentPage = new Views.MenuPage(); 
+                    else 
+                        Manager.MainViewModel.CurrentPage = new Views.UserViews.UserMenu();
+                }
+            }
+            else
+            {
+                Manager.MainViewModel.CurrentPage = new Views.LoginPage();
+            }
 
             CloseCommand = new RelayCommand(Close);
             DragMoveCommand = new RelayCommand(DragMove);

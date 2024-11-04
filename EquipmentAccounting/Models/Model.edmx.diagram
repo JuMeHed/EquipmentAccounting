@@ -4,32 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6aea32378e5a41af90ba9bf294c13c66" Name="Diagram1">
-        <EntityTypeShape EntityType="EquipmentInventoryModel.AccessLevel" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.Characteristic" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.Component" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentCharacteristic" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentType" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentTypeCharacteristic" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+      <Diagram DiagramId="2b02f6f336794de8ab08e22c4095c491" Name="Diagram1">
+        <EntityTypeShape EntityType="EquipmentInventoryModel.AccessLevel" Width="1.5" PointX="1.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.Characteristic" Width="1.5" PointX="3.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.Component" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentCharacteristic" Width="1.5" PointX="8.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentType" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.ComponentTypeCharacteristic" Width="1.5" PointX="6" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.Equipment" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.EquipmentComponent" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.EquipmentLocation" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.EquipmentType" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.Location" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.Location" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EquipmentInventoryModel.State" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EquipmentInventoryModel.User" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__User__AccessLeve__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Compo__59063A47" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="EquipmentInventoryModel.User" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__User__AccessLeve__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Chara__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Compo__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Component__Compo__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__State__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Locat__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Equip__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__State__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Equipment__Locat__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="EquipmentInventoryModel.FK__Location__Respon__3D5E1FD2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,7 +15,7 @@
     <Page.DataContext>
         <vm:RAMAddEditViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="52*"/>
@@ -162,8 +162,8 @@
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                  Margin="0,0,833,0"
                  Height="38"
-                 SelectedValue="{Binding NumberOfCores}"
-                 ItemsSource="{Binding AvailableCores}">
+                 SelectedValue="{Binding SelectedMemoryCapacity}"
+                 ItemsSource="{Binding AvailableMemoryCapacities}">
 
                 </ComboBox>
                 <ComboBox
@@ -176,8 +176,8 @@
                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                      Margin="0,0,833,0"
                      Height="38"
-                     SelectedItem="{Binding Socket}"
-                 ItemsSource="{Binding Sockets}">
+                     SelectedItem="{Binding SelectedRAMType}"
+                 ItemsSource="{Binding AvailableRAMTypes}">
 
                 </ComboBox>
                 <TextBox Grid.Row="3"
@@ -190,7 +190,7 @@
                       Grid.Column="1"
                       Margin="0,73,10,10" 
                       Grid.RowSpan="2"
-                      Text="{Binding Cash}"/>
+                      Text="{Binding Timings}"/>
                 <ComboBox
                  Grid.Row="2"
                  Foreground="#7E7F9C"
@@ -201,8 +201,8 @@
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                  Margin="293,0,540,0"
                  Height="38"
-                 SelectedValue="{Binding NumberOfThreads}"
-                 ItemsSource="{Binding AvailableThreads}"/>
+                 SelectedValue="{Binding SelectedCountOfRAM}"
+                 ItemsSource="{Binding AvailableCountsOfRAM}"/>
                 <ComboBox
                     Grid.Row="3"
                     Foreground="#7E7F9C"
@@ -213,8 +213,8 @@
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     Margin="293,0,540,0"
                     Height="38"
-                    SelectedItem="{Binding Socket}"
-                    ItemsSource="{Binding Sockets}"/>
+                    SelectedItem="{Binding SelectedFormFactor}"
+                    ItemsSource="{Binding AvailableRAMFormFactors}"/>
                 <Image
                     Width="64"
                     Stretch="UniformToFill"
@@ -225,6 +225,22 @@
                     Stretch="UniformToFill"
                     Grid.Row="3"
                     Grid.Column="1" Source="/Resources/sodimm.png" Margin="224,4,737,5"/>
+                <Image  Height="64"
+                    Width="64"
+                    Stretch="UniformToFill"
+                    Grid.Row="5"
+                    Grid.Column="0" Source="/Resources/link.png" Margin="5,5,5,5"/>
+                <TextBox Grid.Row="4"
+                    materialDesign:HintAssist.Hint="Интерфейс подключения"
+                    BorderBrush="#E5EAF3"
+                    materialDesign:HintAssist.Foreground="#E5EAF3"
+                    Foreground="#E5EAF3"
+                    FontSize="20"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    Grid.Column="1"
+                    Margin="0,73,10,10" 
+                    Grid.RowSpan="2"
+                    Text="{Binding ConnectionInterfaces}"/>
             </Grid>
 
         </Border>

@@ -14,7 +14,7 @@
     <Page.DataContext>
         <vm:UserMenuViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="181*"/>
@@ -49,13 +49,13 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding GoToProjectPageCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding ProfileClickCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ToggleButton>
 
             </StackPanel>
         </Border>
-        <Frame x:Name="InnerFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="1" x:Name="InnerFrame" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
     </Grid>
 </Page>
