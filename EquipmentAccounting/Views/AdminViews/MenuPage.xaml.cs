@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EquipmentAccounting.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace EquipmentAccounting.Views
         public MenuPage()
         {
             InitializeComponent();
+      
         }
+
     }
 }

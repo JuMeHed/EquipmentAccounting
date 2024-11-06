@@ -167,8 +167,8 @@
                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                    Margin="0,0,833,0"
                    Height="38"
-                   SelectedValue="{Binding NumberOfCores}"
-                   ItemsSource="{Binding AvailableCores}">
+                   SelectedValue="{Binding Technology}"
+                   ItemsSource="{Binding AvailableTechnologies}">
 
                 </ComboBox>
                 <ComboBox
@@ -181,8 +181,8 @@
                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                        Margin="0,0,833,0"
                        Height="38"
-                       SelectedItem="{Binding Socket}"
-                   ItemsSource="{Binding Sockets}">
+                       SelectedItem="{Binding VideoMemoryCapacity}"
+                   ItemsSource="{Binding AvailableVideoMemoryCapacities}">
 
                 </ComboBox>
                 <TextBox Grid.Row="3"
@@ -195,7 +195,7 @@
                         Grid.Column="1"
                         Margin="0,73,10,10" 
                         Grid.RowSpan="2"
-                        Text="{Binding Cash}"/>
+                        Text="{Binding ConnectionInterface}"/>
                 <TextBox Grid.Row="4"
                         materialDesign:HintAssist.Hint="Энергопотребление"
                         BorderBrush="#E5EAF3"
@@ -206,7 +206,7 @@
                         Grid.Column="1"
                         Margin="0,74,10,10"
                         Grid.RowSpan="2"
-                        Text="{Binding EnergyConsumption}"/>
+                        Text="{Binding Power}"/>
                 <Image  Height="64"
                     Width="64"
                     Stretch="UniformToFill"
@@ -222,8 +222,8 @@
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     Margin="266,0,567,0"
                     Height="38"
-                    SelectedItem="{Binding Socket}"
-                    ItemsSource="{Binding Sockets}"/>
+                    SelectedItem="{Binding VideoMemoryType}"
+                    ItemsSource="{Binding AvailableVideoMemoryTypes}"/>
                 <Image  Height="64"
                     Width="64"
                     Stretch="UniformToFill"
@@ -239,8 +239,8 @@
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     Margin="527,0,306,0"
                     Height="38"
-                    SelectedItem="{Binding Socket}"
-                    ItemsSource="{Binding Sockets}"/>
+                    SelectedItem="{Binding MemoryBus}"
+                    ItemsSource="{Binding AvailableMemoryBus}"/>
                 <Image  Height="64"
                     Width="64"
                     Stretch="UniformToFill"
@@ -256,8 +256,8 @@
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                     Margin="266,0,567,0"
                     Height="38"
-                    SelectedValue="{Binding NumberOfCores}"
-                    ItemsSource="{Binding AvailableCores}"/>
+                    SelectedValue="{Binding MaxResolution}"
+                    ItemsSource="{Binding AvailableResolutions}"/>
             </Grid>
 
         </Border>

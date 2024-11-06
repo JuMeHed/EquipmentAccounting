@@ -172,8 +172,7 @@ namespace EquipmentAccounting.ViewModels
         }
         private void Exit()
         {
-            _isExitDialogOpen = false;
-            _isSaveDialogOpen = false;
+            CloseDialog();
             Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
             Classes.Manager.MenuPage.CurrentPage = componentsPage;
         }

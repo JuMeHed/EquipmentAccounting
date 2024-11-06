@@ -276,7 +276,8 @@ namespace EquipmentAccounting.ViewModels
         {
             SSDAddEditView view = new SSDAddEditView();
             SSDAddEditViewModel viewModel = new SSDAddEditViewModel();
-            view.DataContext = viewModel;
+            viewModel.CurrentComponent = SelectedComponent;
+            view.DataContext = viewModel;          
             Manager.MenuPage.CurrentPage = view;
         }
 
@@ -284,6 +285,7 @@ namespace EquipmentAccounting.ViewModels
         {
             HDDAddEditView view = new HDDAddEditView();
             HDDAddEditViewModel viewModel = new HDDAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
@@ -292,6 +294,7 @@ namespace EquipmentAccounting.ViewModels
         {
             GPUAddEditView view = new GPUAddEditView();
             GPUAddEditViewModel viewModel = new GPUAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }

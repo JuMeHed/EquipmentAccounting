@@ -179,5 +179,73 @@ namespace EquipmentAccounting.Classes
             "Комбинированный",      // Combined materials
         };
 
+        public static readonly List<string> STORAGE_CAPACITY = new List<string>
+        {
+            "128 ГБ",
+            "256 ГБ",
+            "512 ГБ",
+            "1 ТБ",
+            "2 ТБ",
+            "4 ТБ",
+            "8 ТБ",
+            "16 ТБ",
+            "32 ТБ",
+            "64 ТБ",
+            "128 ТБ",
+            "256 ТБ",
+            "512 ТБ",
+            "1 ПБ",
+            "2 ПБ",
+            "4 ПБ",
+            "8 ПБ",
+            "16 ПБ",
+            "32 ПБ",
+            "64 ПБ"
+        };
+
+        public static readonly List<string> MEMORY_BUSES = new List<string>
+        {
+            "64-bit",
+            "128-bit",
+            "192-bit",
+            "256-bit",
+            "384-bit"
+        };
+
+        public static readonly List<string> VIDEO_MEMORY_TYPES = new List<string>
+        {
+            "GDDR6",
+            "GDDR5",
+            "GDDR5X",
+            "HBM2",
+            "GDDR4"
+        };
+
+        public static readonly List<string> VIDEO_MEMORY_CAPACITIES = new List<string>
+        {
+            "2GB",
+            "4GB",
+            "6GB",
+            "8GB",
+            "10GB",
+            "12GB",
+            "16GB"
+        };
+
+        public static readonly List<string> MAX_RESOLUTIONS = new List<string>
+        {
+            "1920x1080",
+            "2560x1440",
+            "3840x2160",
+            "7680x4320",
+            "1280x720",
+            "1600x900"
+        };
+
+        public static readonly List<string> TECHNOLOGIES = new List<string>
+        {
+            "NVIDIA G-Sync",
+            "AMD FreeSync"
+        };
     }
 }

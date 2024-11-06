@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\FrameNavigationBehavior.cs" />
     <Compile Include="Classes\ConstLists.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToTextConverter.cs" />
