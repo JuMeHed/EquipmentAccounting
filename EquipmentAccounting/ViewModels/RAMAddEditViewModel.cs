@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -70,7 +68,7 @@ namespace EquipmentAccounting.ViewModels
             get => _selectedCountOfRAM;
             set
             {
-                _selectedCountOfRAM = value; 
+                _selectedCountOfRAM = value;
                 OnPropertyChanged();
             }
         }
@@ -174,7 +172,7 @@ namespace EquipmentAccounting.ViewModels
 
         public RAMAddEditViewModel()
         {
-            
+
         }
 
         private void OnSaveChanges()
@@ -291,7 +289,7 @@ namespace EquipmentAccounting.ViewModels
                     AddCharacteristic(formFactorCharacteristic);
                 }
 
-               
+
                 if (SelectedCountOfRAM > 0)
                 {
                     var countOfRAMCharacteristic = new Models.ComponentCharacteristic
@@ -325,7 +323,7 @@ namespace EquipmentAccounting.ViewModels
 
                 foreach (var characteristic in characteristics)
                 {
-                 
+
                     switch (characteristic.ComponentTypeCharacteristicId)
                     {
                         case 16:

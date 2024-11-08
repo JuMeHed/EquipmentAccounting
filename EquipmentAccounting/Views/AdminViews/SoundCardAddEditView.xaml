@@ -141,7 +141,7 @@
                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                Margin="5,73,10,10" 
                Grid.RowSpan="2"
-               Text="{Binding ConnectionInterfaces}" Grid.Column="1"/>
+               Text="{Binding ConnectionInterface}" Grid.Column="1"/>
                 <ComboBox
              Grid.Row="1"
              Foreground="#7E7F9C"
@@ -152,8 +152,8 @@
              Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
              Margin="5,19,845,0"
              Height="38"
-             SelectedValue="{Binding SelectedMotherBoardFormFactor}"
-             ItemsSource="{Binding AvailableMotherboardFormFactors}" VerticalAlignment="Top" Grid.Column="1"/>
+             SelectedValue="{Binding SelectedTechnology}"
+             ItemsSource="{Binding AvailableTechnologies}" VerticalAlignment="Top" Grid.Column="1"/>
                 <Image  Height="64"
              Width="64"
              Grid.Row="2"
@@ -171,7 +171,7 @@
                   FontSize="20"
                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                   Margin="5,4,10,5"
-                  Text="{Binding ConnectionInterfaces}" Grid.Column="1"/>
+                  Text="{Binding SendingDataSpeed}" Grid.Column="1"/>
             </Grid>
 
         </Border>

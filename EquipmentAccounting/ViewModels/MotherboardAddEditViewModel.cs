@@ -1,16 +1,12 @@
-﻿using System;
+﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net.Sockets;
 using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using EquipmentAccounting.Classes;
-using EquipmentAccounting.Models;
 
 namespace EquipmentAccounting.ViewModels
 {
@@ -186,7 +182,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenSaveDialogCommand => new RelayCommand(OpenSaveDialog);
         public MotherboardAddEditViewModel()
         {
-            
+
         }
         private void OnSaveChanges()
         {

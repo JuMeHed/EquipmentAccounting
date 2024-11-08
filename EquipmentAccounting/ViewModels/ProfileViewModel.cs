@@ -79,7 +79,7 @@ namespace EquipmentAccounting.ViewModels
         private void Exit()
         {
             Classes.User.CurrentUser = null;
-            Properties.Settings.Default.CurrentUser = string.Empty; 
+            Properties.Settings.Default.CurrentUser = string.Empty;
             Properties.Settings.Default.Save();
 
             Manager.CurrentPage = null;

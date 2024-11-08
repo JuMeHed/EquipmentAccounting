@@ -11,10 +11,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
       Title="MenuPage">
- 
+
+   
     <Page.DataContext>
         <vm:MenuPageViewModel/>
     </Page.DataContext>
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="181*"/>
@@ -100,8 +103,9 @@
         <Frame x:Name="InnerFrame" 
                Grid.Column="1"
                NavigationUIVisibility="Hidden" 
-               Content="{Binding CurrentPage}">
-
+               Content="{Binding CurrentPage}"
+               >
+       
         </Frame>
     </Grid>
 </Page>

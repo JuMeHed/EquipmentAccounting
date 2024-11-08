@@ -1,15 +1,9 @@
 ﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Views.AdminViews;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EquipmentAccounting.Views.AdminViews;
-using System.Windows.Media.Animation;
-using System.Windows;
-using System;
-using EquipmentAccounting.Views;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EquipmentAccounting.ViewModels
 {
@@ -19,8 +13,8 @@ namespace EquipmentAccounting.ViewModels
         private bool _isEquipmentBtnChecked;
         private bool _isComponentBtnChecked;
         private bool _isUsersBtnChecked;
+    
         private Page _currentPage;
-        private double _frameOpacity = 0;
         public bool IsEquipmentBtnChecked
         {
             get => _isEquipmentBtnChecked;
@@ -106,18 +100,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public double FrameOpacity
-        {
-            get => _frameOpacity;
-            set
-            {
-                if (_frameOpacity != value)
-                {
-                    _frameOpacity = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+    
         public ICommand EquipmentCLickCommand => new RelayCommand(EquipmentBtnClick);
         public ICommand ProfileClickCommand => new RelayCommand(ProfileBtnClick);
         public ICommand UsersClickCommand => new RelayCommand(UsersBtnClick);
@@ -134,7 +117,6 @@ namespace EquipmentAccounting.ViewModels
 
         private void EquipmentBtnClick()
         {
-            FrameOpacity = 0;
             EquipmentView view = new EquipmentView();
             EquipmentViewModel viewModel = new EquipmentViewModel();
             view.DataContext = viewModel;
@@ -143,7 +125,6 @@ namespace EquipmentAccounting.ViewModels
 
         private void ProfileBtnClick()
         {
-            FrameOpacity = 0;
             ProfileView view = new ProfileView();
             ProfileViewModel viewModel = new ProfileViewModel();
             view.DataContext = viewModel;
@@ -152,7 +133,6 @@ namespace EquipmentAccounting.ViewModels
 
         private void UsersBtnClick()
         {
-            FrameOpacity = 0;
             UsersView view = new UsersView();
             UsersViewModel viewModel = new UsersViewModel();
             view.DataContext = viewModel;
@@ -161,7 +141,6 @@ namespace EquipmentAccounting.ViewModels
 
         private void ComponentsBtnClick()
         {
-            FrameOpacity = 0;
             Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
             CurrentPage = componentsPage;
         }

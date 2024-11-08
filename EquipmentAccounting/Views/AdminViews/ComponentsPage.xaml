@@ -12,15 +12,16 @@
       d:DesignHeight="800" d:DesignWidth="1119"
       Title="ComponentsPage">
 
-     <Page.DataContext>
+    <Page.DataContext>
         <vm:ComponentsViewModel/>
-     </Page.DataContext>
+    </Page.DataContext>
 
     <Page.Resources>
         <converters:BoolToTextConverter x:Key="BoolToTextConverter"/>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
     </Page.Resources>
-    
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -29,7 +30,6 @@
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal">
             <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" 
-                      Margin="10" 
                       Foreground="#7e7f9c" 
                       BorderBrush="#7e7f9c" 
                       materialDesign:HintAssist.Hint="Название" 
@@ -38,7 +38,8 @@
                       materialDesign:HintAssist.Foreground="#7e7f9c" 
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                       Height="50" 
-                      Width="600"/>
+                     Margin="5,0"
+                      Width="658"/>
             <ComboBox ItemsSource="{Binding ComponentTypes}" 
                       SelectedItem="{Binding SelectedComponentType}" 
                       materialDesign:HintAssist.Hint="Тип компонента" 
@@ -46,21 +47,24 @@
                       x:Name="DepartmentCB" 
                       BorderBrush="#7e7f9c" 
                       Margin="70,0,30,0" 
-                      Width="200" 
+                      Width="145" 
                       DisplayMemberPath="Title" 
                       Height="50" 
                       SelectedIndex="0"
                       FontSize="17"/>
             <CheckBox x:Name="IsActiveCB" 
-                      Content="Применен"
-                      Foreground="#7e7f9c"
-                      FontSize="20"
-                      HorizontalAlignment="Right"
-                      IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"/>
+                        Content="Статус"
+                        Foreground="#7e7f9c"
+                        FontSize="20"
+                        HorizontalAlignment="Right"
+                        IsThreeState="True"
+                        IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"/>
+
 
             <materialDesign:PopupBox Foreground="#7671FA"
-                                     Padding="2 0 2 0"
+                                     Padding="2 0 2 0" Width="25"
                                      >
+           
                 <StackPanel>
                     <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
                     <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
@@ -75,12 +79,25 @@
                     <Button Content="Звуковая карта" Command="{Binding OpenSoundCardAddEditPageCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
+            <Label Content="Добавить" Foreground="#7671FA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"
+                  />
         </StackPanel>
         <ListBox Grid.Row="1"
          x:Name="ComponentsLB"
          ScrollViewer.VerticalScrollBarVisibility="Hidden"
          ItemsSource="{Binding FilteredComponents}"
          SelectedItem="{Binding SelectedComponent}">
+            <ListBox.ContextMenu>
+                <ContextMenu DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="Подробнее" 
+                  Command="{Binding OpenAddEditPageCommand}"  
+                  CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                    <MenuItem Header="Снять с учета" 
+                  Command="{Binding DeregisterComponentCommand}" 
+                  CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding OpenAddEditPageCommand}" CommandParameter="{Binding SelectedComponent}"/>

@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -182,7 +180,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenSaveDialogCommand => new RelayCommand(OpenSaveDialog);
         public GPUAddEditViewModel()
         {
-            
+
         }
 
         private void OnSaveChanges()
@@ -222,8 +220,7 @@ namespace EquipmentAccounting.ViewModels
         }
         private void Exit()
         {
-            _isExitDialogOpen = false;
-            _isSaveDialogOpen = false;
+            CloseDialog();
             Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
             Classes.Manager.MenuPage.CurrentPage = componentsPage;
         }
@@ -364,7 +361,7 @@ namespace EquipmentAccounting.ViewModels
                             MaxResolution = characteristic.Value;
                             break;
                         case 46:
-                           Power = characteristic.Value;
+                            Power = characteristic.Value;
                             break;
                         case 47:
                             Technology = characteristic.Value;

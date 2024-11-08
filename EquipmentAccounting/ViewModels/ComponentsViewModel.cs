@@ -13,14 +13,16 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class ComponentsViewModel : INotifyPropertyChanged
     {
-        //TODO третье состояние кнопки применен (все компоненты)
         private ObservableCollection<EquipmentAccounting.Models.Component> _components;
         private ObservableCollection<ComponentType> _componentTypes;
         private ObservableCollection<EquipmentAccounting.Models.Component> _filteredComponents;
-        private Models.Component _selectedComponent;
+  
         private string _nameFilter;
+
+        private Models.Component _selectedComponent;
         private ComponentType _selectedComponentType;
-        private bool _isActive;
+
+        private bool? _isActive;
         private bool _isContextMenuOpen;
 
         public ObservableCollection<EquipmentAccounting.Models.Component> Components
@@ -77,7 +79,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public bool IsActive
+        public bool? IsActive
         {
             get => _isActive;
             set
@@ -120,6 +122,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenNetworkCardAddEditPageCommand => new RelayCommand(OnNetworkCardAddEditOpen);
         public ICommand OpenSoundCardAddEditPageCommand => new RelayCommand(OnSoundCardAddEditOpen);
         public ICommand OpenCPUAddEdit => new RelayCommand(OnCPUAddEditOpen);
+        public ICommand DeregisterComponentCommand => new RelayCommand<Models.Component>(RemoveFromAccounting);
         public ComponentsViewModel()
         {
             LoadComponents();
@@ -147,6 +150,9 @@ namespace EquipmentAccounting.ViewModels
                 component.IsActive = componentInEquipment != null && componentInEquipment.IsActual;
             }
 
+            components = new ObservableCollection<EquipmentAccounting.Models.Component>(
+                         components.Where(x => string.IsNullOrEmpty(x.Note) || !x.Note.Contains("Снят с учёта")).ToList());
+
             Components = components;
         }
 
@@ -162,7 +168,14 @@ namespace EquipmentAccounting.ViewModels
 
                 var filteredComponents = Components.AsEnumerable();
 
-                filteredComponents = filteredComponents.Where(x => x.IsActive == IsActive);
+                if (IsActive == true)
+                {
+                    filteredComponents = filteredComponents.Where(c => c.IsActive).ToList();
+                }
+                else if (IsActive == false)
+                {
+                    filteredComponents = filteredComponents.Where(c => !c.IsActive).ToList();
+                }
 
                 if (!string.IsNullOrEmpty(NameFilter))
                 {
@@ -227,6 +240,15 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        private void RemoveFromAccounting(Models.Component component)
+        {
+            component.Note += "Снят с учёта";
+            LoadComponents();
+            try
+            {
+                EquipmentEntities.GetContext().SaveChanges();
+            } catch (Exception ex) { }
+        }
         private void OnMotherBoardAddEditOpen()
         {
             MotherboardAddEditView view = new MotherboardAddEditView();
@@ -277,7 +299,7 @@ namespace EquipmentAccounting.ViewModels
             SSDAddEditView view = new SSDAddEditView();
             SSDAddEditViewModel viewModel = new SSDAddEditViewModel();
             viewModel.CurrentComponent = SelectedComponent;
-            view.DataContext = viewModel;          
+            view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
 
@@ -302,6 +324,7 @@ namespace EquipmentAccounting.ViewModels
         {
             PowerAddEditView view = new PowerAddEditView();
             PowerAddEditViewModel viewModel = new PowerAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
@@ -310,6 +333,7 @@ namespace EquipmentAccounting.ViewModels
         {
             NetworkCardAddEditView view = new NetworkCardAddEditView();
             NetworCardAddEditViewModel viewModel = new NetworCardAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }
@@ -318,6 +342,7 @@ namespace EquipmentAccounting.ViewModels
         {
             SoundCardAddEditView view = new SoundCardAddEditView();
             SoundCardAddEditViewModel viewModel = new SoundCardAddEditViewModel();
+            viewModel.CurrentComponent = SelectedComponent;
             view.DataContext = viewModel;
             Manager.MenuPage.CurrentPage = view;
         }

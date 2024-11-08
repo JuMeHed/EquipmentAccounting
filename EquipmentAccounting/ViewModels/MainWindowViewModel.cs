@@ -31,6 +31,7 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
+      
         public ICommand CloseCommand { get; set; }
         public ICommand DragMoveCommand { get; set; }
 
@@ -51,8 +52,8 @@ namespace EquipmentAccounting.ViewModels
                     Classes.User.CurrentUser = user;
 
                     if (user.AccessLevelId == 1)
-                        Manager.MainViewModel.CurrentPage = new Views.MenuPage(); 
-                    else 
+                        Manager.MainViewModel.CurrentPage = new Views.MenuPage();
+                    else
                         Manager.MainViewModel.CurrentPage = new Views.UserViews.UserMenu();
                 }
             }

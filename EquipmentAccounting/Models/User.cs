@@ -27,7 +27,15 @@ namespace EquipmentAccounting.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public int AccessLevelId { get; set; }
-        public virtual string FullName => this.Surname + " " + this.Name + " " + this.Patronymic;
+        public virtual string FullName
+        {
+            get => this.Surname + " " + this.Name + " " + this.Patronymic; 
+            set
+            {
+                FullName = value;
+            }
+        }
+        
         public virtual AccessLevel AccessLevel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Location> Location { get; set; }

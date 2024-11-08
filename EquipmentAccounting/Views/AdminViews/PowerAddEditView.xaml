@@ -137,11 +137,6 @@
                      Stretch="UniformToFill"
                      Grid.Row="4"
                      Grid.Column="0" Source="/Resources/size.png"/>
-                <Image  Height="64"
-                     Width="64"
-                     Stretch="UniformToFill"
-                     Grid.Row="5"
-                     Grid.Column="0" Source="/Resources/thunderbolt.png"/>
                 <TextBox Grid.Row="1"
                       materialDesign:HintAssist.Hint="Мощность"
                       BorderBrush="#E5EAF3"
@@ -151,7 +146,7 @@
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       Grid.Column="1"
                       Margin="0,0,10,10"
-                      Text="{Binding Frequency}"/>
+                      Text="{Binding Power}"/>
                 <ComboBox
                  Grid.Row="2"
                  Foreground="#7E7F9C"
@@ -162,8 +157,8 @@
                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                  Margin="0,0,833,0"
                  Height="38"
-                 SelectedValue="{Binding NumberOfCores}"
-                 ItemsSource="{Binding AvailableCores}">
+                 SelectedValue="{Binding SelectedFormFactor}"
+                 ItemsSource="{Binding AvailableFormFactors}">
 
                 </ComboBox>
                 <TextBox Grid.Row="3"
@@ -176,18 +171,7 @@
                       Grid.Column="1"
                       Margin="0,73,10,10" 
                       Grid.RowSpan="2"
-                      Text="{Binding Cash}"/>
-                <TextBox Grid.Row="4"
-                      materialDesign:HintAssist.Hint="Энергопотребление"
-                      BorderBrush="#E5EAF3"
-                      materialDesign:HintAssist.Foreground="#E5EAF3"
-                      Foreground="#E5EAF3"
-                      FontSize="20"
-                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                      Grid.Column="1"
-                      Margin="0,74,10,10"
-                      Grid.RowSpan="2"
-                      Text="{Binding EnergyConsumption}"/>
+                      Text="{Binding Size}"/>
                 <Image  Height="64"
                   Width="64"
                   Stretch="UniformToFill"
@@ -203,8 +187,8 @@
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                   Margin="266,0,567,0"
                   Height="38"
-                  SelectedValue="{Binding NumberOfCores}"
-                  ItemsSource="{Binding AvailableCores}"/>
+                  SelectedValue="{Binding SelectedCertification}"
+                  ItemsSource="{Binding AvailableCertifications}"/>
                 <Image  Height="64"
                     Width="64"
                     Stretch="UniformToFill"
@@ -219,7 +203,7 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     Grid.Column="1"
                     Margin="0,4,10,4"
-                    Text="{Binding Cash}"/>
+                    Text="{Binding Connectors}"/>
             </Grid>
 
         </Border>
