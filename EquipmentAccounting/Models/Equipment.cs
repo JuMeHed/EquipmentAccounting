@@ -29,7 +29,30 @@ namespace EquipmentAccounting.Models
         public int StateId { get; set; }
         public int EquipmentTypeId { get; set; }
         public string Note { get; set; }
-    
+        public virtual string ImagePath { get; set; }
+
+        public virtual string GetImagePath()
+        {
+            switch (EquipmentTypeId)
+            {
+                case 1:
+                    return "pack://application:,,,/Resources/computer-case1.png";
+                case 2:
+                    return "pack://application:,,,/Resources/monitor1.png";
+                case 3:
+                    return "pack://application:,,,/Resources/computer-keyboard1.png";
+                case 4:
+                    return "pack://application:,,,/Resources/mouse1.png";
+                case 5:
+                    return "pack://application:,,,/Resources/acoustic1.png";
+                case 6:
+                    return "pack://application:,,,/Resources/projector1.png";
+                case 7:
+                    return "pack://application:,,,/Resources/television1.png";
+                default:
+                    return null;
+            }
+        }
         public virtual EquipmentType EquipmentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquipmentComponent> EquipmentComponent { get; set; }

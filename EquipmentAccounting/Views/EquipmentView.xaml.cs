@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EquipmentAccounting.Views.AdminViews
+namespace EquipmentAccounting.Views
 {
     /// <summary>
     /// Логика взаимодействия для EquipmentView.xaml

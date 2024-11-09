@@ -13,9 +13,9 @@ namespace EquipmentAccounting.ViewModels
 {
     internal class ComponentsViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<EquipmentAccounting.Models.Component> _components;
+        private ObservableCollection<Models.Component> _components;
         private ObservableCollection<ComponentType> _componentTypes;
-        private ObservableCollection<EquipmentAccounting.Models.Component> _filteredComponents;
+        private ObservableCollection<Models.Component> _filteredComponents;
   
         private string _nameFilter;
 
@@ -123,6 +123,7 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenSoundCardAddEditPageCommand => new RelayCommand(OnSoundCardAddEditOpen);
         public ICommand OpenCPUAddEdit => new RelayCommand(OnCPUAddEditOpen);
         public ICommand DeregisterComponentCommand => new RelayCommand<Models.Component>(RemoveFromAccounting);
+        public ICommand RefreshCommand => new RelayCommand(LoadComponents);
         public ComponentsViewModel()
         {
             LoadComponents();
@@ -145,7 +146,9 @@ namespace EquipmentAccounting.ViewModels
             {
                 component.ImagePath = component.GetImagePath();
                 var componentInEquipment = EquipmentEntities.GetContext().EquipmentComponent
-                                           .FirstOrDefault(x => x.ComponentId == component.Id);
+                                           .Where(x => x.ComponentId == component.Id)
+                                           .OrderByDescending(x => x.Id)
+                                           .FirstOrDefault();
 
                 component.IsActive = componentInEquipment != null && componentInEquipment.IsActual;
             }

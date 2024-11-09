@@ -4,6 +4,7 @@ namespace EquipmentAccounting.Classes
 {
     internal static class ConstLists
     {
+        public static readonly List<string> TYPES_OF_QR = new List<string>() { "Сгенерировать по серийному номеру", "Сгенерировать по инвентарному номеру" };
         public static readonly List<int> NUMBER_OF_THREADS = new List<int>() { 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 48, 64, 128 };
         public static readonly List<int> NUMBER_OF_CORES = new List<int>() { 2, 4, 6, 8, 10, 12, 16, 64 };
         public static readonly List<int> NUMBER_OF_M2 = new List<int>() { 0, 1, 2, 3, 4, 5, 7 };

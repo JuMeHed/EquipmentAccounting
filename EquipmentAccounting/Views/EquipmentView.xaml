@@ -1,21 +1,21 @@
-﻿<Page x:Class="EquipmentAccounting.Views.AdminViews.ComponentsPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:converters="clr-namespace:EquipmentAccounting.Converters"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:vm="clr-namespace:EquipmentAccounting.ViewModels"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:EquipmentAccounting.Views.AdminViews"
-      mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1119"
-      Title="ComponentsPage">
+﻿<Page x:Class="EquipmentAccounting.Views.EquipmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:EquipmentAccounting.Converters"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm="clr-namespace:EquipmentAccounting.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:EquipmentAccounting.Views.AdminViews"
+        mc:Ignorable="d" 
+        d:DesignHeight="800" d:DesignWidth="1119"
+      Title="EquipmentView">
 
     <Page.DataContext>
-        <vm:ComponentsViewModel/>
+        <vm:EquipmentViewModel/>
     </Page.DataContext>
-
+    
     <Page.Resources>
         <converters:BoolToTextConverter x:Key="BoolToTextConverter"/>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
@@ -29,25 +29,25 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal">
-            <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}" 
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
                       Foreground="#7e7f9c" 
                       BorderBrush="#7e7f9c" 
-                      materialDesign:HintAssist.Hint="Название" 
+                      materialDesign:HintAssist.Hint="Название/Серийный номер/Инвентарный номер" 
                       x:Name="NameTB" 
                       FontSize="20"
                       materialDesign:HintAssist.Foreground="#7e7f9c" 
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                       Height="50" 
                      Margin="5,0"
-                      Width="604"/>
-            <ComboBox ItemsSource="{Binding ComponentTypes}" 
-                      SelectedItem="{Binding SelectedComponentType}" 
-                      materialDesign:HintAssist.Hint="Тип компонента" 
+                      Width="658"/>
+            <ComboBox ItemsSource="{Binding EquipmentTypes}" 
+                      SelectedItem="{Binding SelectedEquipmentType}" 
+                      materialDesign:HintAssist.Hint="Тип оборудования" 
                       Foreground="#7e7f9c" 
                       x:Name="DepartmentCB" 
                       BorderBrush="#7e7f9c" 
-                      Margin="70,0,30,0" 
-                      Width="188" 
+                      Margin="20,0,30,0" 
+                      Width="184" 
                       DisplayMemberPath="Title" 
                       Height="50" 
                       SelectedIndex="0"
@@ -64,19 +64,15 @@
             <materialDesign:PopupBox Foreground="#7671FA"
                                      Padding="2 0 2 0" Width="25"
                                      >
-           
+
                 <StackPanel>
-                    <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
-                    <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
-                    <Button Content="Оперативная память" Command="{Binding OpenRAMAddEditPageCommand}"/>
-                    <Button Content="Корпус" Command="{Binding OpenCaseAddEditPageCommand}"/>
-                    <Button Content="Кулер" Command="{Binding OpenCoolerAddEditPageCommand}"/>
-                    <Button Content="HDD" Command="{Binding OpenHDDAddEditPageCommand}"/>
-                    <Button Content="SSD" Command="{Binding OpenSSDAddEditPageCommand}"/>
-                    <Button Content="Видеокарта" Command="{Binding OpenGPUAddEditPageCommand}"/>
-                    <Button Content="Блок питания" Command="{Binding OpenPowerAddEditPageCommand}"/>
-                    <Button Content="Сетевая карта" Command="{Binding OpenNetworkCardAddEditPageCommand}"/>
-                    <Button Content="Звуковая карта" Command="{Binding OpenSoundCardAddEditPageCommand}"/>
+                    <Button Content="Персональный компьютер" Command="{Binding OpenAddEditComputerViewCommand}"/>
+                    <Button Content="Монитор" Command="{Binding OpenAddEditMonitorViewCommand}"/>
+                    <Button Content="Клавиатура" Command="{Binding OpenAddEditKeyboardCommand}"/>
+                    <Button Content="Компьютерная мышь" Command="{Binding OpenAddEditMouseCommand}"/>
+                    <Button Content="Аудио система" Command="{Binding OpenAddEditAudioCommand}"/>
+                    <Button Content="Проектор" Command="{Binding OpenAddEditProjectorCommand}"/>
+                    <Button Content="Умная доска" Command="{Binding OpenAddEditSmartBoardCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
             <Label Content="Добавить" Foreground="#7671FA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"
@@ -85,8 +81,8 @@
         <ListBox Grid.Row="1"
          x:Name="ComponentsLB"
          ScrollViewer.VerticalScrollBarVisibility="Hidden"
-         ItemsSource="{Binding FilteredComponents}"
-         SelectedItem="{Binding SelectedComponent}">
+         ItemsSource="{Binding FilteredEquipments}"
+         SelectedItem="{Binding SelectedEquipment}">
             <ListBox.ContextMenu>
                 <ContextMenu DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="Подробнее" 
@@ -100,7 +96,7 @@
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding OpenAddEditPageCommand}" CommandParameter="{Binding SelectedComponent}"/>
+                    <i:InvokeCommandAction Command="{Binding OpenAddEditPageCommand}" CommandParameter="{Binding SelectedEquipment}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
@@ -114,16 +110,24 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ImagePath}" Width="128" Height="128" Margin="5"/>
                                 <StackPanel Margin="10,0,0,0">
-                                    <TextBlock Text="{Binding Model}" Foreground="#07244C" FontWeight="Bold" FontSize="20" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Brand}" Foreground="#07244C" FontSize="16" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Title}" Foreground="#07244C" FontWeight="Bold" FontSize="20" TextWrapping="Wrap"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="IN: " Foreground="#07244C" FontSize="16" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding InventoryNumber}" Foreground="#07244C" FontSize="16" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="SN: " Foreground="#07244C" FontSize="16" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding SerialNumber}" Foreground="#07244C" FontSize="16" TextWrapping="NoWrap"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                            <TextBlock Text="{Binding IsActive, Converter={StaticResource BoolToTextConverter}}"
-                               Foreground="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}"
-                               VerticalAlignment="Bottom" 
-                               HorizontalAlignment="Right"
-                               Margin="0,0,5,5" TextAlignment="Right" 
-                               FontSize="14"/>
+                            <TextBlock Text="{Binding InventoryDate, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                        VerticalAlignment="Bottom" 
+                                        HorizontalAlignment="Right"
+                                        Margin="0,0,5,5" 
+                                        TextAlignment="Right" 
+                                        FontSize="14"
+                                       Foreground="#07244C"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

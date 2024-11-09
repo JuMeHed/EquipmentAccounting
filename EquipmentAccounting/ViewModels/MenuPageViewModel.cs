@@ -1,4 +1,5 @@
 ﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Views;
 using EquipmentAccounting.Views.AdminViews;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
