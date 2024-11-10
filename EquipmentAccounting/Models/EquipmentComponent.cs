@@ -18,6 +18,7 @@ namespace EquipmentAccounting.Models
         public int EquipmentId { get; set; }
         public int ComponentId { get; set; }
         public bool IsActual { get; set; }
+        public virtual string IsActualString => IsActual ? "Применен" : "Не актульно";
     
         public virtual Component Component { get; set; }
         public virtual Equipment Equipment { get; set; }

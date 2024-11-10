@@ -162,6 +162,7 @@ namespace EquipmentAccounting.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("Ошибка. Проверьте правильность заполнения полей.");
                 }
             }
         }
@@ -293,7 +294,7 @@ namespace EquipmentAccounting.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

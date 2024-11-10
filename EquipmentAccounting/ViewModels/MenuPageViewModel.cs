@@ -120,6 +120,7 @@ namespace EquipmentAccounting.ViewModels
         {
             EquipmentView view = new EquipmentView();
             EquipmentViewModel viewModel = new EquipmentViewModel();
+            viewModel.IsReadOnly = false;
             view.DataContext = viewModel;
             CurrentPage = view;
         }

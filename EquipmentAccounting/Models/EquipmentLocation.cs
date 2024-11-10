@@ -20,6 +20,7 @@ namespace EquipmentAccounting.Models
         public System.DateTime Date { get; set; }
         public bool IsActual { get; set; }
     
+        public virtual string IsActualString => IsActual ? "Текущее" : "Не актуально";
         public virtual Equipment Equipment { get; set; }
         public virtual Location Location { get; set; }
     }

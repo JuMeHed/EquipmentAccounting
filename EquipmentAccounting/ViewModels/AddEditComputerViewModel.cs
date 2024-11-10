@@ -22,6 +22,8 @@ namespace EquipmentAccounting.ViewModels
         private bool _isExitDialogOpen;
         private bool _isEditing;
         private bool _isEditComponentOpen;
+        private bool _isLocationHistoryOpen;
+        private bool _isComponentHistoryOpen;
 
         private Equipment _currentEquipment;
         private State _selectedState;
@@ -33,6 +35,16 @@ namespace EquipmentAccounting.ViewModels
         private ObservableCollection<State> _states;
         private ObservableCollection<Location> _locations;
         private ObservableCollection<Models.Component> _availableComponents;
+        private ObservableCollection<EquipmentLocation> _locationHistory;
+        private ObservableCollection<EquipmentComponent> _processorHistory;
+        private ObservableCollection<EquipmentComponent> _motherboardHistory;
+        private ObservableCollection<EquipmentComponent> _caseHistory;
+        private ObservableCollection<EquipmentComponent> _coolingHistory;
+        private ObservableCollection<EquipmentComponent> _videocardHistory;
+        private ObservableCollection<EquipmentComponent> _ramHistory;
+        private ObservableCollection<EquipmentComponent> _powerHistory;
+        private ObservableCollection<EquipmentComponent> _networkcardHistory;
+        private ObservableCollection<EquipmentComponent> _soundcardHistory;
 
         private BitmapSource _qrCodeImage;
 
@@ -43,12 +55,21 @@ namespace EquipmentAccounting.ViewModels
         private Models.Component _videocard;
         private Models.Component _ram;
         private Models.Component _power;
-        private List<Models.Component> _storages;
+        private Models.Component _storages;
         private Models.Component _networkCard;
         private Models.Component _soundCard;
 
         public List<string> TypesOfQR => ConstLists.TYPES_OF_QR;
 
+        public ObservableCollection<EquipmentLocation> LocationHistory
+        {
+            get => _locationHistory;
+            set
+            {
+                _locationHistory = value;
+                OnPropertyChanged();
+            }
+        }
         public Models.Location PreviousLocation
         {
             get => _previousLocation;
@@ -97,6 +118,24 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        public bool IsComponentsHistoryOpen
+        {
+            get => _isComponentHistoryOpen;
+            set
+            {
+                _isComponentHistoryOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsLocationHistoryOpen
+        {
+            get => _isLocationHistoryOpen;
+            set
+            {
+                _isLocationHistoryOpen = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsExitDialogOpen
         {
             get => _isExitDialogOpen;
@@ -107,6 +146,93 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        public ObservableCollection<EquipmentComponent> ProcessorHistory
+        {
+            get => _processorHistory;
+            set
+            {
+                _processorHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> MotherboardHistory
+        {
+            get => _motherboardHistory;
+            set
+            {
+                _motherboardHistory = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<EquipmentComponent> CaseHistory
+        {
+            get => _caseHistory;
+            set
+            {
+                _caseHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> CoolingHistory
+        {
+            get => _coolingHistory;
+            set
+            {
+                _coolingHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> VideocardHistory
+        {
+            get => _videocardHistory;
+            set
+            {
+                _videocardHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> RAMHistory
+        {
+            get => _ramHistory;
+            set
+            {
+                _ramHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> PowerHistory
+        {
+            get => _powerHistory;
+            set
+            {
+                _powerHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<EquipmentComponent> NetworkcardHistory
+        {
+            get => _networkcardHistory;
+            set
+            {
+                _networkcardHistory = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<EquipmentComponent> SoundcardHistory
+        {
+            get => _soundcardHistory;
+            set
+            {
+                _soundcardHistory = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsEditing
         {
             get => _isEditing;
@@ -131,23 +257,34 @@ namespace EquipmentAccounting.ViewModels
             get => _currentEquipment;
             set
             {
-                if (value == null)
-                {
-                    _currentEquipment = new Equipment
-                    {
-                        EquipmentTypeId = 1
-                    };
-                }
-                else
+                if (value != null && value.Id != 0)
                 {
                     _currentEquipment = value;
                     IsEditing = true;
                     LoadComponents();
-                    SelectedLocation = EquipmentEntities.GetContext().EquipmentLocation
-                                        .FirstOrDefault(x => x.EquipmentId == _currentEquipment.Id
-                                        && x.IsActual == true).Location;
-                    PreviousLocation = SelectedLocation;
+
+                    var equipmentLocation = EquipmentEntities.GetContext().EquipmentLocation
+                                    .FirstOrDefault(x => x.EquipmentId == CurrentEquipment.Id
+                                    && x.IsActual == true);
+
+                    // Проверяем, что equipmentLocation не null
+                    if (equipmentLocation != null)
+                    {
+                        SelectedLocation = equipmentLocation.Location;
+                        PreviousLocation = SelectedLocation;
+                    }
+                    else
+                    {
+                        // Если equipmentLocation null, сбрасываем SelectedLocation и PreviousLocation
+                        SelectedLocation = null;
+                        PreviousLocation = null;
+                    }
+
                     OnPropertyChanged();
+                }
+                else if (value != null && value.Id == 0)
+                {
+                    _currentEquipment = value;
                 }
             }
         }
@@ -263,7 +400,7 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
-        public List<Models.Component> Storages
+        public Models.Component Storages
         {
             get => _storages;
             set
@@ -317,33 +454,80 @@ namespace EquipmentAccounting.ViewModels
         public ICommand GenerateQRCodeCommand => new RelayCommand(GenerateQRCode);
         public ICommand ChangeComponentCommand => new RelayCommand<string>(ChangeComponentOpen);
         public ICommand SaveChangeComponentCommand => new RelayCommand(ChangeComponentInPC);
-       
+        public ICommand PrintQRCodeCommand => new RelayCommand(PrintQRCode);
+        public ICommand OpenLocationHistoryCommand => new RelayCommand(OpenLocationHistory);
+        public ICommand OpenComponentsHistoryCommand => new RelayCommand(OpenComponentHistory);
         public AddEditComputerViewModel()
         {
-            Storages = new List<Models.Component>();
             LoadLocations();
             LoadStates();
-        }
 
-        private void SaveChanges()
-        {
-            // Убедитесь, что CurrentEquipment инициализирован
             if (CurrentEquipment == null)
             {
-                // Если CurrentEquipment равен null, создайте новый объект
                 CurrentEquipment = new Equipment();
+                CurrentEquipment.EquipmentTypeId = 1;
+                CurrentEquipment.InventoryDate = DateTime.Now;
             }
+        }
 
+        private void OpenComponentHistory()
+        {
+            if (CurrentEquipment != null && CurrentEquipment.Id != 0)
+            {
+                var equipmentComponent = EquipmentEntities.GetContext().EquipmentComponent.ToList();
+
+                ProcessorHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 1).ToList());
+
+                MotherboardHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 2).ToList());
+
+                RAMHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 3).ToList());
+
+                CaseHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 4).ToList());
+
+                CoolingHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 5).ToList());
+
+                VideocardHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 8).ToList());
+
+                PowerHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                   .Where(x => x.Component.ComponentTypeId == 9).ToList());
+
+                NetworkcardHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 10).ToList());
+
+                SoundcardHistory = new ObservableCollection<EquipmentComponent>(equipmentComponent
+                    .Where(x => x.Component.ComponentTypeId == 11).ToList());
+
+                IsComponentsHistoryOpen = true;
+            }
+        }
+        private void OpenLocationHistory()
+        {
+            if (CurrentEquipment != null)
+            {
+                var locations = EquipmentEntities.GetContext().EquipmentLocation.Where(x => x.EquipmentId == CurrentEquipment.Id).ToList();
+                locations.OrderByDescending(x => x.Date);
+
+                LocationHistory = new ObservableCollection<EquipmentLocation>(locations);
+
+                IsLocationHistoryOpen = true;
+            }
+        }
+        private void SaveChanges()
+        {
             try
             {
-                if (CurrentEquipment.Id != 0)
+                if (IsEditing)
                 {
-                    // Если Id не равен 0, обновляем существующий компьютер
                     UpdateExistingComputer();
                 }
                 else
                 {
-                    // Если Id равен 0, добавляем новый компьютер
                     AddNewComputer();
                 }
 
@@ -352,10 +536,15 @@ namespace EquipmentAccounting.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+                MessageBox.Show($"Ошибка. Проверьте правильность заполнения полей.");
             }
         }
 
+        private void PrintQRCode()
+        {
+            if (QrCodeImage != null)
+                QRCodeGenerator.PrintQRCode(QrCodeImage);
+        }
 
         private void UpdateExistingComputer()
         {
@@ -378,38 +567,46 @@ namespace EquipmentAccounting.ViewModels
                     IsActual = true
                 };
 
+                PreviousLocation = EquipmentEntities.GetContext().Location
+                     .FirstOrDefault(x => x.Id == newEquipmentLocation.LocationId);
                 EquipmentEntities.GetContext().EquipmentLocation.Add(newEquipmentLocation);
             }
         }
 
         private void AddNewComputer()
         {
-            // Создание нового объекта Equipment
-            var newEquipment = new Equipment
-            {
-                InventoryNumber = CurrentEquipment.InventoryNumber,
-                SerialNumber = CurrentEquipment.SerialNumber,
-                EquipmentTypeId = CurrentEquipment.EquipmentTypeId,
-                // Заполните другие необходимые поля здесь
-            };
-
-            EquipmentEntities.GetContext().Equipment.Add(newEquipment);
+            EquipmentEntities.GetContext().Equipment.Add(CurrentEquipment);
             EquipmentEntities.GetContext().SaveChanges(); // Сохраняем новый объект, чтобы получить его Id
 
-            // Устанавливаем текущий объект на только что добавленный
-            CurrentEquipment = newEquipment;
-
             // Добавляем новое местоположение
-            EquipmentLocation newEquipmentLocation = new EquipmentLocation
+            if (SelectedLocation != null) // Проверьте, что SelectedLocation не null
             {
-                EquipmentId = CurrentEquipment.Id,
-                LocationId = SelectedLocation.Id,
-                Date = DateTime.Today,
-                IsActual = true
-            };
+                EquipmentLocation newEquipmentLocation = new EquipmentLocation
+                {
+                    EquipmentId = CurrentEquipment.Id,
+                    LocationId = SelectedLocation.Id,
+                    Date = DateTime.Today,
+                    IsActual = true
+                };
 
-            EquipmentEntities.GetContext().EquipmentLocation.Add(newEquipmentLocation);
+                PreviousLocation = EquipmentEntities.GetContext().Location
+                    .FirstOrDefault(x => x.Id == newEquipmentLocation.LocationId);
+                EquipmentEntities.GetContext().EquipmentLocation.Add(newEquipmentLocation);
+            }
+            else
+            {
+                MessageBox.Show("Не выбрано местоположение для нового оборудования.");
+                return;
+            }
 
+            // Добавление компонентов
+            AddComponentsToEquipment();
+
+            EquipmentEntities.GetContext().SaveChanges();
+        }
+
+        private void AddComponentsToEquipment()
+        {
             if (CentralProcessor != null)
             {
                 EquipmentComponent equipmentComponent = new EquipmentComponent
@@ -482,6 +679,18 @@ namespace EquipmentAccounting.ViewModels
                 EquipmentEntities.GetContext().EquipmentComponent.Add(equipmentComponent);
             }
 
+            if (Storages != null)
+            {
+                EquipmentComponent equipmentComponent = new EquipmentComponent
+                {
+                    EquipmentId = CurrentEquipment.Id,
+                    ComponentId = Storages.Id,
+                    IsActual = true
+                };
+
+                EquipmentEntities.GetContext().EquipmentComponent.Add(equipmentComponent);
+            } 
+
             if (NetworkCard != null)
             {
                 EquipmentComponent equipmentComponent = new EquipmentComponent
@@ -506,22 +715,7 @@ namespace EquipmentAccounting.ViewModels
                 EquipmentEntities.GetContext().EquipmentComponent.Add(equipmentComponent);
             }
 
-            // Обработка компонентов, если они есть
-            foreach (var component in Storages) // Или другие компоненты, которые вы хотите добавить
-            {
-                EquipmentComponent newEquipmentComponent = new EquipmentComponent
-                {
-                    ComponentId = component.Id,
-                    EquipmentId = CurrentEquipment.Id,
-                    IsActual = true
-                };
-
-                EquipmentEntities.GetContext().EquipmentComponent.Add(newEquipmentComponent);
-            }
-
-            EquipmentEntities.GetContext().SaveChanges();
         }
-
         private void LoadComponents()
         {
             if (CurrentEquipment != null)
@@ -529,11 +723,11 @@ namespace EquipmentAccounting.ViewModels
                 try
                 {
                     var components = EquipmentEntities.GetContext().EquipmentComponent
-                            .Where(x => x.EquipmentId == CurrentEquipment.Id && x.IsActual == true).ToList();
+                            .Where(x => x.EquipmentId == CurrentEquipment.Id && x.IsActual).ToList();
 
                     foreach (var component in components)
                     {
-                        if (component != null && component.Component != null)
+                        if (component != null && component.Component != null && component.IsActual)
                         {
                             switch (component.Component.ComponentTypeId)
                             {
@@ -553,10 +747,10 @@ namespace EquipmentAccounting.ViewModels
                                     Cooling = component.Component;
                                     break;
                                 case 6:
-                                    Storages.Add(component.Component);
+                                    Storages = component.Component;
                                     break;
                                 case 7:
-                                    Storages.Add(component.Component);
+                                    Storages = component.Component;
                                     break;
                                 case 8:
                                     Videocard = component.Component;
@@ -612,6 +806,11 @@ namespace EquipmentAccounting.ViewModels
                                                     // Дополнительная логика для обновления текущего компонента, если нужно
                 PreviousComponent = currentComponent;
             }
+            else
+            {
+                PreviousComponent = new Models.Component();
+                PreviousComponent.ComponentTypeId = typeId;
+            }
 
             // Получение типа компонента
             var componentTypeEntity = EquipmentEntities.GetContext().ComponentType.FirstOrDefault(x => x.Id == typeId);
@@ -626,9 +825,15 @@ namespace EquipmentAccounting.ViewModels
             }
 
             // Получение доступных компонентов
-            var components = EquipmentEntities.GetContext().Component.Where(x => x.ComponentTypeId == typeId 
-                                                                    && (string.IsNullOrEmpty(x.Note) 
+            var components = EquipmentEntities.GetContext().Component.Where(x => x.ComponentTypeId == typeId
+                                                                    && (string.IsNullOrEmpty(x.Note)
                                                                     || !x.Note.Contains("Снят с учёта"))).ToList();
+            components = components.Where(x => x.IsActive == false).ToList();
+            components.Insert(0, new Models.Component
+            {
+                Model = "Убрать"
+            });
+
             AvailableComponents = new ObservableCollection<Models.Component>(components);
 
             IsEditComponentOpen = true;
@@ -636,12 +841,12 @@ namespace EquipmentAccounting.ViewModels
 
         private void ChangeComponentInPC()
         {
-            if (CurrentEquipment != null)
+            if (CurrentEquipment.Id != 0)
             {
-                if (PreviousComponent != null)
+                if ((PreviousComponent.Id != 0 && PreviousComponent != null) || ComponentToEdit.Model == "Убрать")
                 {
                     var equipmentComponent = EquipmentEntities.GetContext().EquipmentComponent
-                                            .Where(x => x.ComponentId == PreviousComponent.Id 
+                                            .Where(x => x.ComponentId == PreviousComponent.Id
                                             && x.EquipmentId == CurrentEquipment.Id)
                                             .OrderByDescending(x => x.Id)
                                             .FirstOrDefault();
@@ -649,6 +854,50 @@ namespace EquipmentAccounting.ViewModels
                     equipmentComponent.IsActual = false;
                 }
 
+                if (ComponentToEdit.Model == "Убрать")
+                {
+                    switch (PreviousComponent.ComponentTypeId)
+                    {
+                        case 1:
+                            CentralProcessor = null;
+                            break;
+                        case 2:
+                            Motherboard = null;
+                            break;
+                        case 3:
+                            RAM = null;
+                            break;
+                        case 4:
+                            Case = null;
+                            break;
+                        case 5:
+                            Cooling = null;
+                            break;
+                        case 6:
+                            Storages = null;
+                            break;
+                        case 7:
+                            Storages = null;
+                            break;
+                        case 8:
+                            Videocard = null;
+                            break;
+                        case 9:
+                            Power = null;
+                            break;
+                        case 10:
+                            NetworkCard = null;
+                            break;
+                        case 11:
+                            SoundCard = null;
+                            break;
+                    }
+
+                    //LoadComponents();
+                    CloseDialog();
+                    EquipmentEntities.GetContext().SaveChanges();
+                    return;
+                }
 
                 EquipmentComponent newEquipmentComponent = new EquipmentComponent
                 {
@@ -669,6 +918,44 @@ namespace EquipmentAccounting.ViewModels
                     MessageBox.Show(ex.Message);
                 }
             }
+            else
+            {
+                switch (PreviousComponent.ComponentTypeId)
+                {
+                    case 1:
+                        CentralProcessor = ComponentToEdit;
+                        break;
+                    case 2:
+                        Motherboard = ComponentToEdit;
+                        break;
+                    case 3:
+                        Case = ComponentToEdit;
+                        break;
+                    case 4:
+                        Cooling = ComponentToEdit;
+                        break;
+                    case 5:
+                        Videocard = ComponentToEdit;
+                        break;
+                    case 6:
+                        RAM = ComponentToEdit;
+                        break;
+                    case 7:
+                        Power = ComponentToEdit;
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        NetworkCard = ComponentToEdit;
+                        break;
+                    case 10:
+                        SoundCard = ComponentToEdit;
+                        break;
+                }
+
+                LoadComponents();
+                CloseDialog();
+            }
         }
         private void LoadLocations()
         {
@@ -681,21 +968,22 @@ namespace EquipmentAccounting.ViewModels
             var states = new ObservableCollection<State>(EquipmentEntities.GetContext().State.ToList());
             States = states;
         }
-        private void OnSaveChanges()
-        {
-
-        }
         private void CloseDialog()
         {
             IsExitDialogOpen = false;
             IsSaveDialogOpen = false;
+            IsLocationHistoryOpen = false;
+            IsComponentsHistoryOpen = false;
             IsEditComponentOpen = false;
         }
         private void Exit()
         {
             CloseDialog();
-            Views.EquipmentView componentsPage = new Views.EquipmentView();
-            Manager.MenuPage.CurrentPage = componentsPage;
+            Views.EquipmentView equipmentsPage = new Views.EquipmentView();
+            EquipmentViewModel viewModel = new EquipmentViewModel();
+            viewModel.IsReadOnly = false;
+            equipmentsPage.DataContext = viewModel;
+            Manager.MenuPage.CurrentPage = equipmentsPage;
         }
         private void GoBack()
         {

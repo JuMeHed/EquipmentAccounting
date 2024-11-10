@@ -22,6 +22,7 @@ namespace EquipmentAccounting.ViewModels
         private Equipment _selectedEquipment;
         private EquipmentType _selectedEquipmentType;
 
+        private bool _isReadOnly;
         public ObservableCollection<Equipment> Equipments
         {
             get => _equipments;
@@ -53,7 +54,7 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public string SearchText 
+        public string SearchText
         {
             get => _serachText;
             set
@@ -84,7 +85,17 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-        public ICommand OpenAddEditComputerViewCommand => new RelayCommand(OpenAddEditComputerView);
+        public bool IsReadOnly
+        {
+            get => _isReadOnly;
+            set
+            {
+                _isReadOnly = !value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand OpenAddEditComputerViewCommand => new RelayCommand(OnAddEditComputerOpen);
         public ICommand OpenAddEditMonitorViewCommand => new RelayCommand(OnAddEditMonitorOpen);
         public ICommand OpenAddEditKeyboardCommand => new RelayCommand(OnAddEditKeyBoardOpen);
         public ICommand OpenAddEditMouseCommand => new RelayCommand(OnAddEditMouseOpen);
@@ -92,39 +103,44 @@ namespace EquipmentAccounting.ViewModels
         public ICommand OpenAddEditProjectorCommand => new RelayCommand(OnAddEditProjectorOpen);
         public ICommand OpenAddEditSmartBoardCommand => new RelayCommand(OnAddEditSmartBoardOpen);
         public ICommand OpenAddEditPageCommand => new RelayCommand<Models.Equipment>(OnAddEditPageOpen);
+        public ICommand DeregisterEquipmentCommand => new RelayCommand<Models.Equipment>(DeregisterEquipment);
         public EquipmentViewModel()
         {
-            LoadEquipment();   
+            LoadEquipment();
             LoadEquipmentTypes();
         }
 
         private void OnAddEditPageOpen(Models.Equipment equipment)
         {
-            if (equipment == null) return;
-
-            switch (equipment.EquipmentTypeId)
+            if (IsReadOnly)
             {
-                case 1:
-                    OnAddEditComputerOpen();
-                    break;
-                case 2: 
-                    OnAddEditMonitorOpen();
-                    break;
-                case 3:
-                    OnAddEditKeyBoardOpen();
-                    break;
-                case 4:
-                    OnAddEditMouseOpen();
-                    break;
-                case 5:
-                    OnAddEditAudioOpen();
-                    break;
-                case 6:
-                    OnAddEditProjectorOpen();
-                    break;
-                case 7:
-                    OnAddEditSmartBoardOpen();
-                    break;
+                if (equipment == null) return;
+
+                switch (equipment.EquipmentTypeId)
+                {
+                    case 1:
+                        OnAddEditComputerOpen();
+                        break;
+                    case 2:
+                        OnAddEditMonitorOpen();
+                        break;
+                    case 3:
+                        OnAddEditKeyBoardOpen();
+                        break;
+                    case 4:
+                        OnAddEditMouseOpen();
+                        break;
+                    case 5:
+                        OnAddEditAudioOpen();
+                        break;
+                    case 6:
+                        OnAddEditProjectorOpen();
+                        break;
+                    case 7:
+                        OnAddEditSmartBoardOpen();
+                        break;
+
+                }
 
             }
         }
@@ -133,46 +149,96 @@ namespace EquipmentAccounting.ViewModels
         {
             AddEditComputerView view = new AddEditComputerView();
             AddEditComputerViewModel viewModel = new AddEditComputerViewModel();
-            viewModel.CurrentEquipment = SelectedEquipment;
             view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
             Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnAddEditMonitorOpen()
         {
-
+            AddEditMonitorView view = new AddEditMonitorView();
+            AddEditMonitorViewModel viewModel = new AddEditMonitorViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void OnAddEditKeyBoardOpen()
         {
-
+            AddEditKeyBoardView view = new AddEditKeyBoardView();
+            AddEditKeyboardViewModel viewModel = new AddEditKeyboardViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
 
         private void OnAddEditMouseOpen()
         {
-
+            AddEditMouseView view = new AddEditMouseView();
+            AddEditMouseViewModel viewModel = new AddEditMouseViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void OnAddEditAudioOpen()
         {
-
+            AddEditAudioView view = new AddEditAudioView();
+            AddEditAudioViewModel viewModel = new AddEditAudioViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void OnAddEditProjectorOpen()
         {
-
+            AddEditProjectorView view = new AddEditProjectorView();
+            AddEditProjectorViewModel viewModel = new AddEditProjectorViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void OnAddEditSmartBoardOpen()
         {
-
+            AddEditSmartboardView view = new AddEditSmartboardView();
+            AddEditSmartboardViewModel viewModel = new AddEditSmartboardViewModel();
+            view.DataContext = viewModel;
+            viewModel.CurrentEquipment = SelectedEquipment;
+            Manager.MenuPage.CurrentPage = view;
         }
         private void LoadEquipment()
         {
-            var equipment = new ObservableCollection<Equipment>(EquipmentEntities.GetContext().Equipment.ToList());
-
-            foreach (var item in equipment)
+            if (Classes.User.CurrentUser.AccessLevelId == 1)
             {
-                item.ImagePath = item.GetImagePath();
-            }
+                var equipment = new ObservableCollection<Equipment>(EquipmentEntities.GetContext().Equipment
+                        .Where(x => x.StateId != 4));
 
-            Equipments = equipment;
+                foreach (var item in equipment)
+                {
+                    item.ImagePath = item.GetImagePath();
+                }
+
+                Equipments = equipment;
+            }
+            else
+            {
+                var usersLocations = EquipmentEntities.GetContext().Location
+                                                    .Where(x => x.ResponsibleId == Classes.User.CurrentUser.Id)
+                                                    .Select(x => x.Id) // Получаем только Id кабинетов
+                                                    .ToList();
+
+                var equipmentInLocations = EquipmentEntities.GetContext().EquipmentLocation
+                    .Where(x => usersLocations.Contains(x.LocationId) && x.IsActual) 
+                    .Select(x => x.Equipment)
+                    .ToList();
+
+                // Создаем ObservableCollection из списка оборудования
+                ObservableCollection<Equipment> equipment = new ObservableCollection<Equipment>(equipmentInLocations);
+
+                foreach (var item in equipment)
+                {
+                    item.ImagePath = item.GetImagePath();
+                }
+
+                Equipments = equipment;
+            }
         }
 
         private void LoadEquipmentTypes()
@@ -185,7 +251,7 @@ namespace EquipmentAccounting.ViewModels
         {
             try
             {
-                if (Equipments == null ||  Equipments.Count == 0)
+                if (Equipments == null || Equipments.Count == 0)
                 {
                     FilteredEquipments = new ObservableCollection<Equipment>();
                     return;
@@ -208,20 +274,26 @@ namespace EquipmentAccounting.ViewModels
                 }
 
                 FilteredEquipments = new ObservableCollection<Equipment>(filteredEquipment);
-            } 
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void OpenAddEditComputerView()
+        private void DeregisterEquipment(Equipment selectedEquipment)
         {
-            AddEditComputerView view = new AddEditComputerView();
-            AddEditComputerViewModel viewModel = new AddEditComputerViewModel();
-            view.DataContext = viewModel;
-            Manager.MenuPage.CurrentPage = view;
-            
+            selectedEquipment.StateId = 4;
+
+            var equipmentComponent = EquipmentEntities.GetContext().EquipmentComponent
+                .Where(x => x.IsActual && x.EquipmentId == selectedEquipment.Id).ToList();
+            foreach (var equipment in equipmentComponent)
+            {
+                equipment.IsActual = false;
+            }
+
+            EquipmentEntities.GetContext().SaveChanges();
+            LoadEquipment();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,4 +1,5 @@
 ﻿using EquipmentAccounting.Classes;
+using EquipmentAccounting.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -62,11 +63,16 @@ namespace EquipmentAccounting.ViewModels
         {
             Manager.UserMenu = this; // Привязка текущего ViewModel к менеджеру
             Manager.MainViewModel.IsBorderVisible = true; // Установка видимости границы
+            EquipmentBtnCLick();
         }
         // Метод обработки нажатия на кнопку "Оборудование"
         private void EquipmentBtnCLick()
         {
-            // Логика для кнопки "Оборудование" может быть добавлена здесь
+            EquipmentView view = new EquipmentView();
+            EquipmentViewModel viewModel = new EquipmentViewModel();
+            viewModel.IsReadOnly = true;
+            view.DataContext = viewModel;
+            Manager.UserMenu.CurrentPage = view;
         }
         // Метод обработки нажатия на кнопку "Профиль"
         private void ProfileBtnClick()

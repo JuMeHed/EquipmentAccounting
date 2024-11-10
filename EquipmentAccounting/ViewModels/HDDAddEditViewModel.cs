@@ -311,7 +311,7 @@ namespace EquipmentAccounting.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

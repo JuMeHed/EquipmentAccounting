@@ -19,6 +19,7 @@
     <Page.Resources>
         <converters:BoolToTextConverter x:Key="BoolToTextConverter"/>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Page.Resources>
 
 
@@ -66,13 +67,13 @@
                                      >
 
                 <StackPanel>
-                    <Button Content="Персональный компьютер" Command="{Binding OpenAddEditComputerViewCommand}"/>
-                    <Button Content="Монитор" Command="{Binding OpenAddEditMonitorViewCommand}"/>
-                    <Button Content="Клавиатура" Command="{Binding OpenAddEditKeyboardCommand}"/>
-                    <Button Content="Компьютерная мышь" Command="{Binding OpenAddEditMouseCommand}"/>
-                    <Button Content="Аудио система" Command="{Binding OpenAddEditAudioCommand}"/>
-                    <Button Content="Проектор" Command="{Binding OpenAddEditProjectorCommand}"/>
-                    <Button Content="Умная доска" Command="{Binding OpenAddEditSmartBoardCommand}"/>
+                    <Button Content="Персональный компьютер" Command="{Binding OpenAddEditComputerViewCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Монитор" Command="{Binding OpenAddEditMonitorViewCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Клавиатура" Command="{Binding OpenAddEditKeyboardCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Компьютерная мышь" Command="{Binding OpenAddEditMouseCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Аудио система" Command="{Binding OpenAddEditAudioCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Проектор" Command="{Binding OpenAddEditProjectorCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Button Content="Умная доска" Command="{Binding OpenAddEditSmartBoardCommand}" Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
             <Label Content="Добавить" Foreground="#7671FA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"
@@ -87,9 +88,11 @@
                 <ContextMenu DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="Подробнее" 
                   Command="{Binding OpenAddEditPageCommand}"  
-                  CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                  CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                              Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <MenuItem Header="Снять с учета" 
-                  Command="{Binding DeregisterComponentCommand}" 
+                  Command="{Binding DeregisterEquipmentCommand}" 
+                Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"
                   CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>

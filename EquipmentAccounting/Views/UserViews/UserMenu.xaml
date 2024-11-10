@@ -35,6 +35,11 @@
                         <Image Source="/Resources/equipment.png" Width="32" Height="32" Margin="5,0,10,0"/>
                         <TextBlock Text="Оборудование" FontSize="17"  VerticalAlignment="Center"/>
                     </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding EquipmentCLickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ToggleButton>
 
                 <ToggleButton x:Name="ProfileToggleBtn"

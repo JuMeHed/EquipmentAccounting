@@ -67,6 +67,7 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -162,7 +163,13 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddEditAudioViewModel.cs" />
     <Compile Include="ViewModels\AddEditComputerViewModel.cs" />
+    <Compile Include="ViewModels\AddEditKeyboardViewModel.cs" />
+    <Compile Include="ViewModels\AddEditMonitorViewModel.cs" />
+    <Compile Include="ViewModels\AddEditMouseViewModel.cs" />
+    <Compile Include="ViewModels\AddEditProjectorViewModel.cs" />
+    <Compile Include="ViewModels\AddEditSmartboardViewModel.cs" />
     <Compile Include="ViewModels\CaseAddEditViewModel.cs" />
     <Compile Include="ViewModels\ComponentsViewModel.cs" />
     <Compile Include="ViewModels\CoolerAddEditViewModel.cs" />
@@ -180,8 +187,26 @@
     <Compile Include="ViewModels\SSDAddEditViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="Views\AddEditAudioView.xaml.cs">
+      <DependentUpon>AddEditAudioView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditComputerView.xaml.cs">
       <DependentUpon>AddEditComputerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditKeyBoardView.xaml.cs">
+      <DependentUpon>AddEditKeyBoardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditMonitorView.xaml.cs">
+      <DependentUpon>AddEditMonitorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditMouseView.xaml.cs">
+      <DependentUpon>AddEditMouseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditProjectorView.xaml.cs">
+      <DependentUpon>AddEditProjectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditSmartboardView.xaml.cs">
+      <DependentUpon>AddEditSmartboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdminViews\CaseAddEditView.xaml.cs">
       <DependentUpon>CaseAddEditView.xaml</DependentUpon>
@@ -234,7 +259,31 @@
     <Compile Include="Views\UserViews\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddEditAudioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEditComputerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditKeyBoardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditMonitorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditMouseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditProjectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditSmartboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
