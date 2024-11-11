@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,6 +16,7 @@ namespace EquipmentAccounting.ViewModels
         private bool _isSaveDialogOpen;
         private bool _isExitDialogOpen;
         private bool _isEditing;
+        private bool _isMessageOpen;
 
         private int _selectedCountOfRAM;
         private int _selectedMemoryCapacity;
@@ -24,6 +26,7 @@ namespace EquipmentAccounting.ViewModels
         private string _selectedFormFactor;
         private string _timings;
         private string _connectionInterfaces;
+        private string _message;
 
         private Models.Component _currentComponent;
         private Models.ComponentCharacteristic _characteristic;
@@ -33,6 +36,24 @@ namespace EquipmentAccounting.ViewModels
         public List<string> AvailableRAMTypes => ConstLists.RAM_TYPES;
         public List<string> AvailableRAMFormFactors => ConstLists.RAM_FORM_FACTORS;
 
+        public bool IsMessageOpen
+        {
+            get => _isMessageOpen;
+            set
+            {
+                _isMessageOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsSaveDialogOpen
         {
             get => _isSaveDialogOpen;
@@ -184,10 +205,12 @@ namespace EquipmentAccounting.ViewModels
                 try
                 {
                     EquipmentEntities.GetContext().SaveChanges();
-                    Exit();
+                    CloseDialog();
                 }
-                catch (Exception ex)
+                catch 
                 {
+                    DisplayMessage("Не удалось сохранить. Проверьте правильность заполнения полей.");
+                    return;
                 }
             }
             else
@@ -198,12 +221,15 @@ namespace EquipmentAccounting.ViewModels
                 {
                     EquipmentEntities.GetContext().Component.Add(CurrentComponent);
                     EquipmentEntities.GetContext().SaveChanges();
-                    Exit();
+                    CloseDialog();
                 }
-                catch (Exception ex)
+                catch 
                 {
+                    DisplayMessage("Не удалось сохранить. Проверьте правильность заполнения полей.");
+                    return;
                 }
             }
+            DisplayMessage("Данные сохранены.");
         }
         private void CloseDialog()
         {
@@ -372,10 +398,21 @@ namespace EquipmentAccounting.ViewModels
                 EquipmentEntities.GetContext().ComponentCharacteristic.RemoveRange(existingCharacteristics);
                 EquipmentEntities.GetContext().SaveChanges();
             }
-            catch (Exception ex)
+            catch 
             {
-                //MessageBox.Show(ex.Message);
             }
+        }
+
+        private async Task DisplayMessage(string message)
+        {
+            Message = message;
+            IsMessageOpen = true;
+
+            await Task.Delay(3000);
+
+
+            IsMessageOpen = false;
+            Message = "";
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)

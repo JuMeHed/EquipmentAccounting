@@ -64,7 +64,7 @@
             <materialDesign:PopupBox Foreground="#7671FA"
                                      Padding="2 0 2 0" Width="25"
                                      >
-           
+
                 <StackPanel>
                     <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
                     <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
@@ -134,5 +134,10 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <materialDesign:Snackbar
+                       Message="{Binding Message}"
+                       IsActive="{Binding IsMessageOpen}"
+                       x:Name="SnackbarOne"
+                       Background="#7671FA" VerticalAlignment="Top" Width="576" Margin="0,675,0,0" Grid.Row="1"/>
     </Grid>
 </Page>

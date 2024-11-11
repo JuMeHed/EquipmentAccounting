@@ -15,7 +15,7 @@
     <Page.DataContext>
         <vm:EquipmentViewModel/>
     </Page.DataContext>
-    
+
     <Page.Resources>
         <converters:BoolToTextConverter x:Key="BoolToTextConverter"/>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
@@ -141,5 +141,10 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <materialDesign:Snackbar
+                    Message="{Binding Message}"
+                    IsActive="{Binding IsMessageOpen}"
+                    x:Name="SnackbarOne"
+                    Background="#7671FA" VerticalAlignment="Top" Width="576" Margin="0,694,0,0" Grid.Row="1"/>
     </Grid>
 </Page>

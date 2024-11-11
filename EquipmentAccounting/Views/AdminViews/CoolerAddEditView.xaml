@@ -330,5 +330,10 @@
                 </Border>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
+        <materialDesign:Snackbar
+                       Message="{Binding Message}"
+                       IsActive="{Binding IsMessageOpen}"
+                       x:Name="SnackbarOne"
+                       Background="#7671FA" VerticalAlignment="Center" Width="576"/>
     </Grid>
 </Page>

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -17,6 +18,7 @@ namespace EquipmentAccounting.ViewModels
     {
         private string _selectedTypeOfQR;
         private string _typeToEdit;
+        private string _message;
 
         private bool _isSaveDialogOpen;
         private bool _isExitDialogOpen;
@@ -24,6 +26,7 @@ namespace EquipmentAccounting.ViewModels
         private bool _isEditComponentOpen;
         private bool _isLocationHistoryOpen;
         private bool _isComponentHistoryOpen;
+        private bool _isMessageOpen;
 
         private Equipment _currentEquipment;
         private State _selectedState;
@@ -61,6 +64,24 @@ namespace EquipmentAccounting.ViewModels
 
         public List<string> TypesOfQR => ConstLists.TYPES_OF_QR;
 
+        public bool IsMessageOpen
+        {
+            get => _isMessageOpen;
+            set
+            {
+                _isMessageOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<EquipmentLocation> LocationHistory
         {
             get => _locationHistory;
@@ -534,10 +555,13 @@ namespace EquipmentAccounting.ViewModels
                 EquipmentEntities.GetContext().SaveChanges();
                 CloseDialog();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show($"Ошибка. Проверьте правильность заполнения полей.");
+                DisplayMessage("Не удалось сохранить. Проверьте правильность заполнения полей.");
+                return;
             }
+
+            DisplayMessage("Данные сохранены.");
         }
 
         private void PrintQRCode()
@@ -1009,6 +1033,17 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
+        private async Task DisplayMessage(string message)
+        {
+            Message = message;
+            IsMessageOpen = true;
+
+            await Task.Delay(3000);
+
+
+            IsMessageOpen = false;
+            Message = "";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

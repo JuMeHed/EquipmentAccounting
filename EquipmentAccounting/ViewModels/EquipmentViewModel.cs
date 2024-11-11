@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,11 +19,31 @@ namespace EquipmentAccounting.ViewModels
         private ObservableCollection<Equipment> _filteredEquipments;
 
         private string _serachText;
+        private string _message;
 
         private Equipment _selectedEquipment;
         private EquipmentType _selectedEquipmentType;
 
         private bool _isReadOnly;
+        private bool _isMessageOpen;
+        public bool IsMessageOpen
+        {
+            get => _isMessageOpen;
+            set
+            {
+                _isMessageOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<Equipment> Equipments
         {
             get => _equipments;
@@ -283,19 +304,39 @@ namespace EquipmentAccounting.ViewModels
 
         private void DeregisterEquipment(Equipment selectedEquipment)
         {
-            selectedEquipment.StateId = 4;
-
-            var equipmentComponent = EquipmentEntities.GetContext().EquipmentComponent
-                .Where(x => x.IsActual && x.EquipmentId == selectedEquipment.Id).ToList();
-            foreach (var equipment in equipmentComponent)
+            try
             {
-                equipment.IsActual = false;
-            }
+                selectedEquipment.StateId = 4;
 
-            EquipmentEntities.GetContext().SaveChanges();
-            LoadEquipment();
+                var equipmentComponent = EquipmentEntities.GetContext().EquipmentComponent
+                    .Where(x => x.IsActual && x.EquipmentId == selectedEquipment.Id).ToList();
+                foreach (var equipment in equipmentComponent)
+                {
+                    equipment.IsActual = false;
+                }
+
+                EquipmentEntities.GetContext().SaveChanges();
+                LoadEquipment();
+            }
+            catch
+            {
+                DisplayMessage($"{selectedEquipment.Title} не удалось снять с учета.");
+                return;
+            }
+            DisplayMessage($"{selectedEquipment.Title} снят с учета.");
         }
 
+        private async Task DisplayMessage(string message)
+        {
+            Message = message;
+            IsMessageOpen = true;
+
+            await Task.Delay(3000);
+
+
+            IsMessageOpen = false;
+            Message = "";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

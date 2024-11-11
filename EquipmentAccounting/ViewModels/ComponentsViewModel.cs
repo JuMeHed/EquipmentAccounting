@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,12 +19,34 @@ namespace EquipmentAccounting.ViewModels
         private ObservableCollection<Models.Component> _filteredComponents;
   
         private string _nameFilter;
+        private string _message;
+
 
         private Models.Component _selectedComponent;
         private ComponentType _selectedComponentType;
 
         private bool? _isActive;
         private bool _isContextMenuOpen;
+        private bool _isMessageOpen;
+
+        public bool IsMessageOpen
+        {
+            get => _isMessageOpen;
+            set
+            {
+                _isMessageOpen = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<EquipmentAccounting.Models.Component> Components
         {
@@ -250,7 +273,11 @@ namespace EquipmentAccounting.ViewModels
             try
             {
                 EquipmentEntities.GetContext().SaveChanges();
-            } catch (Exception ex) { }
+                DisplayMessage($"{component.Model} снят с учета.");
+            } catch (Exception ex)
+            {
+                DisplayMessage($"Не удалось снять {component.Model} c учета.");
+            }
         }
         private void OnMotherBoardAddEditOpen()
         {
@@ -350,6 +377,17 @@ namespace EquipmentAccounting.ViewModels
             Manager.MenuPage.CurrentPage = view;
         }
 
+        private async Task DisplayMessage(string message)
+        {
+            Message = message;
+            IsMessageOpen = true;
+
+            await Task.Delay(3000);
+
+
+            IsMessageOpen = false;
+            Message = "";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

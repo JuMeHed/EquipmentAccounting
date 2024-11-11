@@ -20,7 +20,7 @@
         <converters:BoolToTextConverter x:Key="BoolToTextConverter"/>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="305*"/>
@@ -414,7 +414,7 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
-            </materialDesign:DialogHost.DialogContent> 
+            </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
         <Label Content="Расположение"
             FontFamily="Montserrat"
@@ -514,233 +514,237 @@ Margin="0,0,0,16"/>
 
                 <Border Background="#7671FA" Padding="20" CornerRadius="8" BorderBrush="Transparent">
                     <ScrollViewer MaxHeight="700">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="История изменений"
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="История изменений"
                        Foreground="#E5EAF3" 
                        FontSize="20" 
                        Margin="0,0,0,16"/>
 
-                        <!-- ListView для истории изменения первого типа компонента -->
-                        <TextBlock Text="История изменения процессоров" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding ProcessorHistory}" 
+                            <!-- ListView для истории изменения первого типа компонента -->
+                            <TextBlock Text="История изменения процессоров" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding ProcessorHistory}" 
                           Margin="0,10,0,0"
                           BorderBrush="Transparent"
                           Background="Transparent"
                           Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                            Width="150" 
                                            Margin="5,0,5,0" 
                                            Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                            Width="100" 
                                            Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения материнских плат" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding MotherboardHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения материнских плат" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding MotherboardHistory}" 
                           Margin="0,10,0,0"
                           BorderBrush="Transparent"
                           Background="Transparent"
                           Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                                     Width="150" 
                                                     Margin="5,0,5,0" 
                                                     Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                                     Width="100" 
                                                     Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения корпусов" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding CaseHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения корпусов" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding CaseHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}" 
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения охлаждения" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding CoolingHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения охлаждения" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding CoolingHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения видеокарт" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding VideocardHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения видеокарт" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding VideocardHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения оперативной памяти" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding RAMHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения оперативной памяти" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding RAMHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения блока питания" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding PowerHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения блока питания" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding PowerHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения сетевой карты" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding NetworkcardHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения сетевой карты" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding NetworkcardHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <!-- ListView для истории изменения второго типа компонента -->
-                        <TextBlock Text="История изменения звуковой карты" Foreground="#E5EAF3" Margin="0,10,0,0"/>
-                        <ListView ItemsSource="{Binding SoundcardHistory}" 
+                            <!-- ListView для истории изменения второго типа компонента -->
+                            <TextBlock Text="История изменения звуковой карты" Foreground="#E5EAF3" Margin="0,10,0,0"/>
+                            <ListView ItemsSource="{Binding SoundcardHistory}" 
        Margin="0,10,0,0"
        BorderBrush="Transparent"
        Background="Transparent"
        Foreground="#E5EAF3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Component.Model}" 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Component.Model}" 
                                  Width="150" 
                                  Margin="5,0,5,0" 
                                  Foreground="#E5EAF3"/>
-                                        <TextBlock Text="{Binding IsActualString}"
+                                            <TextBlock Text="{Binding IsActualString}"
                                                    Foreground="{Binding IsActual, Converter={StaticResource BoolToColorConverter}}"
                                  Width="100" 
                                  Margin="5,0,5,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="Назад" 
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Назад" 
                             Command="{Binding CloseDialogCommand}"
                             Foreground="#7671FA"
                             Background="#E5EAF3"
                             Margin="5" Cursor=""/>
-                         
+
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>
+                    </ScrollViewer>
                 </Border>
-                
+
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
-
+        <materialDesign:Snackbar
+                    Message="{Binding Message}"
+                    IsActive="{Binding IsMessageOpen}"
+                    x:Name="SnackbarOne"
+                    Background="#7671FA" VerticalAlignment="Top" Width="576" Grid.Column="1" />
     </Grid>
 </Page>
