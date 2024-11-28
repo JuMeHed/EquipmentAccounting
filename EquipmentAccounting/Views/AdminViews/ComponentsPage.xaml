@@ -34,15 +34,17 @@
                       BorderBrush="#7e7f9c" 
                       materialDesign:HintAssist.Hint="Название" 
                       x:Name="NameTB" 
+                      FontFamily="Montserrat"
                       FontSize="20"
                       materialDesign:HintAssist.Foreground="#7e7f9c" 
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                       Height="50" 
                      Margin="5,0"
-                      Width="604"/>
+                      Width="592"/>
             <ComboBox ItemsSource="{Binding ComponentTypes}" 
                       SelectedItem="{Binding SelectedComponentType}" 
                       materialDesign:HintAssist.Hint="Тип компонента" 
+                       FontFamily="Montserrat"
                       Foreground="#7e7f9c" 
                       x:Name="DepartmentCB" 
                       BorderBrush="#7e7f9c" 
@@ -56,6 +58,7 @@
                         Content="Статус"
                         Foreground="#7e7f9c"
                         FontSize="20"
+                       FontFamily="Montserrat"
                         HorizontalAlignment="Right"
                         IsThreeState="True"
                         IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"/>
@@ -66,20 +69,20 @@
                                      >
 
                 <StackPanel>
-                    <Button Content="Центральный процессор" Command="{Binding OpenCPUAddEdit}"/>
-                    <Button Content="Материнская плата" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
-                    <Button Content="Оперативная память" Command="{Binding OpenRAMAddEditPageCommand}"/>
-                    <Button Content="Корпус" Command="{Binding OpenCaseAddEditPageCommand}"/>
-                    <Button Content="Кулер" Command="{Binding OpenCoolerAddEditPageCommand}"/>
-                    <Button Content="HDD" Command="{Binding OpenHDDAddEditPageCommand}"/>
-                    <Button Content="SSD" Command="{Binding OpenSSDAddEditPageCommand}"/>
-                    <Button Content="Видеокарта" Command="{Binding OpenGPUAddEditPageCommand}"/>
-                    <Button Content="Блок питания" Command="{Binding OpenPowerAddEditPageCommand}"/>
-                    <Button Content="Сетевая карта" Command="{Binding OpenNetworkCardAddEditPageCommand}"/>
-                    <Button Content="Звуковая карта" Command="{Binding OpenSoundCardAddEditPageCommand}"/>
+                    <Button Content="Центральный процессор"  FontFamily="Montserrat" Command="{Binding OpenCPUAddEdit}"/>
+                    <Button Content="Материнская плата"  FontFamily="Montserrat" Command="{Binding OpenMotherboardAddEditPageCommand}"/>
+                    <Button Content="Оперативная память"   FontFamily="Montserrat" Command="{Binding OpenRAMAddEditPageCommand}"/>
+                    <Button Content="Корпус"  FontFamily="Montserrat" Command="{Binding OpenCaseAddEditPageCommand}"/>
+                    <Button Content="Кулер"  FontFamily="Montserrat"   Command="{Binding OpenCoolerAddEditPageCommand}"/>
+                    <Button Content="HDD"  FontFamily="Montserrat" Command="{Binding OpenHDDAddEditPageCommand}"/>
+                    <Button Content="SSD"  FontFamily="Montserrat" Command="{Binding OpenSSDAddEditPageCommand}"/>
+                    <Button Content="Видеокарта"   FontFamily="Montserrat" Command="{Binding OpenGPUAddEditPageCommand}"/>
+                    <Button Content="Блок питания"  FontFamily="Montserrat" Command="{Binding OpenPowerAddEditPageCommand}"/>
+                    <Button Content="Сетевая карта"  FontFamily="Montserrat" Command="{Binding OpenNetworkCardAddEditPageCommand}"/>
+                    <Button Content="Звуковая карта"  FontFamily="Montserrat" Command="{Binding OpenSoundCardAddEditPageCommand}"/>
                 </StackPanel>
             </materialDesign:PopupBox>
-            <Label Content="Добавить" Foreground="#7671FA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"
+            <Label Content="Добавить" Foreground="#7671FA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  FontFamily="Montserrat"
                   />
         </StackPanel>
         <ListBox Grid.Row="1"
@@ -89,10 +92,10 @@
          SelectedItem="{Binding SelectedComponent}">
             <ListBox.ContextMenu>
                 <ContextMenu DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                    <MenuItem Header="Подробнее" 
+                    <MenuItem Header="Подробнее"   FontFamily="Montserrat"
                   Command="{Binding OpenAddEditPageCommand}"  
                   CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
-                    <MenuItem Header="Снять с учета" 
+                    <MenuItem Header="Снять с учета"  FontFamily="Montserrat"
                   Command="{Binding DeregisterComponentCommand}" 
                   CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                 </ContextMenu>
@@ -114,13 +117,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ImagePath}" Width="128" Height="128" Margin="5"/>
                                 <StackPanel Margin="10,0,0,0">
-                                    <TextBlock Text="{Binding Model}" Foreground="#07244C" FontWeight="Bold" FontSize="20" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Brand}" Foreground="#07244C" FontSize="16" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Model}" Foreground="#07244C" FontWeight="Bold" FontSize="20" TextWrapping="Wrap"  FontFamily="Montserrat"/>
+                                    <TextBlock Text="{Binding Brand}" Foreground="#07244C" FontSize="16" TextWrapping="Wrap"  FontFamily="Montserrat"/>
                                 </StackPanel>
                             </StackPanel>
                             <TextBlock Text="{Binding IsActive, Converter={StaticResource BoolToTextConverter}}"
                                Foreground="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}"
-                               VerticalAlignment="Bottom" 
+                               VerticalAlignment="Bottom"  FontFamily="Montserrat"
                                HorizontalAlignment="Right"
                                Margin="0,0,5,5" TextAlignment="Right" 
                                FontSize="14"/>
@@ -137,6 +140,7 @@
         <materialDesign:Snackbar
                        Message="{Binding Message}"
                        IsActive="{Binding IsMessageOpen}"
+             FontFamily="Montserrat"
                        x:Name="SnackbarOne"
                        Background="#7671FA" VerticalAlignment="Top" Width="576" Margin="0,675,0,0" Grid.Row="1"/>
     </Grid>

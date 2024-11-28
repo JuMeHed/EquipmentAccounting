@@ -33,7 +33,7 @@
                               IsChecked="{Binding IsEquipmentBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/equipment.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Оборудование" FontSize="17"  VerticalAlignment="Center"/>
+                        <TextBlock Text="Оборудование" FontSize="15"  VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
@@ -50,7 +50,7 @@
                               IsChecked="{Binding IsProfileBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/user.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Профиль" FontSize="17" VerticalAlignment="Center"/>
+                        <TextBlock Text="Профиль" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">

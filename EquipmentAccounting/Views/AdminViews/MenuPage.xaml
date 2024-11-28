@@ -36,7 +36,7 @@
                               IsChecked="{Binding IsComponentBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/tools.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Комплектующие" FontSize="17" VerticalAlignment="Center"/>
+                        <TextBlock Text="Комплектующие" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
@@ -54,7 +54,7 @@
                               IsChecked="{Binding IsEquipmentBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/equipment.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Оборудование" FontSize="17"  VerticalAlignment="Center"/>
+                        <TextBlock Text="Оборудование" FontSize="15"  VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
@@ -72,7 +72,7 @@
                               IsChecked="{Binding IsUsersBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/group.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Пользователи" FontSize="17" VerticalAlignment="Center"/>
+                        <TextBlock Text="Пользователи" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
@@ -85,11 +85,12 @@
                               Style="{StaticResource TgBtn}"
                               Width="180"
                               Height="40"
+                                  Margin="0,0,0,10"
                               HorizontalAlignment="Left"
                               IsChecked="{Binding IsProfileBtnChecked}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/user.png" Width="32" Height="32" Margin="5,0,10,0"/>
-                        <TextBlock Text="Профиль" FontSize="17" VerticalAlignment="Center"/>
+                        <TextBlock Text="Профиль" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
@@ -98,6 +99,23 @@
                     </i:Interaction.Triggers>
                 </ToggleButton>
 
+                <ToggleButton
+                Style="{StaticResource TgBtn}"
+                Width="180"
+                Height="40"
+                HorizontalAlignment="Left"
+                        Margin="0,0,0,10"
+                IsChecked="{Binding IsReportBtnChecked}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/report.png" Width="32" Height="32" Margin="5,0,10,0"/>
+                        <TextBlock Text="Отчеты" FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding ReportsClickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
             </StackPanel>
         </Border>
         <Frame x:Name="InnerFrame" 

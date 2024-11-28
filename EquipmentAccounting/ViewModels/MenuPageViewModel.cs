@@ -14,7 +14,8 @@ namespace EquipmentAccounting.ViewModels
         private bool _isEquipmentBtnChecked;
         private bool _isComponentBtnChecked;
         private bool _isUsersBtnChecked;
-    
+        private bool _isReportBtnChecked;
+
         private Page _currentPage;
         public bool IsEquipmentBtnChecked
         {
@@ -30,6 +31,7 @@ namespace EquipmentAccounting.ViewModels
                         IsProfileBtnChecked = false;
                         IsUsersBtnChecked = false;
                         IsComponentBtnChecked = false;
+                        IsReportBtnChecked = false;
                     }
                 }
             }
@@ -49,6 +51,7 @@ namespace EquipmentAccounting.ViewModels
                         IsEquipmentBtnChecked = false;
                         IsUsersBtnChecked = false;
                         IsComponentBtnChecked = false;
+                        IsReportBtnChecked = false;
                     }
                 }
             }
@@ -68,6 +71,7 @@ namespace EquipmentAccounting.ViewModels
                         IsEquipmentBtnChecked = false;
                         IsUsersBtnChecked = false;
                         IsProfileBtnChecked = false;
+                        IsReportBtnChecked = false;
                     }
                 }
             }
@@ -87,10 +91,30 @@ namespace EquipmentAccounting.ViewModels
                         IsEquipmentBtnChecked = false;
                         IsProfileBtnChecked = false;
                         IsComponentBtnChecked = false;
+                        IsReportBtnChecked = false;
                     }
                 }
             }
         }
+
+        public bool IsReportBtnChecked
+        {
+            get => _isReportBtnChecked;
+            set
+            {
+                _isReportBtnChecked = value;
+                OnPropertyChanged();
+
+                if(_isReportBtnChecked)
+                {
+                    IsEquipmentBtnChecked = false;
+                    IsProfileBtnChecked = false;
+                    IsComponentBtnChecked = false;
+                    IsUsersBtnChecked = false;
+                }
+            }
+        }
+
         public Page CurrentPage
         {
             get => _currentPage;
@@ -101,11 +125,12 @@ namespace EquipmentAccounting.ViewModels
             }
         }
 
-    
+
         public ICommand EquipmentCLickCommand => new RelayCommand(EquipmentBtnClick);
         public ICommand ProfileClickCommand => new RelayCommand(ProfileBtnClick);
         public ICommand UsersClickCommand => new RelayCommand(UsersBtnClick);
         public ICommand ComponentsClickCommand => new RelayCommand(ComponentsBtnClick);
+        public ICommand ReportsClickCommand => new RelayCommand(ReportsBtnClick);
         public MenuPageViewModel()
         {
             Manager.MainViewModel.IsBorderVisible = true;
@@ -145,6 +170,14 @@ namespace EquipmentAccounting.ViewModels
         {
             Views.AdminViews.ComponentsPage componentsPage = new Views.AdminViews.ComponentsPage();
             CurrentPage = componentsPage;
+        }
+
+        private void ReportsBtnClick()
+        {
+            ReportsView view = new ReportsView();
+            ReportsViewModel viewModel = new ReportsViewModel();
+            view.DataContext = viewModel;
+            CurrentPage = view;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

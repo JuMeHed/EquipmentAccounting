@@ -183,6 +183,7 @@
     <Compile Include="ViewModels\PowerAddEditViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RAMAddEditViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SoundCardAddEditViewModel.cs" />
     <Compile Include="ViewModels\SSDAddEditViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
@@ -255,6 +256,9 @@
     </Compile>
     <Compile Include="Views\EquipmentView.xaml.cs">
       <DependentUpon>EquipmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
@@ -382,6 +386,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserViews\UserMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -496,6 +504,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\report.png" />
     <Resource Include="Resources\file.png" />
     <Resource Include="Resources\acoustic1.png" />
     <Resource Include="Resources\computer-case1.png" />
