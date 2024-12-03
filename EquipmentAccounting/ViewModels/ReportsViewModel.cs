@@ -1,8 +1,14 @@
 ﻿using EquipmentAccounting.Models;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Media;
+using LiveCharts.Defaults;
+
 
 namespace EquipmentAccounting.ViewModels
 {
@@ -16,6 +22,19 @@ namespace EquipmentAccounting.ViewModels
         private int _countNeedRepair;
         private int _countGoodState;
 
+        private List<string> _componentTypes;
+        public ChartValues<double> AppliedValues { get; set; }
+        public ChartValues<double> NotAppliedValues { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+        public List<string> ComponentTypes
+        {
+            get => _componentTypes;
+            set
+            {
+                _componentTypes = value;
+                OnPropertyChanged();
+            }
+        }
         public double PercentInRepair
         {
             get => _percentInRepair;
@@ -65,8 +84,8 @@ namespace EquipmentAccounting.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        public int CountGoodState 
+
+        public int CountGoodState
         {
             get => _countGoodState;
             set
@@ -78,6 +97,60 @@ namespace EquipmentAccounting.ViewModels
         public ReportsViewModel()
         {
             GetInfoAboutEquipment();
+            SetChart();
+        }
+
+        private void SetChart()
+        {
+            AppliedValues = new ChartValues<double>();
+            NotAppliedValues = new ChartValues<double>();
+            ComponentTypes = EquipmentEntities.GetContext().ComponentType.Select(x => x.Title).ToList();
+
+            foreach (string component in ComponentTypes)
+            {
+                var items = EquipmentEntities.GetContext().Component
+                    .Where(x => x.ComponentType.Title.Equals(component))
+                    .ToList();
+
+                int appliedCount = 0;
+                int notAppliedCount = 0;
+
+                foreach (var item in items)
+                {
+                    var componentInEquipment = EquipmentEntities.GetContext().EquipmentComponent
+                                               .Where(x => x.ComponentId == item.Id)
+                                               .OrderByDescending(x => x.Id)
+                                               .FirstOrDefault();
+
+                    if (componentInEquipment != null && componentInEquipment.IsActual)
+                    {
+                        appliedCount++;
+                    }
+                    else
+                    {
+                        notAppliedCount++;
+                    }
+                }
+
+                AppliedValues.Add(appliedCount);
+                NotAppliedValues.Add(notAppliedCount);
+            }
+
+            SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "Примененные",
+                    Values = AppliedValues
+                },
+                new ColumnSeries
+                {
+                    Title = "Непримененные",
+                    Values = NotAppliedValues
+                }
+            };
+
+            OnPropertyChanged(nameof(SeriesCollection));
         }
 
         private void GetInfoAboutEquipment()
