@@ -101,15 +101,19 @@ d:DesignHeight="800" d:DesignWidth="1119"
                 Background="#7671FA"
                 CornerRadius="5"
                 Margin="10">
-            <lc:CartesianChart Name="MyChart">
-                <lc:CartesianChart.Series>
-                    <lc:ColumnSeries Fill="#7e7f9c" Title="Примененные" Values="{Binding AppliedValues}" />
-                    <lc:ColumnSeries Fill="#07244C" Title="Непримененные" Values="{Binding NotAppliedValues}" />
-                </lc:CartesianChart.Series>
-                <lc:CartesianChart.AxisX>
-                    <lc:Axis Title="Тип компонента" Labels="{Binding ComponentTypes}" />
-                </lc:CartesianChart.AxisX>
-            </lc:CartesianChart>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Компоненты" Foreground="White" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <lc:CartesianChart Name="MyChart" Height="428">
+                    <lc:CartesianChart.Series>
+                        <lc:ColumnSeries Fill="#7e7f9c" Title="Примененные" Values="{Binding AppliedValues}" />
+                        <lc:ColumnSeries Fill="#07244C" Title="Непримененные" Values="{Binding NotAppliedValues}" />
+                    </lc:CartesianChart.Series>
+                    <lc:CartesianChart.AxisX>
+                        <lc:Axis Title="Тип компонента" Labels="{Binding ComponentTypes}" />
+                    </lc:CartesianChart.AxisX>
+                </lc:CartesianChart>
+            </StackPanel>
+      
         </Border>
     </Grid>
 </Page>
